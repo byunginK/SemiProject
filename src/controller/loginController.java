@@ -32,11 +32,10 @@ if(work.equals("logout")) {
 		 forward("index.jsp", req, resp);
 } else if(work.equals("myPage")) {
 	        
-	      String id = req.getParameter("id");
-	      String pwd = req.getParameter("pwd");
+ String id = req.getParameter("id");  String pwd = req.getParameter("pwd");
 	      
-	      MemberDto dto = dao.login(id, pwd);
-	      
+	      MemberDto dto = (MemberDto)dao.login(id, pwd);
+	     // System.out.println("아이디"+dto.getId());
 	      req.setAttribute("dto", dto);
 	      forward("myPage.jsp", req, resp);	      
 }else {
@@ -47,12 +46,7 @@ if(work.equals("logout")) {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
-		
-		
-		
-		
+		String id = req.getParameter("id"); String pwd = req.getParameter("pwd");
 		HttpSession session = req.getSession();
 		
 		String a = "";
