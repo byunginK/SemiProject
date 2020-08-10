@@ -22,14 +22,12 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Simple Five</title>
-
+  <title>Login</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!--slick slider stylesheet -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
@@ -44,18 +42,18 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
-<body>
 
 <!-- 바디 셋팅 -->
+<body class="sub_page">
+
   <div class="main_body_content">
 
     <div class="hero_area">
-    
-      <!-- 헤더 -->
+       <!-- 헤더 -->
       <header class="header_section">
         <div class="container-fluid">
         
-        <!-- 네비게이션 바 -->
+         <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.jsp">
               Simple Five
@@ -63,6 +61,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
             </button>
+
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -72,11 +71,12 @@
                   <a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">고객센터</a>
+                  <a class="nav-link" href="contact.jsp">고객센터</a>
                 </li>
-             <% if(id != null){ %>
+             
+                <% if(id != null){ %>
              <li class="nav-item">
-                  <a class="nav-link" href="myPage.jsp?id=<%=id%>"><%=id %> 님</a>
+                  <a class="nav-link" href="mypage.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
    				<li class="nav-item">
                   <a class="nav-link" href="login?work=logout">로그아웃</a>
@@ -90,16 +90,18 @@
                 </li>
                 <%} %>
               </ul>
+
             </div>
           </nav>
         </div>
       </header>
       <!-- 헤더 끝 -->
+    </div>
 <!-- 마이 페이지 시작 -->
 
 <table>
 <col width="100"><col width="200">
-<tr><th>아이디</th><td><%=dto.getId() %></td></tr>
+<tr><th>아이디</th><td><%=id %></td></tr>
 <tr><th>이름</th><td><%=dto.getName() %></td></tr>
 <tr><th>이메일</th><td><%=dto.getEmail() %></td></tr>
 <tr><th>전화번호</th><td><%=dto.getPwd() %></td></tr>
