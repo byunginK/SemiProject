@@ -92,11 +92,13 @@
       <!-- 헤더 끝 -->
     </div>
     <div align="center">
-    <table style="margin-top: 200px; margin-bottom: 200px" >
-    <col width="500">
+    <form action="login">
+    <input type="hidden" name="work" value="myPage"><input type="hidden" name="id" value="<%=id%>">  
+    <table style="margin-top: 200px; margin-bottom: 200px" ><col width="500">
 <tr><td>본인 확인을 위해 비밀번호를 한번 더 입력해주세요.</td></tr>
-<tr><td><input type="password" name="pwd" id="pwd"><button type="button" id="btn">확인</button></td></tr>
+<tr><td><input type="password" name="pwd" id="password"><button type="submit" id="btn">확인</button></td></tr>
 </table>
+</form>
 </div>
  <!-- 바닥글 -->
     <section class="info_section layout_padding2">
@@ -200,15 +202,6 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
   <!-- Google Map -->
-<script>
-$(document).ready(function() {
-	let pwd = $('#pwd').val();
-	$("#btn").click(function() {
-		location.href = "login?work=myPage&id=<%=id%>&pwd=" + pwd;
-		
-	});
-	
-});
-</script>
+
 </body>
 </html>
