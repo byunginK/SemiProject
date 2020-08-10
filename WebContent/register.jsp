@@ -268,9 +268,7 @@ $(document).ready(function () {
 					
 				}			
 			},
-			error:function(){
-				alert("error");
-			}
+			error:function(){	alert("error");  }
 		});
 	}
 	}); 
@@ -318,8 +316,6 @@ $(document).ready(function () {
 $("#regi").click(function() {
 	
       $.fn.CheckFunction();
-
- 
 });
 	
 });

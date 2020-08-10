@@ -332,7 +332,7 @@ function paging( pageno ) {
 				 if(val.del == 0){
 					app	+=  "<td>" 
 						   + arrow(val.depth)		
-						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq='"+ val.seq +">"
+						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq="+ val.seq + "'>"
 						   + val.title
 						   + "</a>"
 						   +"</td>"
