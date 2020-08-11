@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
 import dto.MemberDto;
@@ -21,8 +23,8 @@ public class addMemberController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("UTF-8"); resp.setContentType("text/html; charset=UTF-8"); req.setCharacterEncoding("utf-8");
+		PrintWriter out = resp.getWriter();
 		
 		String id = req.getParameter("id");
 		String pwd = req.getParameter("pwd");
@@ -32,27 +34,17 @@ public class addMemberController extends HttpServlet {
 		String email = req.getParameter("email");
 		
 		int auth = 3;
-		System.out.println(id);
-		System.out.println(pwd);
-		System.out.println(name);
-		System.out.println(phone);
-		System.out.println(email);
+	//	System.out.println("아뒤: "+id); System.out.println("비번: "+pwd); System.out.println("이름: "+name); System.out.println("전번: "+phone); System.out.println("이메: "+email);
 		MemberDao dao = MemberDao.getInstance();
-	
-		loginDto dto = new loginDto();
-		
-		System.out.println(dto.getAuth());
-		
-		
+
 		boolean isS = dao.addMember(new MemberDto(id, pwd, name, phone, email, auth));
 		if(isS) {
 			
-			forward("login.jsp", req, resp);
-			
+			out.print("<script> alert('회원이 돼주셔서 감사합니다'); location.href = 'login.jsp';</script>");
+			out.flush(); 
 		}else {
-			
-			forward("register.jsp", req, resp);
-		
+			out.print("<script> alert('회원에 실패했습니다. 해당 현상이 지속되면 문의해주세요(문의전화 02-233-5555)'); location.href = 'index.jsp';</script>");
+			out.flush();
 		}	
 		
 		
@@ -72,14 +64,13 @@ public class addMemberController extends HttpServlet {
 		boolean isS =dao.CheckId(id);
 		
 			if(isS == true){	// id가 없음
-		
+		     
 				a = "YES";
-				
+		
 			}else if((isS == false)){			// id가 있음
 			
 				a = "NO";
-				
-			}
+				}
 		
 		Map<Object, Object> map =  new HashMap<Object, Object>();
 		map.put("isS", a);

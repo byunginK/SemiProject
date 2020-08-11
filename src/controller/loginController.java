@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import dao.MemberDao;
 import dto.MemberDto;
 import dto.loginDto;
+import dto.suggestDto;
 import net.sf.json.JSONObject;
 
 @WebServlet("/login")
@@ -22,14 +24,15 @@ public class loginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		resp.setCharacterEncoding("UTF-8"); resp.setContentType("text/html; charset=UTF-8"); req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession(); PrintWriter out = resp.getWriter();
 		String work = req.getParameter("work");
 		MemberDao dao = MemberDao.getInstance();
 if(work.equals("logout")) {
-        HttpSession session = req.getSession();
-			
-        session.removeAttribute("login_Id");;
-		 forward("index.jsp", req, resp);
+
+        session.removeAttribute("login_Id");
+        forward("index.jsp", req, resp);
+        
 } else if(work.equals("myPage")) {
 	        
  String id = req.getParameter("id");  String pwd = req.getParameter("pwd");
@@ -54,24 +57,22 @@ if(work.equals("logout")) {
 		MemberDao dao = MemberDao.getInstance();
 		
 		MemberDto dto = dao.login(id, pwd);
-		loginDto lo_dto = null;
+		loginDto dto2 = new loginDto();
+		
 		
 		if(dto != null && !dto.getId().equals("")) {
 	         	
 			a = "YES";
 		
-	        lo_dto = new loginDto(dto.getId(), dto.getAuth());
+			dto2.setId(dto.getId());  dto2.setAuth(dto.getAuth());
 	 
 	    	session.setAttribute("login_Id", id);
 	    	
 	    	session.setMaxInactiveInterval(30*60*60);
 	            
-		
 	    //	System.out.println(lo_dto.getAuth());
-		}else {
-				
-				a = "NO";
-				
+		}else {	
+				a = "NO";		
 			}
 		
 		Map<Object, Object> map =  new HashMap<Object, Object>();

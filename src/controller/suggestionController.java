@@ -23,10 +23,12 @@ import net.sf.json.JSONObject;
 public class suggestionController extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String detailwork = req.getParameter("detailwork"); String work = req.getParameter("work");resp.setCharacterEncoding("UTF-8"); resp.setContentType("text/html; charset=UTF-8");
-		   HttpSession session = req.getSession(); PrintWriter out = resp.getWriter();
-		  req.setCharacterEncoding("utf-8");
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
+		resp.setCharacterEncoding("UTF-8"); resp.setContentType("text/html; charset=UTF-8"); req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession(); PrintWriter out = resp.getWriter();
+		String detailwork = req.getParameter("detailwork"); String work = req.getParameter("work");
+		   
+		  
 if(work.equals("suggest")) {
 	suggestDao dao = suggestDao.getInstance();
      
@@ -73,13 +75,13 @@ if(work.equals("suggest")) {
 				resp.setContentType("application/x-json; charset=UTF-8");
 				resp.getWriter().print(jobj); }
 
-	  else if(detailwork.equals("suggest_detail")) {   
+ else if(detailwork.equals("suggest_detail")) {   
 		  
 		  String id = (String)session.getAttribute("login_Id");
 					
 	          if(id == null) {
 	        	  
-	            out.print("<script> var result = confirm('로그인이 필요한 페이지입니다.  로그인페이지로 이동하시겠습니까?'); if(result){location.href = 'login.jsp';} else{alert('로그인후 이용해주세요'); location.href = 'suggest?work=suggest&detailwork=suggest_main';}</script>");
+	            out.print("<script> let result = confirm('로그인이 필요한 페이지입니다.  로그인페이지로 이동하시겠습니까?'); if(result){location.href = 'login.jsp';} else{alert('로그인후 이용해주세요'); location.href = 'suggest?work=suggest&detailwork=suggest_main';}</script>");
 				out.flush(); 
 				}
 			  else {
@@ -89,20 +91,18 @@ if(work.equals("suggest")) {
                 forward("suggestDetail.jsp", req, resp);}
 	          }
 	 
-	   else if(detailwork.equals("writeIdcheck")) {  
+ else if(detailwork.equals("writeIdcheck")) {  
 		   
 		   String id = (String)session.getAttribute("login_Id");	
 		   if(id == null) {  
 			   
-			out.print("<script> var result = confirm('로그인이 필요한 페이지입니다.  로그인페이지로 이동하시겠습니까?'); if(result){location.href = 'login.jsp';} else{alert('로그인후 이용해주세요'); location.href = 'suggest?work=suggest&detailwork=suggest_main';}</script>");
+			out.print("<script> let result = confirm('로그인이 필요한 페이지입니다.  로그인페이지로 이동하시겠습니까?'); if(result){location.href = 'login.jsp';} else{alert('로그인후 이용해주세요'); location.href = 'suggest?work=suggest&detailwork=suggest_main';}</script>");
 			out.flush();
 		   }else {    
-		  
 		    	forward("suggestwrite.jsp?id="+id, req, resp);  
-		   
 		    	} 
 }else {
-					forward("index.jsp", req, resp);
+	forward("index.jsp", req, resp);
 				}
 				
 				}
@@ -123,29 +123,35 @@ if(work.equals("suggest")) {
   //System.out.println("타이틀?"+title);//System.out.println("내용? "+content);
 	        boolean isS = dao.writeBbs(new suggestDto(id, title, content));
 	        if(isS){ 
-	        	 out.print("<script>alert('글이 등록되었습니다');</script>");
-	        	 out.print("location.href = 'suggest?work=suggest&detailwork=suggest_main';");
+	        	 out.print("<script> alert('글이 등록되었습니다'); location.href = 'suggest?work=suggest&detailwork=suggest_main';</script>");
 	        	 out.flush();
 	       }else{
-	    	     out.print("<script>alert('등록에 실패했습니다');</script>");
-	             out.print("location.href = 'suggest?work=suggest&detailwork=suggest_main';");
+	    	     out.print("<script>alert('등록에 실패했습니다'); location.href = 'suggest?work=suggest&detailwork=suggest_main';</script>");
 	             out.flush();
 	       }    
 		 }
 	else if(detailwork.equals("suggest_delete")) {
 		         int seq = Integer.parseInt(sseq);
 		         dao.deletesuggest(seq);
-		         out.print("<script>alert('삭제되었습니다');</script>");
-                 out.print("location.href = 'suggest?work=suggest&detailwork=suggest_main';");
+		         out.print("<script>alert('삭제되었습니다'); location.href = 'suggest?work=suggest&detailwork=suggest_main';</script>");
                  out.flush();
  
 	}else if(detailwork.equals("suggest_update")) {
 				 int seq = Integer.parseInt(sseq);
 				 dao.suggestUpdate(title, content, seq);
-				 out.print("<script>alert('수정이 완료되었습니다.');</script>");
-		         out.print("location.href = 'suggest?work=suggest&detailwork=suggest_main';");
+				 out.print("<script>alert('수정이 완료되었습니다.'); location.href = 'suggest?work=suggest&detailwork=suggest_main';</script>");
 		         out.flush();
 		 }
+	else if(detailwork.equals("suggest_answer")) {
+		         title = sseq+"번째의 답글";
+		         int seq = Integer.parseInt(sseq);
+		         boolean isS = dao.answer(seq, new suggestDto(id, title, content));
+		         if(isS) {
+		        	 
+		         }else {
+		        	 
+		         }
+	}
 	}
 	}
 	
