@@ -91,31 +91,30 @@
     </div>
     
   <!----------- 건의사항 글쓰기 시작 --------------->
-<div align="center">
-<h1>건사(글쓰기)</h1>
+<div align="left">
+<a>건의사항(글작성)</a>
+<hr>
 </div>
-<form action="suggest" method="post">
-<input type="hidden" name="work" value="suggest"><input type="hidden" name="detailwork" value="suggest_write">
+<form method="post" id="frm">
+<input type="hidden" name="work" value="suggest"><input type="hidden" value="suggest_write" name="detailwork"><input type="hidden" value="<%=id %>" name="id">
 <div align="center">
-<div style="margin-left: 20px">
+<table border="1">
+<col width="100"><col width="150"><col width="100"><col width="250">
+<tr><td colspan="4"><input type="text" name="title" size="70" placeholder="제목" id="title"></td></tr>
+<tr bgcolor="#CCFFFF"><th>작성자   </th><td colspan="4"><%=id %></td></tr>
 
-<!-- 아이디 자동으로 채워짐 수정x -->
-ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" readonly="readonly"  value="<%=id%>"></div><br><br>
+<tr><td colspan="6" ><textarea rows="10" cols="100" style="border: none" name="content" placeholder="내용" id="content"></textarea> </td></tr>
 
-제목:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="title"><br><br>
-<div style="margin-right: 420px">
-건의내용:<br><br>
-</div>
-<textarea style="height: 500px; width: 500px" name="content"></textarea><br><br>
-
-<!-- 글 목록으로 이동 -->
-<button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button>&nbsp;
-
-<!-- 추가완료 버튼 -->
-<button type="submit" id="add">글 추가</button>
-
+<tr style="border: none" bgcolor="#CCFFFF">
+<!-- 글 수정으로 이동 -->
+<td colspan="3" align="left"><button type="submit" id="btn" value="작성">글 작성</button></td>
+<!-- 글목록으로 이동(suggest_main.jsp) -->
+<td colspan="3" align="right"><button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button></td>
+</tr>
+</table>
 </div>
 </form>
+<br><br>
 <!------------ 건의사항 글쓰기 끝 ------------>
 
 <!-- 바닥글 -->
@@ -224,5 +223,29 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" readonly
   <!-- Google Map -->
  
  <!--  --> 
+<script>
+$(document).ready(function() {
+	$("#btn").click(function() {
+		let title = $("#title").val();  let content = $("#content").val();
+		if( title == "" || content == ""){
+			alert("모두 작성해주세요");
+		}else{
+			$("#frm").attr("action", "suggest").submit();
+		}
+		
+		
+		
+	});
+	
+	
+});
+
+</script> 
+ 
 </body>
 </html>
+
+
+
+
+

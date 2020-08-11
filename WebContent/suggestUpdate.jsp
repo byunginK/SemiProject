@@ -100,10 +100,10 @@
 <div align="center">
 <h1>건사(수정)</h1>
 </div>
-<form action="suggest">
+<form method="post" id="frm" >
 
 <!-- 컨트롤러에 보내는 값 -->
-<input type="hidden" value="suggest" name="work"><input type="hidden" value="suggest_update" name="detailwork"><input type="hidden" value="suggest" name="seq">
+<input type="hidden" value="suggest" name="work"><input type="hidden" value="suggest_update" name="detailwork"><input type="hidden" value="<%=seq %>" name="seq">
 
 <div align="center">
 <div style="margin-left: 20px">
@@ -120,7 +120,7 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<
 <button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button>
 
 <!-- 수정 완료 버튼 -->
-<button type="submit" id="add">수정완료</button>
+<button type="submit" id="add" >수정완료</button>
 </div>
 </form>
  <!-- 바닥글 -->
@@ -228,17 +228,14 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<
 
 <script>
 $(document).ready(function() {
-	$("#btn").click(function() {
+	$("#add").click(function() {
 		let title = $("#title").val(); let content = $("#content").val()
 		if( title =="" || content ==""){
 			alert("빈칸없이 입력해주세요");
 		}else{
-			location.href = ""
+			let result = confirm("수정하시겠습니까?"); if(result){$("#frm").attr("action","suggest").submit();}else{}
 		}
-		
-	});
-	
-	
+	});	
 });
 </script>
 </body>

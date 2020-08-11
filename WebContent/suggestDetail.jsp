@@ -8,6 +8,7 @@
     if(session.getAttribute("login_Id") != null){
  	   id = (String)session.getAttribute("login_Id");
     }
+    int answerNumber = 0;
     %>
 <!DOCTYPE html>
 <html>
@@ -99,26 +100,44 @@
     </div>
 
 <!---------- 건의사항 상세보기 시작 ----------->
-<div align="center">
-<h1>건사(상세보기)</h1>
+<div align="left">
+<a>건의사항(상세보기)</a>
+<hr>
 </div>
-
 <div align="center">
-<div style="margin-left: 20px">ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<%=dto.getId()%>" readonly="readonly" id="id"></div><br><br>
-제목:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="title" value="<%=dto.getTitle()%>" readonly="readonly"><br><br>
-<div style="margin-right: 420px">
-건의내용:<br><br>
-</div>
-<textarea name="content" readonly="readonly" style="height: 500px; width: 500px;"><%=dto.getContent() %></textarea><br><br>
+<table border="1">
+<col width="100"><col width="150"><col width="100"><col width="250"><col width="100"><col width="120">
+<tr ><td colspan="6" align="left"><%=dto.getTitle() %></td></tr>
+<tr style="border: none" bgcolor="#CCFFFF"><td>작성자  |</td><td id="id" class="<%=dto.getId() %>"><%=dto.getId() %></td><td>작성일   |</td><td><%=dto.getWdate() %></td><td>조회수   |</td><td><%=dto.getReadcount() %></td></tr>
 
-<!-- 글목록으로 이동(suggest_main.jsp) -->
-<button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button>
+<tr><td colspan="6" ><textarea rows="10" cols="100" readonly="readonly" style="border: none"><%=dto.getContent() %></textarea> </td></tr>
 
+<tr style="border: none" bgcolor="#CCFFFF">
 <!-- 글 수정으로 이동 -->
-<button type="button" id="btn" value="수정">글 수정</button>
-<button type="button" id="btn" value="삭제">글 삭제</button>
+<td colspan="3" align="left"><button type="button" id="btn" value="수정">글 수정</button></td>
+<!-- 글목록으로 이동(suggest_main.jsp) -->
+<td colspan="3" align="right"><button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button></td>
+</tr>
+</table>
 </div>
+<br>
+<form id="frm">
+<div align="center">
+<table>
+<col width="100"><col width="150"><col width="100"><col width="250"><col width="100"><col width="120">
+<tr><td colspan="6" bgcolor="#FFFFCC">총 <%=dto.getStep() %>개의 답글이 있습니다</td></tr>
+<tr><td colspan="4" ><textarea rows="5" cols="70"></textarea></td><td></td><td style="float: right" id="btn2"><button type="button" >답글작성</button></td></tr>
+</table>
+</div>
+<br><br>
+<%if(dto.getStep() == 0){ %>
+<div align="center"><a>       작성된 답글이 없습니다.</a></div>
+<%}else{ %>
 
+<%} %>
+
+</form>
+<br><br><br><br>
 <!------------ 건의사항 상세보기 끝 --------------->
 <!-- 바닥글 -->
     <section class="info_section layout_padding2">
@@ -225,19 +244,83 @@
   
   <script>
   $(document).ready(function() {
+	  let id = $("#id").attr("class");
+	  let id2 = "aaa";
+	  if("<%=id%>" != id ){     
+		$("#btn").hide();
+	  }else{
+		  $("#btn").show();
+	  }
+	 <%--  if("<%=id%>"!= id2){
+		  $("#btn2").hide();
+	  }	else{
+		  $("#btn2").show();
+	  }            --%>       
+	  
   	$("#btn").click(function() {
-  		let id = $("#id").val(); let btn = $(this).attr("value");
- 
-  		if("<%=id%>" != id ){     
-  			alert("권한이 없습니다");      }
-  		else if(btn == "수정"){
-            location.href = "suggestUpdate.jsp?seq=<%=dto.getSeq()%>&id=<%=dto.getId()%>&title=<%=dto.getTitle()%>&content=<%=dto.getContent()%>";
+  		 let btn = $(this).attr("value");
+  		if(btn == "수정"){
+  			location.href = "suggestUpdate.jsp?seq=<%=dto.getSeq()%>&id=<%=dto.getId()%>&title=<%=dto.getTitle()%>&content=<%=dto.getContent()%>";
+  			
   		}	
   		else if(btn == "삭제"){ 
-            location.href = "suggest?work=suggest&detailwork=suggest_delete&seq=<%=dto.getSeq()%>";   
+            let result = confirm("정말 삭제하시겠습니까?"); if(result){location.href = "suggest?work=suggest&detailwork=suggest_delete&seq=<%=dto.getSeq()%>";} 
+            else{ 
+            	 
+            }
   		}
   		});
   	});	  
   </script>
+  <script >
+function answer() {
+	let answerContent = $("#answer").val();
+	let id = "<%=id%>";  let seq = "<%=dto.getSeq()%>";
+	if(answerContent ==""){
+		alert("글을 작성해주세요");
+	}
+	$.ajax({
+		url:"suggest?work=suggest&detailwork=suggest_answer",
+		type: "post",
+		data:{"content": content, "id": id, "seq": seq}
+		datatype:"json",
+		success:(function( datas ) {
+			let maxStep = datas.map.maxStep;
+			let answerList = datas.map.answerList;
+			$.each(answerList, function (i, val) {
+				
+				
+				
+				
+			})
+			
+		}
+		
+		
+		
+	});
+	
+}  
+  </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

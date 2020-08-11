@@ -114,9 +114,9 @@ suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggest
 <!--------- 건의사항 메인(리스트) 시작 ------------>
 <div id="suggestStart" align="center">
 <table border="1" id="suggest2">
-<col width="40"><col width="70"><col width="400"><col width="80"><col width="120">
-<tr align="center" class="suggestAjax">
-<td></td><td>번호</td><td>제목</td><td>작성자</td><td>작성일</td>
+<col width="40"><col width="400"><col width="100"><col width="150"><col width="100">
+<tr align="center" class="suggestAjax" bgcolor="pink">
+<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
 </tr>
 <tbody id="suggest">
 
@@ -129,21 +129,24 @@ if(list.size() == 0){
 	for(int i = 0; i < list.size(); i++){
 		suggestDto bbs = list.get(i);
 %>
-     <tr>
-     <td><input type='checkbox' name='delck' value="<%=bbs.getId()%>" ></td>
+     <tr align="center">
     <th><%=bbs.getSeq() %></th>
 		<td>
 			<%
-			if(bbs.getDel() == 0){
-				%>
-				<%=arrow( bbs.getDepth() ) %>			
+			if(bbs.getDel() == 0 && bbs.getStep()== 0){
+				%>		
 				<a href="suggest?work=suggest&detailwork=suggest_detail&seq=<%=bbs.getSeq() %>"><%=bbs.getTitle() %></a>	
-	<%}else{%>		
+	<%}else if(bbs.getStep() > 0 && bbs.getDel()== 0){%>
+			
+			<a href="suggest?work=suggest&detailwork=suggest_detail&seq=<%=bbs.getSeq() %>"><%=bbs.getTitle() %>&nbsp;[<%=bbs.getStep() %>]</a>	
+		<%}
+		else{%>		
 	<font color="#CC0000">관리자에 의해서 삭제되었습니다</font> 
 <%}%>
 		</td>  
 		<td align="center"><%=bbs.getId() %></td>
 		<td><%=bbs.getWdate() %></td>
+		<td><%=bbs.getReadcount() %></td>
 	</tr>
 	<%}}%>
 	</tbody>
@@ -176,8 +179,7 @@ if(list.size() == 0){
 <form action="./suggest" method="get">
 
 <!-- 컨트롤러로 보내는 값 -->
-<input type="hidden" value="suggest" name="work">
-<input type="hidden" value="suggest_main" name="detailwork">
+<input type="hidden" value="suggest" name="work"><input type="hidden" value="suggest_main" name="detailwork">
 <div align="center">
 
 <!-- 검색 옵션 -->
@@ -324,8 +326,7 @@ function paging( pageno ) {
 					 for( i = 0; i < depth; i++){
 						 ts += nbsp; 
 					 }return depth==0?"":ts + rs; } 
-				let app ="<tr>" 
-					+"<th><input type='checkbox' name='delck' value='" + val.id + "'></th>"    
+				let app ="<tr align='center'>"   
 				          +"<th>"+ val.seq +"</th>";
 				 if(val.del == 0){
 					app	+=  "<td>" 
@@ -334,13 +335,23 @@ function paging( pageno ) {
 						   + val.title
 						   + "</a>"
 						   +"</td>"
-				}else{
+				}else if(val.step > 0 && val.del == 0){
+					app	+=  "<td>" 
+						   + arrow(val.depth)		
+						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq="+ val.seq + "'>"
+						   + val.title + "&nbsp;" + "[" + val.step + "]"
+						   + "</a>"
+						   +"</td>"
+				}
+				 
+				 else{
 				app +=	"<td>"
 					+ "<font color='#CC0000'>관리자에 의해서 삭제되었습니다</font>";
 			     	+"</td>";		
 				       }
 				app	+=  "<td align='center'>"+ val.id +"</td>"
-				         +"<td>"+ val.wdate +"</td>";	
+				         +"<td>"+ val.wdate +"</td>"
+				         +"<td>"+ val.readcount +"</td>"
 					    + "</tr>";
 					  	   
 				$("#suggest").append(app);		
