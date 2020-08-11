@@ -37,91 +37,7 @@ public class suggestDao {
 		 
 		 return depth==0?"":ts + rs;
 	 }
-	private int[] paging(int page) throws Exception {
-		
-		String sql = "SELECT COUNT(*) FORM FIVE_SUGGEST";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
 
-		// 전체 게시물 갯수로 총 페이지 수 산출 (하나도 없으면 null 리턴)
-				int totalContent = 0;
-				int totalPage = 0;
-				int[] startEnd = new int[2];
-		
-		// result 객체는 호출한 곳에서 재활용할 것이므로 자원해제
-		try {
-			conn = DBConnection.getConnection();
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			
-			while (rs.next()) {
-				totalContent += rs.getInt(1);
-			}
-			if (totalContent == 0) {
-				return null;
-			}
-			totalPage = totalContent / 10; // 최종 전체 페이지 갯수
-			if (totalContent % 10 > 0) {
-				totalPage++;	// 나머지가 있다면 1을 더해줌
-			}
-			// 페이징 범위 계산
-			int startPage, endPage; // 시작과 끝 페이지
-			startPage = ((page - 1) / 10) * 10
-					+ 1;
-			endPage = startPage +10 - 1;
-			if (endPage > totalPage) {
-				endPage = totalPage;
-			}
-			 // 결과를 전달해줄 배열
-			startEnd[0] = startPage;
-			startEnd[1] = endPage;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return startEnd;
-	}
-     
-     
-     
-	public List<suggestDto> getBbsList() {
-		String sql = " SELECT SEQ, ID, REF, STEP, DEPTH, " + " TITLE, CONTENT, WDATE, " + " DEL, READCOUNT "
-				+ " FROM FIVE_SUGGEST " + " ORDER BY REF DESC, STEP ASC ";
-
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-
-		List<suggestDto> list = new ArrayList<suggestDto>();
-		try {
-			conn = DBConnection.getConnection();
-			System.out.println("1/6 getBbsList success");
-
-			psmt = conn.prepareStatement(sql);
-			System.out.println("2/6 getBbsList success");
-
-			rs = psmt.executeQuery();
-			System.out.println("3/6 getBbsList success");
-
-			while (rs.next()) {
-				int i = 1;
-				suggestDto dto = new suggestDto(rs.getInt(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++),
-						rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++),
-						rs.getInt(i++));
-				list.add(dto);
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBClose.close(psmt, conn, rs);
-		}
-		return list;
-	}
 
 	public boolean writeBbs(suggestDto dto) {
 		String sql = " INSERT INTO FIVE_SUGGEST " + " (SEQ, ID, REF, STEP, DEPTH, " + " TITLE, CONTENT, WDATE, "
@@ -315,7 +231,7 @@ public class suggestDao {
 				return count>0?true:false;
 			}
 	
-	public boolean deletebbs(int seq) {
+	public boolean deletesuggest(int seq) {
 		
 		String sql = " UPDATE FIVE_SUGGEST "
 				     + " SET DEL=DEL+1 "
@@ -350,78 +266,7 @@ public class suggestDao {
 		
 		return count>0?true:false;
 	}
-	public List<suggestDto> getBbsList(String option, String select) {
-		int co = 0;
-		String sql = " SELECT SEQ, ID, REF, STEP, DEPTH, " 
-		               + " TITLE, CONTENT, WDATE, " + " DEL, READCOUNT "
-				       + " FROM FIVE_SUGGEST ";
-		String sqlword= "";
-		if(option.equals("all")) {
-			
-		 sqlword =  " WHERE ID LIKE ? "
-					+ " OR TITLE LIKE ? "
-					+ " OR CONTENT LIKE ? " ;
-			
-			co = 1;
-		}
-		 if(option.equals("id")) {
-			
-			 sqlword = " WHERE ID LIKE ? ";
-		}
-		else if(option.equals("title")) {
-			
-			sqlword = " WHERE TITLE LIKE ? ";		
-		}else if(option.equals("content")) {
-			
-			sqlword =  " WHERE CONTENT LIKE ? ";
-		}
-		 
-		sql = sql + sqlword;
-		sql += " ORDER BY REF DESC, STEP ASC ";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-
-		List<suggestDto> list = new ArrayList<suggestDto>();
-		try {
-			conn = DBConnection.getConnection();
-			System.out.println("1/6 getBbsList success");
-
-			
-			psmt = conn.prepareStatement(sql);
-			
-			if(co==1) {
-				psmt.setString(1, "%"+select.trim()+"%");
-				psmt.setString(2, "%"+select.trim()+"%");
-				psmt.setString(3, "%"+select.trim()+"%");
-			
-			}else {
-			
-				psmt.setString(1, "%"+select.trim()+"%");
-				
-			}
-			System.out.println("2/6 getBbsList success");
-
-			rs = psmt.executeQuery();
-			System.out.println("3/6 getBbsList success");
-
-			while (rs.next()) {
-				int i = 1;
-				suggestDto dto = new suggestDto(rs.getInt(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++),
-						rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++),
-						rs.getInt(i++));
-				list.add(dto);
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBClose.close(psmt, conn, rs);
-		}
-		return list;
-	}
+	
 	
       public void suggestUpdate(String title, String content, int seq) {
 		
@@ -523,9 +368,7 @@ public class suggestDao {
     	return len;
 	}
       
-      
-      
-      
+       
       public List<suggestDto> getSuggestList(String option, String select, int page) {
 		
     	  int co = 0;
