@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
+  <%request.setCharacterEncoding("utf-8"); %>
      <%!
     // 답글의 depth 와 image를 추가하는 함수 
     public String arrow(int depth){
@@ -16,12 +16,10 @@
  
  %>   
       <%
-      String id = null;
-      if(session.getAttribute("login_Id") != null){
-   	   id = (String)session.getAttribute("login_Id");
-      }
+      String id = null;   if(session.getAttribute("login_Id") != null){ id = (String)session.getAttribute("login_Id"); }
 String text = request.getParameter("text")==null?"":request.getParameter("text");
-int pageNumber = (Integer)request.getAttribute("pageNumbers"); int allPage =(Integer)request.getAttribute("allPage"); int endPage =(Integer)request.getAttribute("endPage");
+int pageNumber = (Integer)request.getAttribute("pageNumbers"); 
+int allPage =(Integer)request.getAttribute("allPage"); int endPage =(Integer)request.getAttribute("endPage");
 suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggestDto>)request.getAttribute("suggestList");
             
     %>
@@ -39,7 +37,7 @@ suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggest
   <meta name="author" content="" />
 
   <title>Login</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -86,12 +84,12 @@ suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggest
                   <a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.jsp">고객센터</a>
+                  <a class="nav-link" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">고객센터</a>
                 </li>
              
                 <% if(id != null){ %>
              <li class="nav-item">
-                  <a class="nav-link" href="mypage.jsp?id=<%=id%>"><%=id %> 님</a>
+                  <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
    				<li class="nav-item">
                   <a class="nav-link" href="login?work=logout">로그아웃</a>
@@ -310,7 +308,7 @@ function paging( pageno ) {
 	  let option = $("#option").val();
 	  let text = $("#text").val();
 	$.ajax({
-		url:"suggest?work=suggest&&pageNumber=" + pageno +"&detailwork=paging&option="+option+"&text="+text,
+		url:"suggest?work=suggest&pageNumber=" + pageno +"&detailwork=paging&option="+option+"&text="+text,
 		type:"get",
 		datatype:"json",
 		success:(function(datas){
@@ -352,6 +350,7 @@ function paging( pageno ) {
 
 }
 </script>
+
 <!-- 페이징 처리 끝 -->
 
 </body>

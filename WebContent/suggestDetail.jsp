@@ -102,13 +102,9 @@
 <div align="center">
 <h1>건사(상세보기)</h1>
 </div>
-<form action="suggestUpdate.jsp">
-
-<!-- 수정에 필요한 seq값 -->
-<input type="hidden" name="seq" value="<%=dto.getSeq()%>">
 
 <div align="center">
-<div style="margin-left: 20px">ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<%=dto.getId()%>" readonly="readonly"></div><br><br>
+<div style="margin-left: 20px">ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<%=dto.getId()%>" readonly="readonly" id="id"></div><br><br>
 제목:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="title" value="<%=dto.getTitle()%>" readonly="readonly"><br><br>
 <div style="margin-right: 420px">
 건의내용:<br><br>
@@ -119,9 +115,10 @@
 <button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button>
 
 <!-- 글 수정으로 이동 -->
-<button type="submit" id="add">글 수정</button>
+<button type="button" id="btn" value="수정">글 수정</button>
+<button type="button" id="btn" value="삭제">글 삭제</button>
 </div>
-</form>
+
 <!------------ 건의사항 상세보기 끝 --------------->
 <!-- 바닥글 -->
     <section class="info_section layout_padding2">
@@ -225,5 +222,22 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
   <!-- Google Map -->
+  
+  <script>
+  $(document).ready(function() {
+  	$("#btn").click(function() {
+  		let id = $("#id").val(); let btn = $(this).attr("value");
+ 
+  		if("<%=id%>" != id ){     
+  			alert("권한이 없습니다");      }
+  		else if(btn == "수정"){
+            location.href = "suggestUpdate.jsp?seq=<%=dto.getSeq()%>&id=<%=dto.getId()%>&title=<%=dto.getTitle()%>&content=<%=dto.getContent()%>";
+  		}	
+  		else if(btn == "삭제"){ 
+            location.href = "suggest?work=suggest&detailwork=suggest_delete&seq=<%=dto.getSeq()%>";   
+  		}
+  		});
+  	});	  
+  </script>
 </body>
 </html>

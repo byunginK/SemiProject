@@ -226,6 +226,41 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<
   <script src="js/custom.js"></script>
   <!-- Google Map -->
 
-
+<script>
+$(document).ready(function() {
+	$("#btn").click(function() {
+		let title = $("#title").val(); let content = $("#content").val()
+		if( title =="" || content ==""){
+			alert("빈칸없이 입력해주세요");
+		}else{
+			location.href = ""
+		}
+		
+	});
+	
+	
+});
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%request.setCharacterEncoding("utf-8"); %>
    <%
    String id = null;
    if(session.getAttribute("login_Id") != null){
@@ -95,11 +95,12 @@
 <h1>건사(글쓰기)</h1>
 </div>
 <form action="suggest" method="post">
+<input type="hidden" name="work" value="suggest"><input type="hidden" name="detailwork" value="suggest_write">
 <div align="center">
 <div style="margin-left: 20px">
 
 <!-- 아이디 자동으로 채워짐 수정x -->
-ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" readonly="readonly"  value="<%=GetId%>"></div><br><br>
+ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" readonly="readonly"  value="<%=id%>"></div><br><br>
 
 제목:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="title"><br><br>
 <div style="margin-right: 420px">
@@ -116,6 +117,7 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" readonly
 </div>
 </form>
 <!------------ 건의사항 글쓰기 끝 ------------>
+
 <!-- 바닥글 -->
     <section class="info_section layout_padding2">
       <div class="container">

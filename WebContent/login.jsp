@@ -124,7 +124,7 @@
 			<br>
 			
 			<!-- 이게 깔끔한거 같아요! 체크박스는 불편하시면 없어도 돼요~ -->
-			<a href="register.jsp">아이디가 없으신가요?</a><div style="position: relative;"><a style="float: right;">아이디 저장</a><input type="checkbox" id="chk_save_id" style="float: right; margin-top: 5px; margin-right: 3px"></div>
+			<a href="register_agree.jsp">아이디가 없으신가요?</a><div style="position: relative;"><a style="float: right;">아이디 저장</a><input type="checkbox" id="chk_save_id" style="float: right; margin-top: 5px; margin-right: 3px"></div>
 		</div>
 			</form>
 		</div>
@@ -243,8 +243,7 @@
 		$(document).ready(function() {
 				$("#btn").click(function () {
 					//	alert("btn click");
-					let id = $("#id").val();
-					let pwd =$("#pwd").val();
+					let id = $("#id").val();  let pwd =$("#pwd").val();
 					if(id== ""||id.search(/\s/) != -1 ||pwd=="" ||pwd.search(/\s/) != -1){
 						alert("공백없이 입력해주세요")
 					}else{
