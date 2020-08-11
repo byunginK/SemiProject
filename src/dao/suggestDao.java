@@ -3,7 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -310,6 +310,7 @@ public class suggestDao {
       		if(option.equals("all")) {
       			
       		 sqlword =  " WHERE DEL = 0 "
+      		 		   + "  AND STEP=0 "
       		 		    + " AND ID LIKE ? "
       					+ " OR TITLE LIKE ? "
       					+ " OR CONTENT LIKE ? " ;
@@ -318,14 +319,14 @@ public class suggestDao {
       		}
       		 if(option.equals("id")) {
       			
-      			 sqlword = " WHERE ID LIKE ? AND DEL=0 ";
+      			 sqlword = " WHERE ID LIKE ? AND DEL=0 AND STEP=0 ";
       		}
       		else if(option.equals("title")) {
       			
-      			sqlword = " WHERE TITLE LIKE ? AND DEL=0 ";		
+      			sqlword = " WHERE TITLE LIKE ? AND DEL=0 AND STEP=0 ";		
       		}else if(option.equals("content")) {
       			
-      			sqlword =  " WHERE CONTENT LIKE ? AND DEL=0 ";
+      			sqlword =  " WHERE CONTENT LIKE ? AND DEL=0 AND STEP=0 ";
       		}
       		 
       		sql = sql + sqlword;
@@ -386,6 +387,7 @@ public class suggestDao {
   		if(option.equals("all")) {
   			
   		 sqlword =  " WHERE DEL = 0 "
+  		 		    + " AND STEP=0 "
   		 		    + " AND ID LIKE ? "
   					+ " OR TITLE LIKE ? "
   					+ " OR CONTENT LIKE ? " ;
@@ -394,14 +396,14 @@ public class suggestDao {
   		}
   		 if(option.equals("id")) {
   			
-  			 sqlword = " WHERE ID LIKE ? AND DEL=0 ";
+  			 sqlword = " WHERE ID LIKE ? AND DEL=0 AND STEP=0 ";
   		}
   		else if(option.equals("title")) {
   			
-  			sqlword = " WHERE TITLE LIKE ? AND DEL=0 ";		
+  			sqlword = " WHERE TITLE LIKE ? AND DEL=0 AND STEP=0 ";		
   		}else if(option.equals("content")) {
   			
-  			sqlword =  " WHERE CONTENT LIKE ? AND DEL=0 ";
+  			sqlword =  " WHERE CONTENT LIKE ? AND DEL=0 AND STEP=0 ";
   		}
   		 
   		sql = sql + sqlword;
@@ -460,6 +462,28 @@ public class suggestDao {
   		}
   		return list;
   	}
+     
+      public int getAllAnswer( int seq ) {
+		
+    	  String sql = " SELECT MAX(STEP) "
+    	  		        + " FROM FIVE_SUGGEST "
+    	  	         	+ " WHERE SEQ=? ";
+    	  Connection conn = null;
+    	  PreparedStatement psmt = null;
+    	  ResultSet rs = null;
+    	  
+    	  try {
+    		conn= DBConnection.getConnection();
+			psmt = conn.prepareStatement(sql);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	  
+    	  
+    	  
+	}
 }
 
 
