@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.CookieStore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,8 +87,28 @@ if(work.equals("suggest")) {
 				out.flush(); 
 				}
 			  else {
-	        	int seq = Integer.parseInt(sseq);
-				suggestDto dto = dao.getSuggest(seq);
+			 int seq = Integer.parseInt(sseq);
+				suggestDto dto = dao.getSuggest(seq); 
+	        	
+	        	Cookie[] cookies = req.getCookies();
+	       	
+	        	boolean isGet=false;
+	        	
+	        if(cookies!=null){   
+	        	   for(Cookie c: cookies){//    
+	        	    //num쿠키가 있는 경우
+	        	    if(c.getName().equals(sseq)){
+	        	     isGet=true; 
+	        	    }
+	        	   }
+	        	   // num쿠키가 없는 경우
+	        	   if(!isGet) {
+	        	    dao.readcount(seq);//조회수증가
+	        	    Cookie c1 = new Cookie(sseq, sseq);
+	        	    c1.setMaxAge(1*24*60*60);
+	        	    resp.addCookie(c1);    
+	        	   }
+	        	  }	
                 req.setAttribute("suggest_dto", dto); 
                 forward("suggestDetail.jsp", req, resp);}
 	          }
