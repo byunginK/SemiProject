@@ -81,6 +81,7 @@ if(work.equals("suggest")) {
  else if(detailwork.equals("suggest_detail")) {   
 		  // suggest 클릭시 글 상세화면
 		  String id = (String)session.getAttribute("login_Id");
+		  
 				//로그인 여부 확인 
 	          if(id == null) {
 	        	  
@@ -88,31 +89,37 @@ if(work.equals("suggest")) {
 				out.flush(); 
 				}
 			  else {
-			 int seq = Integer.parseInt(sseq);
-				suggestDto dto = dao.getSuggest(seq); 
-	        	
-	        	Cookie[] cookies = req.getCookies();
-	       	
-	        	boolean isGet=false;
-	        	//조회수 새로고침 조회수 상승 방지 쿠키에 저장
-	        if(cookies!=null){   
-	        	   for(Cookie c: cookies){//    
-	        	    //sseq쿠키가 있는 경우
-	        	    if(c.getName().equals(sseq)){
-	        	     isGet=true; 
-	        	    }
-	        	   }
-	        	   // sseq쿠키가 없는 경우
-	        	   if(!isGet) {
-	        	    dao.readcount(seq);//조회수증가
-	        	    Cookie c1 = new Cookie(sseq, sseq);
-	        	    c1.setMaxAge(1*24*60*60);
-	        	    resp.addCookie(c1);    
-	        	   }
-	        	  }	
+				   
+                int seq = Integer.parseInt(sseq);
+             // 저장된 쿠키 불러오기
+            	Cookie[] cookieFromRequest = req.getCookies();
+            	String cookieValue = null;
+            	for(int i = 0 ; i<cookieFromRequest.length; i++) {
+            		// 요청정보로부터 쿠키를 가져온다.
+            		cookieValue = cookieFromRequest[0].getValue();
+            	}
+             	// 쿠키 세션 입력
+            	if (session.getAttribute(sseq+":cookie") == null) {
+            	 	session.setAttribute(sseq+":cookie", sseq + ":" + cookieValue);
+            	} else {
+            		session.setAttribute(sseq+":cookie ex", session.getAttribute(sseq+":cookie"));
+            		if (!session.getAttribute(sseq+":cookie").equals(sseq + ":" + cookieValue)) {
+            		 	session.setAttribute(sseq+":cookie", sseq + ":" + cookieValue);
+            		}
+            	}
+             	// 글 상세 조회
+
+             	// 조회수 카운트
+             	if (!session.getAttribute(seq+":cookie").equals(session.getAttribute(seq+":cookie ex"))) {
+            	 	// 가시적으로  조회수 1 추가해줌
+            	 	dao.readcount(seq);
+             	}	   
+             	suggestDto dto = dao.getSuggest(seq);
 	        // 상세화면으로 전송
-                req.setAttribute("suggest_dto", dto); 
-                forward("suggestDetail.jsp", req, resp);}
+				req.setAttribute("suggest_dto", dto); 
+                forward("suggestDetail.jsp", req, resp);
+              
+			  }
 	          }
 	 
  else if(detailwork.equals("writeIdcheck")) {  
