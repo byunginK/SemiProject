@@ -39,7 +39,6 @@
 <body class="sub_page">
 <!-- 바디 셋팅 -->
   <div class="main_body_content">
-
     <div class="hero_area">
     
      <!-- 헤더 -->
@@ -170,32 +169,403 @@
             
             
               
-     <!-- 카테고리별 디테일 -->
-    <section class="contact_section layout_padding">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5 col-lg-4 offset-md-1 offset-lg-2">
-            <div class="form_container">
-              
-              
-              
-              
-              
-              
+<!-- 카테고리별 디테일 -->
+     
+<!-- 상의 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Top & Outer
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+			      		
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top26.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top18.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top21.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top22.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+		             
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top01.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top12.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top23.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/top/top27.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+		             
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 상의 끝 -->
+	
+	
+	
+	
+<!-- 하의 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Pants & Skirts
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images2.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images25.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images28.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images7.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images8.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images9.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images11.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/pants/images32.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 하의 끝 -->	
+	
+	
+	
+	
+	
+<!-- 신발 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Shoes
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+			      		
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/18.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/24-1.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/30-2.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/32-2.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+		             
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/4-2.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/9-2.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/19.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/shoes/46-2.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 신발 끝 -->	
+	
+	
+	
+	
+	
+	
 
-              
-              
-              
-              
-              
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+<!-- 악세서리 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Pants & Skirts
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+			      		
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images12.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images13.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images16.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images27.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images15.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		               
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images17.jpg" alt="">
+		                    </div> 
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		                    
+		             <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images25.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 230,000원<br>오렌지리프 블라우스
+		             </div>
+			                
+			         <div class="box">
+		                <a href="">
+	           				<div class="img-box">
+		                       	<img src="img/acc/images33.jpg" alt="">
+		                    </div>
+		                 </a>
+		                 60,000원<br>PUMA<br>굽 5cm
+		             </div>
+		             
+		             
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 악세서리 끝 -->
+
+
+	
+	
+	
+	
     
-     <!-- 디테일 끝 -->
+<!-- 디테일 끝 -->
 
    
  <!-- 바닥글 창 -->
