@@ -28,20 +28,24 @@ public class loginController extends HttpServlet {
 		HttpSession session = req.getSession(); PrintWriter out = resp.getWriter();
 		String work = req.getParameter("work");
 		MemberDao dao = MemberDao.getInstance();
+		
+		
 if(work.equals("logout")) {
-
+	//로그아웃 
         session.removeAttribute("login_Id");
         forward("index.jsp", req, resp);
         
 } else if(work.equals("myPage")) {
-	        
+	    //마이페이지    
  String id = req.getParameter("id");  String pwd = req.getParameter("pwd");
 	      
 	      MemberDto dto = (MemberDto)dao.login(id, pwd);
 	     // System.out.println("아이디"+dto.getId());
 	      req.setAttribute("dto", dto);
-	      forward("myPage.jsp", req, resp);	      
-}else {
+	      forward("myPage.jsp", req, resp);	  
+	      
+}
+else {
 	
 }
 		
@@ -49,6 +53,7 @@ if(work.equals("logout")) {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setCharacterEncoding("UTF-8"); resp.setContentType("text/html; charset=UTF-8"); req.setCharacterEncoding("utf-8");
 		String id = req.getParameter("id"); String pwd = req.getParameter("pwd");
 		HttpSession session = req.getSession();
 		
@@ -57,14 +62,14 @@ if(work.equals("logout")) {
 		MemberDao dao = MemberDao.getInstance();
 		
 		MemberDto dto = dao.login(id, pwd);
-		loginDto dto2 = new loginDto();
 		
+		loginDto log = null;
 		
 		if(dto != null && !dto.getId().equals("")) {
 	         	
 			a = "YES";
 		
-			dto2.setId(dto.getId());  dto2.setAuth(dto.getAuth());
+		 log = new loginDto(dto.getId(), dto.getAuth());
 	 
 	    	session.setAttribute("login_Id", id);
 	    	
@@ -76,6 +81,7 @@ if(work.equals("logout")) {
 			}
 		
 		Map<Object, Object> map =  new HashMap<Object, Object>();
+		map.put("log", log);
 		map.put("isS", a);
 		JSONObject jobj = new JSONObject();
 		jobj.put("map", map);			

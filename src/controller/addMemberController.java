@@ -26,24 +26,23 @@ public class addMemberController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8"); resp.setContentType("text/html; charset=UTF-8"); req.setCharacterEncoding("utf-8");
 		PrintWriter out = resp.getWriter();
 		
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
-		String name = req.getParameter("name");
-		String sphone = req.getParameter("phone");
-		int phone = Integer.parseInt(sphone);
-		String email = req.getParameter("email");
+		String id = req.getParameter("id");  String pwd = req.getParameter("pwd");
+		String name = req.getParameter("name"); String sphone = req.getParameter("phone");
+		int phone = Integer.parseInt(sphone); String email = req.getParameter("email");
 		
-		int auth = 3;
+		int auth = 3;  //관리자 1, 일반 3
+		
 	//	System.out.println("아뒤: "+id); System.out.println("비번: "+pwd); System.out.println("이름: "+name); System.out.println("전번: "+phone); System.out.println("이메: "+email);
 		MemberDao dao = MemberDao.getInstance();
 
 		boolean isS = dao.addMember(new MemberDto(id, pwd, name, phone, email, auth));
-		if(isS) {
-			
+		if(isS) {	
+			//회원가입 성공
 			out.print("<script> alert('회원이 돼주셔서 감사합니다'); location.href = 'login.jsp';</script>");
 			out.flush(); 
 		}else {
-			out.print("<script> alert('회원에 실패했습니다. 해당 현상이 지속되면 문의해주세요(문의전화 02-233-5555)'); location.href = 'index.jsp';</script>");
+			//회원가입 실패
+			out.print("<script> alert('회원가입에 실패했습니다. 해당 현상이 지속되면 문의해주세요(문의전화 02-233-5555)'); location.href = 'index.jsp';</script>");
 			out.flush();
 		}	
 		
@@ -61,6 +60,7 @@ public class addMemberController extends HttpServlet {
 	//	System.out.println(id);
 		String a = "";
 		
+   //  회원 가입시 아이디 중복확인 ajax
 		boolean isS =dao.CheckId(id);
 		
 			if(isS == true){	// id가 없음
