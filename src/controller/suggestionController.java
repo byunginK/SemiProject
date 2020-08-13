@@ -52,7 +52,7 @@ if(work.equals("suggest")) {
 	        if(spageNumber != null && !spageNumber.equals("")){
 				 pageNumber = Integer.parseInt(spageNumber);
 				}
-			 System.out.println(pageNumber);
+			// System.out.println(pageNumber);
 			List<suggestDto> list = dao.getSuggestList(option, text, pageNumber);
 			 
 			 int allPage = len / 10 ;    
@@ -216,8 +216,8 @@ if(work.equals("suggest")) {
 	else if(detailwork.equals("answer_delete")) {
 		 //댓글 삭제         
         int seq = Integer.parseInt(sseq);
-        
-        boolean isS = dao.su_Answer_Delete(seq);
+        int a_seq = Integer.parseInt(req.getParameter("a_seq"));
+        boolean isS = dao.su_Answer_Delete(a_seq);
         
         if(isS) {
         	out.print("<script>alert('삭제되었습니다'); location.href='suggest?work=suggest&detailwork=suggest_detail&seq="+ seq +"';</script>");
