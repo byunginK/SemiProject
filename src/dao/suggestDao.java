@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
+import dto.sug_AnswerDto;
 import dto.suggestDto;
 
 public class suggestDao {
@@ -25,19 +26,6 @@ public class suggestDao {
 	public static suggestDao getInstance() {
 		return dao;
 	}
-	 public String arrow(int depth){
-		 
-		 String rs = "<img src='./image/arrow.png' width='20px' height='20px'/> ";
-		 String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
-		 
-		 String ts = "";
-		 for(int i = 0; i < depth; i++){
-			 ts += nbsp; 
-		 }
-		 
-		 return depth==0?"":ts + rs;
-	 }
-
 
 	public boolean writeBbs(suggestDto dto) {
 		String sql = " INSERT INTO FIVE_SUGGEST " + " (SEQ, ID, REF, STEP, DEPTH, " + " TITLE, CONTENT, WDATE, "
@@ -157,23 +145,14 @@ public class suggestDao {
 		
 	}
 	
-	public boolean answer(int seq, suggestDto bbs) {
-		// update
-				String sql1 = " UPDATE FIVE_SUGGEST "
-							+ " SET STEP=STEP+1 "
-							+ " WHERE REF = (SELECT REF FROM BBS WHERE SEQ=? ) "
-							+ " 	AND STEP > (SELECT STEP FROM BBS WHERE SEQ=? ) ";
-				
+	public boolean answer(int seq, sug_AnswerDto bbs) {
+	
 				// insert
-				String sql2 = " INSERT INTO FIVE_SUGGEST "
-							+ " (SEQ, ID, "
-							+ " REF, STEP, DEPTH, "
-							+ " TITLE, CONTENT, WDATE, DEL, READCOUNT) "
-							+ " VALUES(SEQ_FIVE_SUGGEST.NEXTVAL, ?, "
-							+ "		(SELECT REF FROM FIVE_SUGGEST WHERE SEQ=?), "
-							+ "		(SELECT STEP FROM FIVE_SUGGEST WHERE SEQ=?) + 1, "
-							+ "     (SELECT DEPTH FROM FIVE_SUGGEST WHERE SEQ=?) + 1, "
-							+ "		?, ?, SYSDATE, 0, 0) ";
+				String sql = " INSERT INTO FIVE_SUGGEST_COMMENT "
+							+ " (SEQ, WRITER_ID, SUGGEST_NO, "
+							+ "  CONTENT, WDATE, DEL ) "
+							+ " VALUES(SEQ_FIVE_SUGGEST_COMMENT.NEXTVAL, ?, "
+							+ "	 ?, ?, SYSDATE, 0 ) " ;
 				
 				Connection conn = null;
 				PreparedStatement psmt = null;
@@ -182,51 +161,25 @@ public class suggestDao {
 				
 				try {
 					conn = DBConnection.getConnection();
-					conn.setAutoCommit(false);
 					System.out.println("1/6 answer success");
-					
-					// update
-					psmt = conn.prepareStatement(sql1);
-					psmt.setInt(1, seq);
-					psmt.setInt(2, seq);
+
+					psmt = conn.prepareStatement(sql);
 					System.out.println("2/6 answer success");
-					
-					count = psmt.executeUpdate();
-					System.out.println("3/6 answer success");
-					
-					// psmt 초기화
-					psmt.clearParameters();
-					
-					// insert
-					psmt = conn.prepareStatement(sql2);
-					psmt.setString(1, bbs.getId());
+			
+					// insert	
+					psmt.setString(1, bbs.getAnswer_Id());
 					psmt.setInt(2, seq);
-					psmt.setInt(3, seq);
-					psmt.setInt(4, seq);
-					psmt.setString(5, bbs.getTitle());
-					psmt.setString(6, bbs.getContent());
-					System.out.println("4/6 answer success");
-					
+					psmt.setString(3, bbs.getContent());
+					System.out.println("3/6 answer success");
+		
 					count = psmt.executeUpdate();
-					System.out.println("5/6 answer success");
-					
-					conn.commit();
+					System.out.println("4/6 answer success");
 					
 				} catch (Exception e) {			
 					e.printStackTrace();			
-					try {
-						conn.rollback();
-					} catch (Exception e1) {				
-						e1.printStackTrace();
-					}
 				} finally {			
-					try {
-						conn.setAutoCommit(true);
-					} catch (Exception e) {				
-						e.printStackTrace();
-					}
 					DBClose.close(psmt, conn, null);
-					System.out.println("6/6 answer success");
+					System.out.println("5/6 answer success");
 				}
 				return count>0?true:false;
 			}
@@ -310,7 +263,7 @@ public class suggestDao {
       		if(option.equals("all")) {
       			
       		 sqlword =  " WHERE DEL = 0 "
-      		 		   + "  AND STEP=0 "
+      		 		   + "  AND STEP= 0 "
       		 		    + " AND ID LIKE ? "
       					+ " OR TITLE LIKE ? "
       					+ " OR CONTENT LIKE ? " ;
@@ -381,13 +334,12 @@ public class suggestDao {
     		
     		sql += "(SELECT ROW_NUMBER()OVER(ORDER BY REF DESC, STEP ASC) AS RNUM, " + 
     				"	SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT " + 
-    				" FROM FIVE_SUGGEST ";
+    				" FROM FIVE_SUGGEST";
     	
   		String sqlword= "";
   		if(option.equals("all")) {
   			
   		 sqlword =  " WHERE DEL = 0 "
-  		 		    + " AND STEP=0 "
   		 		    + " AND ID LIKE ? "
   					+ " OR TITLE LIKE ? "
   					+ " OR CONTENT LIKE ? " ;
@@ -396,19 +348,19 @@ public class suggestDao {
   		}
   		 if(option.equals("id")) {
   			
-  			 sqlword = " WHERE ID LIKE ? AND DEL=0 AND STEP=0 ";
+  			 sqlword = " WHERE ID LIKE ? AND DEL=0 ";
   		}
   		else if(option.equals("title")) {
   			
-  			sqlword = " WHERE TITLE LIKE ? AND DEL=0 AND STEP=0 ";		
+  			sqlword = " WHERE TITLE LIKE ? AND DEL=0";		
   		}else if(option.equals("content")) {
   			
-  			sqlword =  " WHERE CONTENT LIKE ? AND DEL=0 AND STEP=0 ";
+  			sqlword =  " WHERE CONTENT LIKE ? AND DEL=0";
   		}
   		 
   		sql = sql + sqlword;
   		sql += " ORDER BY REF DESC, STEP ASC) ";
-  		sql += " WHERE RNUM >= ? AND RNUM <= ? ";
+  		sql += " WHERE STEP =0 AND RNUM >= ? AND RNUM <= ? ";
   		
   		int start, end;
   		start = 1 + 10 * page;  // 시작 글의 번호
@@ -462,30 +414,115 @@ public class suggestDao {
   		}
   		return list;
   	}
-     
-     /*
+    
+      // 답글 갯수
       public int getAllAnswer( int seq ) {
 		
-    	  String sql = " SELECT MAX(STEP) "
-    	  		        + " FROM FIVE_SUGGEST "
-    	  	         	+ " WHERE SEQ=? ";
+    	  String sql = " SELECT COUNT(*) "
+    	  		        + " FROM FIVE_SUGGEST_COMMENT "
+    	  	         	+ " WHERE SUGGEST_NO=? ";
     	  Connection conn = null;
     	  PreparedStatement psmt = null;
     	  ResultSet rs = null;
-    	  
+    	  int count = 0;
     	  try {
     		conn= DBConnection.getConnection();
+    		System.out.println("1/6 getAllAnswer success");
 			psmt = conn.prepareStatement(sql);
-			
+			psmt.setInt(1, seq);
+			System.out.println("2/6 getAllAnswer success");
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			System.out.println("3/6 getAllAnswer success");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			DBClose.close(psmt, conn, rs);
+			System.out.println("4/6 getAllAnswer success");
 		}
-    	  
-    	  
-    	  
+    	return count;
+	  
 	}
-	*/
+      
+      // 댓글 받아오기
+      public List<sug_AnswerDto> getSu_AnswerList( int seq ) {
+  		String sql = " SELECT SEQ, SUGGEST_NO, WRITER_ID, CONTENT, WDATE, DEL "
+  				+ " FROM FIVE_SUGGEST_COMMENT "
+  				+ " WHERE SUGGEST_NO=? "
+  			    + " ORDER BY WDATE DESC ";
+
+  		Connection conn = null;
+  		PreparedStatement psmt = null;
+  		ResultSet rs = null;
+
+  		List<sug_AnswerDto> list = new ArrayList<sug_AnswerDto>();
+  		try {
+  			conn = DBConnection.getConnection();
+  			System.out.println("1/6 getSu_AnswerList success");
+
+  			psmt = conn.prepareStatement(sql);
+  			psmt.setInt(1, seq);
+  			System.out.println("2/6 getSu_AnswerList success");
+
+  			rs = psmt.executeQuery();
+  			System.out.println("3/6 getSu_AnswerList success");
+
+  			while (rs.next()) {
+  				int i = 1;
+  				sug_AnswerDto dto = new sug_AnswerDto(rs.getInt(i++), rs.getInt(i++),  rs.getString(i++),
+  						 rs.getString(i++), rs.getString(i++), rs.getInt(i++));
+  				list.add(dto);
+  			}
+  			System.out.println("5/6 getSu_AnswerList success");
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		} finally {
+  			DBClose.close(psmt, conn, rs);
+  			System.out.println("6/6 getSu_AnswerList success");
+  		}
+  		return list;
+  	}
+      
+      
+	  
+      public boolean su_Answer_Delete( int seq ) {
+		
+    	  String sql = " UPDATE FIVE_SUGGEST_COMMENT "
+				     + " SET DEL=DEL+1 "
+				     + " WHERE SEQ=? ";		
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 su_Answer_Delete success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+		
+			System.out.println("2/6 su_Answer_Delete success");
+			
+			count = psmt.executeUpdate();
+			System.out.println("3/6 su_Answer_Delete success");
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			DBClose.close(psmt, conn, null);
+			System.out.println("4/6 su_Answer_Delete success");
+		}
+		
+		
+		return count>0?true:false;
+      }
 }
 
 
