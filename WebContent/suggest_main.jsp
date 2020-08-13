@@ -6,15 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%request.setCharacterEncoding("utf-8"); %>
-     <%!
-    // 답글의 depth 와 image를 추가하는 함수 
-    public String arrow(int depth){
-	 String rs = "다음"; String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; String ts = "";
-	 for(int i = 0; i < depth; i++){
-		 ts += nbsp; 
-	 }  return depth==0?"":ts + rs; }
- 
- %>   
+     
       <%
       String id = null;   if(session.getAttribute("login_Id") != null){ id = (String)session.getAttribute("login_Id"); }
 String text = request.getParameter("text")==null?"":request.getParameter("text");
@@ -146,11 +138,7 @@ if(list.size() == 0){
 			if(bbs.getDel() == 0 && bbs.getStep()== 0){
 				%>		
 				<a href="suggest?work=suggest&detailwork=suggest_detail&seq=<%=bbs.getSeq() %>"><%=bbs.getTitle() %></a>	
-	<%}else if(bbs.getStep() > 0 && bbs.getDel()== 0){%>
-			
-			<a href="suggest?work=suggest&detailwork=suggest_detail&seq=<%=bbs.getSeq() %>"><%=bbs.getTitle() %>&nbsp;[<%=bbs.getStep() %>]</a>	
-		<%}
-		else{%>		
+	<%}else if(bbs.getStep()== 0 && bbs.getDel()!=0){%>		
 	<font color="#CC0000">관리자에 의해서 삭제되었습니다</font> 
 <%}%>
 		</td>  
@@ -331,32 +319,17 @@ function paging( pageno ) {
 			let bbspage = datas.map.bbsPage;
 			let pagenumber = datas.map.pageNumber;
 			$.each(suggestList, function (i, val) {
-				 arrow = function( depth ) {
-					 let rs = "<img src='./image/arrow.png' width='20px' height='20px'/> ";
-					 let nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
-					 let ts = "";
-					 for( i = 0; i < depth; i++){
-						 ts += nbsp; 
-					 }return depth==0?"":ts + rs; } 
+	 
 				let app ="<tr align='center'>"   
 				          +"<th>"+ val.seq +"</th>";
-				 if(val.del == 0){
-					app	+=  "<td>" 
-						   + arrow(val.depth)		
+				 if(val.del == 0 && val.step == 0){
+					app	+=  "<td>" 		
 						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq="+ val.seq + "'>"
 						   + val.title
 						   + "</a>"
 						   +"</td>"
-				}else if(val.step > 0 && val.del == 0){
-					app	+=  "<td>" 
-						   + arrow(val.depth)		
-						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq="+ val.seq + "'>"
-						   + val.title + "&nbsp;" + "[" + val.step + "]"
-						   + "</a>"
-						   +"</td>"
 				}
-				 
-				 else{
+				 else if(val.step == 0 && val.del !=0){
 				app +=	"<td>"
 					+ "<font color='#CC0000'>관리자에 의해서 삭제되었습니다</font>";
 			     	+"</td>";		

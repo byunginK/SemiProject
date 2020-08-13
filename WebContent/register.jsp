@@ -140,9 +140,11 @@
 
 
 
-    <!-- 바닥글-->
-   <section class="info_section layout_padding2">
+     <!-- 바닥글 -->
+    <section class="info_section layout_padding2">
       <div class="container">
+
+        
         <div class="row info_main_row">
           <div class="col-md-6 col-lg-3">
             <div class="info_links">
@@ -162,7 +164,7 @@
                 <a href="login.jsp">
                   	로그인
                 </a>
-                <a href="register.jsp">
+                <a href="register_agree.jsp">
                   	회원가입
                 </a>
               </div>
@@ -217,7 +219,7 @@
 
   </div>
 
-  <!-- 밑창 -->
+  <!-- 밑창-->
   <footer class="container-fluid footer_section">
     <div class="container">
       <div class="col-md-11 col-lg-8 mx-auto">
@@ -227,8 +229,8 @@
       </div>
     </div>
   </footer>
-  <!-- footer section -->
-
+  <!-- 밑창 끝 -->
+  
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <!-- bootstrap js -->

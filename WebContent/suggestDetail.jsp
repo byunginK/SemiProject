@@ -1,14 +1,18 @@
+<%@page import="java.util.List"%>
+<%@page import="dto.sug_AnswerDto"%>
 <%@page import="dto.suggestDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
-         suggestDto dto = (suggestDto)request.getAttribute("suggest_dto");
+        
     String id = null;
     if(session.getAttribute("login_Id") != null){
  	   id = (String)session.getAttribute("login_Id");
     }
-    int answerNumber = 0;
+    int answerCount = (Integer)request.getAttribute("answerCount");
+    suggestDto dto = (suggestDto)request.getAttribute("suggest_dto");
+    List<sug_AnswerDto> list = (List<sug_AnswerDto>)request.getAttribute("a_list");
     %>
 <!DOCTYPE html>
 <html>
@@ -123,8 +127,10 @@
 <tr><td colspan="6" ><textarea rows="10" cols="100" readonly="readonly" style="border: none"><%=dto.getContent() %></textarea> </td></tr>
 
 <tr style="border: none" bgcolor="#CCFFFF">
+
 <!-- 글 수정으로 이동 -->
 <td colspan="3" align="left"><button type="button" id="btn" value="수정">글 수정</button></td>
+
 <!-- 글목록으로 이동(suggest_main.jsp) -->
 <td colspan="3" align="right"><button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button></td>
 </tr>
@@ -132,24 +138,49 @@
 </div>
 <!-- 건의사항 작성 테이블 끝 -->
 <br>
-<!----- 답글 시작  ----->
-<form id="frm">
+
+<!----- 댓글 시작  ----->
+<!-- 글의 seq번호로 댓글 수 체크후 댓글 유무 확인/ 댓글이 있으면 삭제번호를 통해 구별-->
+<!-- 관리자 모드에서 게시글 삭제 할때 comment 테이블에 suggest_no에 게시글 seq를 넣으면 게시글 댓글 모두 삭제 -->
 <div align="center">
 <table>
 <col width="100"><col width="150"><col width="100"><col width="250"><col width="100"><col width="120">
-<!-- max(step) 번호로 댓글 갯수 확인 -->
-<tr><td colspan="6" bgcolor="#FFFFCC">총 <%=dto.getStep() %>개의 답글이 있습니다</td></tr>
-<tr><td colspan="4" ><textarea rows="5" cols="70"></textarea></td><td></td><td style="float: right" id="btn2"><button type="button" >답글작성</button></td></tr>
+<tr id="answerCountAf"><td colspan="6" bgcolor="#FFFFCC" id="countAjax">총 <%=answerCount %>개의 답글이 있습니다</td></tr>
+<tr><td colspan="4" ><textarea rows="5" cols="70" id="content"></textarea></td><td></td><td style="float: right" id="btn2"><button type="button" id="answer">답글작성</button></td></tr>
 </table>
 </div>
 <br><br>
-<!-- max(step) 번호로 체크후 댓글 유무 확인-->
-<%if(dto.getStep() == 0){ %>
-<div align="center"><a>       작성된 답글이 없습니다.</a></div>
-<%}else{ %>
 
-<%} %>
+<form id="a_frm" method="post">
+<!-- 컨트롤러에 보내는 데이터 -->
+<input type="hidden" name="work" value="suggest"><input type="hidden" name="detailwork" value="answer_delete">
+<div align="center">
+<table>
+<col width='100'><col width='150'><col width='100'><col width='250'><col width='100'><col width='120'>
 
+<tbody id="answerAf">
+
+<!-- 댓글 작성시 ajax가 뿌려질 위치-->
+
+<%if(answerCount == 0){ %>
+<tr><td colspan="6" align="center"><a>작성된 답글이 없습니다.</a></td></tr>
+<%}else{ 
+for(int i = 0; i < list.size(); i++){
+     sug_AnswerDto a_dto = list.get(i);
+     if(a_dto.getDel() == 0){
+    	%>
+    	<tr bgcolor="#FFFFCC"><td colspan="3" align="left" id="a_id"><%=a_dto.getAnswer_Id()%></td><td colspan="3" align="right"><%=a_dto.getAnswer_Wdate() %><a href='#' id="a_delete">[댓글 삭제]</a><a href='#' id="a_update">[댓글 수정]</a></td></tr>
+     <tr><td colspan="6"><%=a_dto.getContent() %><input type="hidden" name="seq" value="<%=a_dto.getAnswer_Seq()%>"></td></tr> 
+     <%}else{
+%>
+ <tr bgcolor='#FFFFCC'><td colspan ='3'><%=a_dto.getAnswer_Id() %></td><td colspan='3' align='right'><%=a_dto.getAnswer_Wdate() %></td></tr>
+				          <tr><td colspan ='6'>삭제된 댓글입니다</td></tr>
+<%}
+} 
+}%>
+</tbody>
+</table>
+</div>
 </form>
 <!------- 답글 끝 ------>
 <br><br><br><br>
@@ -287,38 +318,64 @@
             } 
   		}--%>
   		});
-  	});	  
-  </script>
-  <!-- 답글 작성 ajax  -->
-  <script >
-function answer() {
-	let answerContent = $("#answer").val();
-	let id = "<%=id%>";  let seq = "<%=dto.getSeq()%>";
-	if(answerContent ==""){
-		alert("글을 작성해주세요");
-	}
-	$.ajax({
+  	/*댓글 작성 시 바로 뿌려주는 AJAX */
+$("#answer").click(function() {
+	
+      let id3 = "<%=id%>"; 
+      let content = $("#content").val(); 
+      let seq = "<%=dto.getSeq()%>";
+ 
+ 	 $.ajax({
 		url:"suggest?work=suggest&detailwork=suggest_answer",
 		type: "post",
-		data:{"content": content, "id": id, "seq": seq}
+		data:{"content":content, "id":id3, "seq":seq},
 		datatype:"json",
 		success:(function( datas ) {
-			let maxStep = datas.map.maxStep;
-			let answerList = datas.map.answerList;
+		
+			let answerCount = datas.map.answerCount;
+			var answerList = datas.map.answerList;
+
+			let app ="";
+			if(answerCount == 0){
+			  app = "<tr><td colspan='6' align='center'><a>작성된 답글이 없습니다.</a></td></tr>";
+			}
+			else{
 			$.each(answerList, function (i, val) {
-				
-				
-				
-				
-			})
+				if(val.del == 0){
+				  app += " <tr bgcolor='#FFFFCC'><td colspan ='3'>"+ val.answer_Id +"</td><td colspan='3' align='right'>"+ val.answer_Wdate +"<a href='#' id='a_btn'>[댓글 삭제]</a><a href='#' id='a_btn'>[댓글 수정]</a></td></tr>"
+				    + " <tr><td colspan ='6'>"+ val.content +"</td></tr>";
+				}else{
+					 app += "<tr bgcolor='#FFFFCC'><td colspan ='3'>"+ val.answer_Id +"</td><td colspan='3' align='right'>"+ val.answer_Wdate +"</td></tr>"
+			             +" <tr><td colspan ='6'>삭제된 댓글입니다</td></tr>";
+				}
+				});
+			 $("#answerAf").empty();
+			 $('#answerAf').append(app);
+			}
 			
-		}
-		
-		
-		
-	});
+		})
 	
-}  
+	})	  
+  });
+/* 댓글 삭제 및 수정 */
+$("#a_delete").click(function() {
+	let id = $("#a_id").text();
+	if(id != "<%=id%>"){
+		alert("권한이 없습니다.");
+	}else if(id == "<%=id%>"){
+	 let result = confirm("삭제하시겠습니까?"); 
+	 if(result && id == "<%=id%>"){$("#a_frm").attr("action", "suggest").submit();} 
+	 else{ } 	}
+});
+$("#a_update").click(function() {
+	let id = $("#a_id").text();
+	if(id != "<%=id%>"){
+		alert("권한이 없습니다.");
+	}else{
+		alert("서비스준비중입니다");
+	}
+});
+});
   </script>
 </body>
 </html>
