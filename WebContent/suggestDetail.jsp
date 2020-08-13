@@ -1,11 +1,10 @@
-<%@page import="java.util.List"%>
 <%@page import="dto.sug_AnswerDto"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.suggestDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
-        
     String id = null;
     if(session.getAttribute("login_Id") != null){
  	   id = (String)session.getAttribute("login_Id");
@@ -28,7 +27,7 @@
   <meta name="author" content="" />
 
   <title>Login</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -37,22 +36,19 @@
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
-
-  <link rel="stylesheet" href="css/slick-theme.css" />
+  <!--<link rel="stylesheet" href="css/slick-theme.css" /> -->
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />  
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
 
 </head>
-
+  
 <!-- 바디 셋팅 -->
 <body class="sub_page">
-
   <div class="main_body_content">
-
     <div class="hero_area">
        <!-- 헤더 -->
       <header class="header_section">
@@ -113,7 +109,33 @@
     </div>
 
 <!---------- 건의사항 상세보기 시작 ----------->
-<div align="left">
+<section class="chocolate_section">
+	<div class="container">
+		<div class="write-form">
+			<h2>건의사항(상세보기)</h2><p>작성일 : <%=dto.getWdate() %> | 조회수 : <%=dto.getReadcount() %></p> 
+			<form>
+				<div class="form-group has-error">
+					ID:<p class="form-control" id="id"><%=dto.getId() %>
+		        </div> 
+				
+				<div class="form-group">
+		                     제목 : <input type="text" class="form-control" id="title" name="title" placeholder="<%=dto.getTitle() %>" readonly="readonly">
+		        </div>   
+				
+				<div class="form-group">
+		         	내용:<textarea class="form-area" name="content"  placeholder="<%=dto.getContent() %>" readonly="readonly"></textarea>
+		        </div> 
+		        
+		        <div class="form-group">
+		            <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn" value="수정">수정 하기</button>
+		            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">목록으로 돌아가기</button>
+		        </div>
+			</form>
+		</div>
+	</div>
+</section> 
+
+<%-- <div align="left">
 <a>건의사항(상세보기)</a>
 <hr>
 </div>
@@ -127,71 +149,69 @@
 <tr><td colspan="6" ><textarea rows="10" cols="100" readonly="readonly" style="border: none"><%=dto.getContent() %></textarea> </td></tr>
 
 <tr style="border: none" bgcolor="#CCFFFF">
-
 <!-- 글 수정으로 이동 -->
 <td colspan="3" align="left"><button type="button" id="btn" value="수정">글 수정</button></td>
-
 <!-- 글목록으로 이동(suggest_main.jsp) -->
 <td colspan="3" align="right"><button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button></td>
 </tr>
 </table>
 </div>
-<!-- 건의사항 작성 테이블 끝 -->
-<br>
+<!-- 건의사항 작성 테이블 끝 --> --%>
 
-<!----- 댓글 시작  ----->
-<!-- 글의 seq번호로 댓글 수 체크후 댓글 유무 확인/ 댓글이 있으면 삭제번호를 통해 구별-->
-<!-- 관리자 모드에서 게시글 삭제 할때 comment 테이블에 suggest_no에 게시글 seq를 넣으면 게시글 댓글 모두 삭제 -->
-<div align="center">
-<table>
-<col width="100"><col width="150"><col width="100"><col width="250"><col width="100"><col width="120">
-<tr id="answerCountAf"><td colspan="6" bgcolor="#FFFFCC" id="countAjax">총 <%=answerCount %>개의 답글이 있습니다</td></tr>
-<tr><td colspan="4" ><textarea rows="5" cols="70" id="content"></textarea></td><td></td><td style="float: right" id="btn2"><button type="button" id="answer">답글작성</button></td></tr>
-</table>
-</div>
-<br><br>
 
-<form id="a_frm" method="post">
-<!-- 컨트롤러에 보내는 데이터 -->
-<input type="hidden" name="work" value="suggest"><input type="hidden" name="detailwork" value="answer_delete">
-<div align="center">
-<table>
-<col width='100'><col width='150'><col width='100'><col width='250'><col width='100'><col width='120'>
-
-<tbody id="answerAf">
-
-<!-- 댓글 작성시 ajax가 뿌려질 위치-->
-
-<%if(answerCount == 0){ %>
-<tr><td colspan="6" align="center"><a>작성된 답글이 없습니다.</a></td></tr>
-<%}else{ 
+<!----- 답글 시작  ----->
+<div class="container">
+	<div class="answer-from">
+		<form id="a_frm" method="post">
+		<input type="hidden" name="work" value="suggest"><input type="hidden" name="detailwork" value="answer_delete"><input type="hidden" name="seq" value="<%=dto.getSeq()%>">
+			<div align="center">
+			<!-- max(step) 번호로 댓글 갯수 확인 -->
+				<h6 id="answerCount">총 <%=answerCount %>개의 답글이 있습니다</h6>
+			
+				<textarea class="answer-area" id="content" ></textarea>
+				<div class="form-group">
+		            <button type="button" class="btn1" id="answer">답글 작성</button>
+		        </div>
+		        
+			</div>
+			<div id="answerAf">
+		<!-- max(step) 번호로 체크후 댓글 유무 확인-->
+		<%if(answerCount == 0){ %>
+			<div align="center"><a>       작성된 답글이 없습니다.</a></div>
+	<%}else{ 
 for(int i = 0; i < list.size(); i++){
      sug_AnswerDto a_dto = list.get(i);
      if(a_dto.getDel() == 0){
     	%>
-    	<tr bgcolor="#FFFFCC"><td colspan="3" align="left" id="a_id"><%=a_dto.getAnswer_Id()%></td><td colspan="3" align="right"><%=a_dto.getAnswer_Wdate() %><a href='#' id="a_delete">[댓글 삭제]</a><a href='#' id="a_update">[댓글 수정]</a></td></tr>
-     <tr><td colspan="6"><%=a_dto.getContent() %><input type="hidden" name="seq" value="<%=a_dto.getAnswer_Seq()%>"></td></tr> 
+    	<div style="background-color: #99CCCC"><a id="a_id"><%=a_dto.getAnswer_Id()%></a><a>(<%=a_dto.getAnswer_Wdate() %>)</a>
+    	  <a href='#' id="a_delete" style="float: right;">[댓글 삭제]</a><a href='#' id="a_update" style="float: right;">[댓글 수정]</a></div>
+        <div style="background-color: #CCFFFF; height: 100px"><%=a_dto.getContent() %></div><input type="hidden" name="a_seq" value="<%=a_dto.getAnswer_Seq()%>">
      <%}else{
 %>
- <tr bgcolor='#FFFFCC'><td colspan ='3'><%=a_dto.getAnswer_Id() %></td><td colspan='3' align='right'><%=a_dto.getAnswer_Wdate() %></td></tr>
-				          <tr><td colspan ='6'>삭제된 댓글입니다</td></tr>
+<div style="background-color: #99CCCC"><%=a_dto.getAnswer_Id()%><a>(<%=a_dto.getAnswer_Wdate() %>)</a></div>
+				   <div style="background-color: #CCFFFF; height: 100px"><a>삭제된 댓글입니다</a></div>    
 <%}
 } 
 }%>
-</tbody>
-</table>
+	</div>
+		</form>
+	
+	</div>
 </div>
-</form>
+
 <!------- 답글 끝 ------>
 <br><br><br><br>
 <!------------ 건의사항 상세보기 끝 --------------->
 
-<!-- 바닥글 -->
+
+
+
+    <!-- 바닥글 창 -->
     <section class="info_section layout_padding2">
       <div class="container">
-
         
         <div class="row info_main_row">
+ <!-- Menu -->
           <div class="col-md-6 col-lg-3">
             <div class="info_links">
               <h4>
@@ -201,10 +221,10 @@ for(int i = 0; i < list.size(); i++){
                 <a href="index.jsp">
                   Home
                 </a>
-                <a href="#">
+                <a href="detail.jsp">
                   	카테고리
                 </a>
-                <a href="contact.jsp">
+                <a href="suggetion.jsp?work=suggest">
                   	고객센터
                 </a>
                 <a href="login.jsp">
@@ -216,7 +236,8 @@ for(int i = 0; i < list.size(); i++){
               </div>
             </div>
           </div>
-          
+
+<!-- 회사 -->          
           <div class="col-md-6 col-lg-3">
             <div class="info_detail">
               <h4>
@@ -230,6 +251,7 @@ for(int i = 0; i < list.size(); i++){
               </p>
             </div>
           </div>
+<!-- 고객센터 -->
           <div class="col-md-6 col-lg-3">
             <h4>
               	CS Center
@@ -261,7 +283,8 @@ for(int i = 0; i < list.size(); i++){
         </div>
       </div>
     </section>
-    <!-- 바닥글 끝 -->
+
+    <!-- 바닥글 끝-->
 
   </div>
 
@@ -287,14 +310,12 @@ for(int i = 0; i < list.size(); i++){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-  <!-- Google Map -->
   
-  <script>
+<script>
 
   $(document).ready(function() {
     /* 아이디 확인 후 수정버튼 보이기 */
-	  let id = $("#id").attr("class");
-	  let id2 = "aaa";
+	  let id = $("#id").text();
 	  if("<%=id%>" != id ){     
 		$("#btn").hide();
 	  }else{
@@ -318,11 +339,33 @@ for(int i = 0; i < list.size(); i++){
             } 
   		}--%>
   		});
+	  
+  	/* 댓글 삭제 및 수정 */
+  	$("#a_delete").click(function() {
+  		let id = $("#a_id").text();
+  		alert(id);
+  		 if(id != "<%=id%>"){
+  			alert("권한이 없습니다.");
+  		}else if(id == "<%=id%>"){
+  		 let result = confirm("삭제하시겠습니까?"); 
+  		 if(result && id == "<%=id%>")
+  		 {$("#a_frm").attr("action", "suggest").submit();} 
+  		 else{ alert(id);} 	} 
+  	});
+  	$("#a_update").click(function() {
+  		let id = $("#a_id").text();
+  		if(id != "<%=id%>"){
+  			alert("권한이 없습니다.");
+  		}else{
+  			alert("서비스준비중입니다");
+  		}
+  	}); 
+	  
   	/*댓글 작성 시 바로 뿌려주는 AJAX */
 $("#answer").click(function() {
-	
+	content = $("#content").val();
       let id3 = "<%=id%>"; 
-      let content = $("#content").val(); 
+ 
       let seq = "<%=dto.getSeq()%>";
  
  	 $.ajax({
@@ -336,45 +379,31 @@ $("#answer").click(function() {
 			var answerList = datas.map.answerList;
 
 			let app ="";
+			let count = "총 "+ answerCount +"개의 답글이 있습니다"
 			if(answerCount == 0){
 			  app = "<tr><td colspan='6' align='center'><a>작성된 답글이 없습니다.</a></td></tr>";
 			}
 			else{
 			$.each(answerList, function (i, val) {
 				if(val.del == 0){
-				  app += " <tr bgcolor='#FFFFCC'><td colspan ='3'>"+ val.answer_Id +"</td><td colspan='3' align='right'>"+ val.answer_Wdate +"<a href='#' id='a_btn'>[댓글 삭제]</a><a href='#' id='a_btn'>[댓글 수정]</a></td></tr>"
-				    + " <tr><td colspan ='6'>"+ val.content +"</td></tr>";
+				  app += " <div style='background-color: #99CCCC'>" +val.answer_Id +"<a>("+ val.answer_Wdate +")</a>"
+				         + "<a href='#' id='a_delete'>[댓글 삭제]</a><a href='#' id='a_update'>[댓글 수정]</a></div>"
+			             + "<div style='background-color: #CCFFFF; height: 100px'>"+ val.content +"</div><input type='hidden' name='seq' value='"+ val.answer_Seq +"'><br><br>";
 				}else{
-					 app += "<tr bgcolor='#FFFFCC'><td colspan ='3'>"+ val.answer_Id +"</td><td colspan='3' align='right'>"+ val.answer_Wdate +"</td></tr>"
-			             +" <tr><td colspan ='6'>삭제된 댓글입니다</td></tr>";
+					 app += "<div style='background-color: #99CCCC'>" +val.answer_Id +"<a>("+ val.answer_Wdate +")</a>"
+			             +" <div style='background-color: #CCFFFF; height: 100px'><a>삭제된 댓글입니다</a></div>";
 				}
 				});
+			$("#answerCount").empty();
+			$('#answerCount').append(count);
 			 $("#answerAf").empty();
 			 $('#answerAf').append(app);
 			}
 			
-		})
-	
+		})	
 	})	  
   });
-/* 댓글 삭제 및 수정 */
-$("#a_delete").click(function() {
-	let id = $("#a_id").text();
-	if(id != "<%=id%>"){
-		alert("권한이 없습니다.");
-	}else if(id == "<%=id%>"){
-	 let result = confirm("삭제하시겠습니까?"); 
-	 if(result && id == "<%=id%>"){$("#a_frm").attr("action", "suggest").submit();} 
-	 else{ } 	}
-});
-$("#a_update").click(function() {
-	let id = $("#a_id").text();
-	if(id != "<%=id%>"){
-		alert("권한이 없습니다.");
-	}else{
-		alert("서비스준비중입니다");
-	}
-});
+
 });
   </script>
 </body>
