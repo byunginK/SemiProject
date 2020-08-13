@@ -68,13 +68,21 @@
                 <li class="nav-item">
                   <a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.jsp">고객센터</a>
-                </li>
-             
-                <% if(id != null){ %>
+                  <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+                 <li><a href="#">게시판</a>
+            <ul class="sub">
+               <li><a href="#" >공지사항</a></li>
+                  <li><a href="#">Q&A</a></li>
+          <!-- 혹시 모를 오류를 위해 "return false" 안해도 무방 -->
+               <li><a href="#" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">건의사항</a></li>
+               </ul>
+                 </li>
+                 <!-- 게시판 이동 끝 -->
+         
+          <!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
+             <% if(id != null){ %>
              <li class="nav-item">
-                  <a class="nav-link" href="mypage.jsp?id=<%=id%>"><%=id %> 님</a>
+                  <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
    				<li class="nav-item">
                   <a class="nav-link" href="login?work=logout">로그아웃</a>
@@ -87,6 +95,7 @@
                   <a class="nav-link" href="register_agree.jsp">회원가입</a>
                 </li>
                 <%} %>
+                 <!-- 로그인 메뉴 끝  --> 
               </ul>
 
             </div>

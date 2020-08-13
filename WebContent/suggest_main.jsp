@@ -6,15 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%request.setCharacterEncoding("utf-8"); %>
-     <%!
-    // 답글의 depth 와 image를 추가하는 함수 
-    public String arrow(int depth){
-	 String rs = "다음"; String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; String ts = "";
-	 for(int i = 0; i < depth; i++){
-		 ts += nbsp; 
-	 }  return depth==0?"":ts + rs; }
- 
- %>   
+     
       <%
       String id = null;   if(session.getAttribute("login_Id") != null){ id = (String)session.getAttribute("login_Id"); }
 String text = request.getParameter("text")==null?"":request.getParameter("text");
@@ -83,11 +75,19 @@ suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggest
                 <li class="nav-item">
                   <a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">고객센터</a>
-                </li>
-             
-                <% if(id != null){ %>
+                  <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+                 <li><a href="#">게시판</a>
+            <ul class="sub">
+               <li><a href="#" >공지사항</a></li>
+                  <li><a href="#">Q&A</a></li>
+          <!-- 혹시 모를 오류를 위해 "return false" 안해도 무방 -->
+               <li><a href="#" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">건의사항</a></li>
+               </ul>
+                 </li>
+                 <!-- 게시판 이동 끝 -->
+         
+          <!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
+             <% if(id != null){ %>
              <li class="nav-item">
                   <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
@@ -102,6 +102,7 @@ suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggest
                   <a class="nav-link" href="register_agree.jsp">회원가입</a>
                 </li>
                 <%} %>
+                 <!-- 로그인 메뉴 끝  --> 
               </ul>
 
             </div>
@@ -111,7 +112,8 @@ suggestDao dao = suggestDao.getInstance(); List<suggestDto> list = (List<suggest
       <!-- 헤더 끝 -->
     </div>
     
-<!--------- 건의사항 메인(리스트) 시작 ------------>
+<!--------- 건의사항 시작 ------------>
+<!-- 건의사항 리스트 시작 -->
 <div id="suggestStart" align="center">
 <table border="1" id="suggest2">
 <col width="40"><col width="400"><col width="100"><col width="150"><col width="100">
@@ -136,11 +138,7 @@ if(list.size() == 0){
 			if(bbs.getDel() == 0 && bbs.getStep()== 0){
 				%>		
 				<a href="suggest?work=suggest&detailwork=suggest_detail&seq=<%=bbs.getSeq() %>"><%=bbs.getTitle() %></a>	
-	<%}else if(bbs.getStep() > 0 && bbs.getDel()== 0){%>
-			
-			<a href="suggest?work=suggest&detailwork=suggest_detail&seq=<%=bbs.getSeq() %>"><%=bbs.getTitle() %>&nbsp;[<%=bbs.getStep() %>]</a>	
-		<%}
-		else{%>		
+	<%}else if(bbs.getStep()== 0 && bbs.getDel()!=0){%>		
 	<font color="#CC0000">관리자에 의해서 삭제되었습니다</font> 
 <%}%>
 		</td>  
@@ -152,8 +150,9 @@ if(list.size() == 0){
 	</tbody>
 </table>
 </div>
+<!-- 건의사항 리스트 끝 -->
 
-<!-- 페이징 번호 -->
+<!-- 페이징 번호 시작 -->
 <br>
 <div align="center" id="">
  <%
@@ -168,7 +167,7 @@ if(list.size() == 0){
 <%}
 }
  %>
- <!-- 페이징 끝 -->
+ <!-- 페이징 번호 끝 -->
  
  <!-- 글쓰기로 이동버튼 -->
 <a href="suggest?work=suggest&detailwork=writeIdcheck">글쓰기</a>
@@ -182,6 +181,7 @@ if(list.size() == 0){
 <input type="hidden" value="suggest" name="work"><input type="hidden" value="suggest_main" name="detailwork">
 <div align="center">
 
+<!----------------- 검색 시작 ------------>
 <!-- 검색 옵션 -->
 <select name="option" id="option">
 <option value="all" class="all" >전체</option>
@@ -319,32 +319,17 @@ function paging( pageno ) {
 			let bbspage = datas.map.bbsPage;
 			let pagenumber = datas.map.pageNumber;
 			$.each(suggestList, function (i, val) {
-				 arrow = function( depth ) {
-					 let rs = "<img src='./image/arrow.png' width='20px' height='20px'/> ";
-					 let nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
-					 let ts = "";
-					 for( i = 0; i < depth; i++){
-						 ts += nbsp; 
-					 }return depth==0?"":ts + rs; } 
+	 
 				let app ="<tr align='center'>"   
 				          +"<th>"+ val.seq +"</th>";
-				 if(val.del == 0){
-					app	+=  "<td>" 
-						   + arrow(val.depth)		
+				 if(val.del == 0 && val.step == 0){
+					app	+=  "<td>" 		
 						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq="+ val.seq + "'>"
 						   + val.title
 						   + "</a>"
 						   +"</td>"
-				}else if(val.step > 0 && val.del == 0){
-					app	+=  "<td>" 
-						   + arrow(val.depth)		
-						   +"<a href='suggest?work=suggest&detailwork=suggest_detail&seq="+ val.seq + "'>"
-						   + val.title + "&nbsp;" + "[" + val.step + "]"
-						   + "</a>"
-						   +"</td>"
 				}
-				 
-				 else{
+				 else if(val.step == 0 && val.del !=0){
 				app +=	"<td>"
 					+ "<font color='#CC0000'>관리자에 의해서 삭제되었습니다</font>";
 			     	+"</td>";		

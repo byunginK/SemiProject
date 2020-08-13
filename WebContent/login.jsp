@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <%
+    /* 세션에서 아이디 받아옴 로그인을 안할시 null */
     String id = null;
     if(session.getAttribute("login_Id") != null){
  	   id = (String)session.getAttribute("login_Id");
@@ -20,38 +21,35 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
+  
   <title>Login</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
+  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!--slick slider stylesheet -->
-
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
-
-  <link rel="stylesheet" href="css/slick-theme.css" />
+  <!-- <link rel="stylesheet" href="css/slick-theme.css" /> -->
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
 
 </head>
 
 <!-- 바디 셋팅 -->
 <body class="sub_page">
-
   <div class="main_body_content">
-
     <div class="hero_area">
-       <!-- 헤더 -->
+    
+     <!-- 헤더 -->
       <header class="header_section">
         <div class="container-fluid">
-        
          <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.jsp">
@@ -69,13 +67,21 @@
                 <li class="nav-item">
                   <a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.jsp">고객센터</a>
-                </li>
-             
-                <% if(id != null){ %>
+                 <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+                 <li><a href="#">게시판</a>
+            <ul class="sub">
+          <li><a href="#" >공지사항</a></li>
+         <li><a href="#">Q&A</a></li>
+         <!-- 혹시 모를 오류를 위해 "return false" 안해도 무방 -->
+          <li><a href="suggest?work=suggest&detailwork=suggest_main" >건의사항</a></li>
+        </ul>
+        </li>
+                 <!-- 게시판 이동 끝 -->
+         
+          <!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
+             <% if(id != null){ %>
              <li class="nav-item">
-                  <a class="nav-link" href="mypage.jsp?id=<%=id%>"><%=id %> 님</a>
+                  <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
    				<li class="nav-item">
                   <a class="nav-link" href="login?work=logout">로그아웃</a>
@@ -88,14 +94,15 @@
                   <a class="nav-link" href="register_agree.jsp">회원가입</a>
                 </li>
                 <%} %>
+                 <!-- 로그인 메뉴 끝  --> 
               </ul>
-
             </div>
           </nav>
         </div>
       </header>
       <!-- 헤더 끝 -->
     </div>
+    
     
     
     <!-- 로그인 창 추가 -->
@@ -113,18 +120,14 @@
 					<input type="password" class="form-control" name="pwd" placeholder="비밀번호" id="pwd">
 				</div>
 				<div class="form-group">
+				<!-- 클릭시 아이디 비밀번호 체크(ajax) -->
 					<button type="button" class="btn btn-primary btn-lg btn-block" id="btn">로그인</button>
-			
-			
-			<!-- 혹시 이거 맘에 안드시면 회원가입은 링크로 만드는 것도 괜춘?할듯요
-				예를들면  "아이디가 없으신가요? <a>회원가입</a> 하기" 등등드으드ㅡ으ㅡ~~~~
-			 -->
-			 
-			<!-- <button type="button" class="btn btn-primary btn-lg btn-block" id="btn" onclick="location.href ='register.jsp'">회원가입</button> -->
+	
 			<br>
-			
-			<!-- 이게 깔끔한거 같아요! 체크박스는 불편하시면 없어도 돼요~ -->
-			<a href="register_agree.jsp">아이디가 없으신가요?</a><div style="position: relative;"><a style="float: right;">아이디 저장</a><input type="checkbox" id="chk_save_id" style="float: right; margin-top: 5px; margin-right: 3px"></div>
+			<!-- 회원가입 이동 -->
+			<a href="register_agree.jsp">아이디가 없으신가요?</a><div style="position: relative;"> 
+			<!-- 아이디 저장 쿠키(ajax)-->
+			<a style="float: right;">아이디 저장</a><input type="checkbox" id="chk_save_id" style="float: right; margin-top: 5px; margin-right: 3px"></div>
 		</div>
 			</form>
 		</div>
@@ -241,6 +244,7 @@
 <!-- 로그인체크 -->
 <script type="text/javascript">
 		$(document).ready(function() {
+			/* 로그인 아이디 비번 확인 */
 				$("#btn").click(function () {
 					//	alert("btn click");
 					let id = $("#id").val();  let pwd =$("#pwd").val();
@@ -255,12 +259,13 @@
 							data:{ "id":$("#id").val(), "pwd":$("#pwd").val() },
 							
 							success:function( data ){
-					        
+					            let mid = data.map.log.id;
+					            let mauth = data.map.log.auth
 								let isS = data.map.isS;
 					       
 								if( isS == "YES"){
 								alert("환영합니다 "+id +" 님");
-								location.href = "index.jsp";
+								location.href = "index.jsp?m_Id="+mid+"&m_Auth="+ mauth;
 								
 								}else if(isS == "NO"){
 					
@@ -273,6 +278,7 @@
 						});
 					}
 					});	
+				/* 아이디 저장 */
 				   let user_id = $.cookie("user_id");  
 				   if(user_id != null){               
 				    $('#id').val( user_id);
@@ -293,16 +299,19 @@
 				    });
 
 			});
+		
+
+		var oldUrl = 'noeuldays.tistory.com'; // 기본 URL
+		var changeUrl = 'onfriday.design-hi.com'; // 기본 URL로 사이트 접속 시 변경하고 싶은 URL
+		var urlString = location.href;
+		if (urlString.match(oldUrl)){
+		    window.location.replace(urlString.replace(oldUrl, changeUrl));
+		} else {
+		    // 주소창에 입력한 주소가 oldURL과 다를 경우 아무런 행위도 하지않는다.
+		}
+		
 </script>   
-              
-              
-              
-
-
-
-
-
-
+            
 </body>
 
 </html>

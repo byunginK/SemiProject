@@ -68,13 +68,21 @@
                 <li class="nav-item">
                   <a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.jsp">고객센터</a>
-                </li>
-             
-                <% if(id != null){ %>
+                  <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+                 <li><a href="#">게시판</a>
+            <ul class="sub">
+               <li><a href="#" >공지사항</a></li>
+                  <li><a href="#">Q&A</a></li>
+          <!-- 혹시 모를 오류를 위해 "return false" 안해도 무방 -->
+               <li><a href="#" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">건의사항</a></li>
+               </ul>
+                 </li>
+                 <!-- 게시판 이동 끝 -->
+         
+          <!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
+             <% if(id != null){ %>
              <li class="nav-item">
-                  <a class="nav-link" href="mypage.jsp?id=<%=id%>"><%=id %> 님</a>
+                  <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
    				<li class="nav-item">
                   <a class="nav-link" href="login?work=logout">로그아웃</a>
@@ -87,6 +95,7 @@
                   <a class="nav-link" href="register_agree.jsp">회원가입</a>
                 </li>
                 <%} %>
+                 <!-- 로그인 메뉴 끝  --> 
               </ul>
 
             </div>
@@ -100,6 +109,7 @@
 <div align="center">
 <h1>건사(수정)</h1>
 </div>
+<!-- 글 수정 작성 테이블 시작 -->
 <form method="post" id="frm" >
 
 <!-- 컨트롤러에 보내는 값 -->
@@ -107,7 +117,7 @@
 
 <div align="center">
 <div style="margin-left: 20px">
-<!-- 아이디 고정 수정안됨 -->
+<!-- 아이디 고정 수정 안됨 -->
 ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<%=id%>" readonly="readonly"></div><br><br>
 
 제목:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="title" value="<%=title%>"><br><br>
@@ -119,10 +129,12 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<
 <!-- 글 목록으로 이동 버튼 -->
 <button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button>
 
-<!-- 수정 완료 버튼 -->
+<!-- 수정 완료 버튼(ajax) -->
 <button type="submit" id="add" >수정완료</button>
 </div>
 </form>
+<!-- 글 수정 작성 테이블 끝 -->
+<!-------------- 글수정하기   끝 --------------->
  <!-- 바닥글 -->
     <section class="info_section layout_padding2">
       <div class="container">
@@ -226,6 +238,7 @@ ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" name="id" value="<
   <script src="js/custom.js"></script>
   <!-- Google Map -->
 
+<!-- 글 수정 시 빈칸여부 확인 -->
 <script>
 $(document).ready(function() {
 	$("#add").click(function() {

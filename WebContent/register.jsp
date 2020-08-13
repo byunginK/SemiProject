@@ -98,44 +98,53 @@
       <!-- 헤더 끝 -->
     </div>
 
-  <!-- 회원가입창 -->
+  <!---------- 회원가입창 시작 ----------->
 
     <section class="contact_section layout_padding">
         	<div class="regi-form2">
 					<form id="frm">
 					
 							<h2>회원 가입</h2>
+					   <!-- 아이디  -->
 						<div class="form-group">
-							<input type="text" class="form-control" name="id" placeholder="아이디" maxlength="20" id="id"><input type="button" class="btn1" id="btn" value="중복체크">
+							<input type="text" class="form-control" name="id" placeholder="아이디" maxlength="20" id="id">
+							<!-- 중복체크 -->
+							<input type="button" class="btn1" id="btn" value="중복체크">
 						</div>
-						
+						<!-- 비밀번호  -->
 						<div class="form-group">
 							<input type="text" class="form-control" name="pwd" placeholder="비밀번호" maxlength="25" id="pwd">
 						</div>
+						<!-- 이름 -->
 						<div class="form-group">
 						</div>	
 							<input type="text" class="form-control" name="name" placeholder="이름" id="name">
+						<!-- 휴대폰 번호 -->
 						<div class="form-group">
 						</div>
 							<input type="text" class="form-control" name="phone" placeholder="휴대폰번호" maxlength="11" id="number">
 						<div class="form-group">
 						</div>
+						<!-- 이메일 -->
 						<div class="form-group">
 							<input type="text" class="form-control" name="email" placeholder="이메일" id="email">
 						</div>
+						<!-- 회원가입 버튼 // ajax로 각각의 조건의 맞게 체크 후 이동 -->
 						<div class="form-group">
 							<button type="button" class="btn btn-primary btn-lg btn-block" id="regi">회원가입</button>
 						</div>
 					</form>
 				</div>
     </section>
-    <!-- 회원가입 끝 -->
+    <!-------- 회원가입 끝 ----------->
 
 
 
-    <!-- 바닥글-->
-   <section class="info_section layout_padding2">
+     <!-- 바닥글 -->
+    <section class="info_section layout_padding2">
       <div class="container">
+
+        
         <div class="row info_main_row">
           <div class="col-md-6 col-lg-3">
             <div class="info_links">
@@ -155,7 +164,7 @@
                 <a href="login.jsp">
                   	로그인
                 </a>
-                <a href="register.jsp">
+                <a href="register_agree.jsp">
                   	회원가입
                 </a>
               </div>
@@ -210,7 +219,7 @@
 
   </div>
 
-  <!-- 밑창 -->
+  <!-- 밑창-->
   <footer class="container-fluid footer_section">
     <div class="container">
       <div class="col-md-11 col-lg-8 mx-auto">
@@ -220,8 +229,8 @@
       </div>
     </div>
   </footer>
-  <!-- footer section -->
-
+  <!-- 밑창 끝 -->
+  
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <!-- bootstrap js -->
@@ -238,7 +247,7 @@
 
 $(document).ready(function () {
 	
-	
+	/* 아이디 중복 체크 */
 	 $("#btn").click(function () {
 	//	alert("btn click");
 	
@@ -272,6 +281,7 @@ $(document).ready(function () {
 		});
 	}
 	}); 
+	 /* 조건에 맞는지 체크 */
 	 $.fn.CheckFunction = function() {
 			
 		 /* 비밀번호  */
@@ -313,6 +323,7 @@ $(document).ready(function () {
 		 }
 
   }	
+	 /* 클릭시 조건 확인 func 실행 */
 $("#regi").click(function() {
 	
       $.fn.CheckFunction();

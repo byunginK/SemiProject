@@ -68,19 +68,34 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="detail.jsp">카테고리</a>
+                  <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+                 <li><a href="#">게시판</a>
+            <ul class="sub">
+               <li><a href="#" >공지사항</a></li>
+                  <li><a href="#">Q&A</a></li>
+          <!-- 혹시 모를 오류를 위해 "return false" 안해도 무방 -->
+               <li><a href="#" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">건의사항</a></li>
+               </ul>
+                 </li>
+                 <!-- 게시판 이동 끝 -->
+         
+          <!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
+             <% if(id != null){ %>
+             <li class="nav-item">
+                  <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.jsp">고객센터</a>
+   				<li class="nav-item">
+                  <a class="nav-link" href="login?work=logout">로그아웃</a>
                 </li>
-             
+             <%}else{ %>
                 <li class="nav-item">
                   <a class="nav-link" href="login.jsp">로그인</a>
                 </li>
    				<li class="nav-item">
                   <a class="nav-link" href="register_agree.jsp">회원가입</a>
                 </li>
+                <%} %>
+                 <!-- 로그인 메뉴 끝  --> 
               </ul>
 
             </div>
@@ -96,7 +111,11 @@
 <hr>
 </div>
 <form method="post" id="frm">
+
+<!-- 컨트롤러로 보내는 값 -->
 <input type="hidden" name="work" value="suggest"><input type="hidden" value="suggest_write" name="detailwork"><input type="hidden" value="<%=id %>" name="id">
+
+<!-- 건의 사항 글쓰기 테이블 시작 -->
 <div align="center">
 <table border="1">
 <col width="100"><col width="150"><col width="100"><col width="250">
@@ -106,14 +125,17 @@
 <tr><td colspan="6" ><textarea rows="10" cols="100" style="border: none" name="content" placeholder="내용" id="content"></textarea> </td></tr>
 
 <tr style="border: none" bgcolor="#CCFFFF">
+
 <!-- 글 수정으로 이동 -->
 <td colspan="3" align="left"><button type="submit" id="btn" value="작성">글 작성</button></td>
+
 <!-- 글목록으로 이동(suggest_main.jsp) -->
 <td colspan="3" align="right"><button type="button" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'">글 목록</button></td>
 </tr>
 </table>
 </div>
 </form>
+<!--  건의사항 글쓰기 테이블 끝 -->
 <br><br>
 <!------------ 건의사항 글쓰기 끝 ------------>
 
@@ -222,7 +244,7 @@
   <script src="js/custom.js"></script>
   <!-- Google Map -->
  
- <!--  --> 
+ <!-- 글 작성시 빈칸 여부 확인 --> 
 <script>
 $(document).ready(function() {
 	$("#btn").click(function() {
@@ -231,13 +253,8 @@ $(document).ready(function() {
 			alert("모두 작성해주세요");
 		}else{
 			$("#frm").attr("action", "suggest").submit();
-		}
-		
-		
-		
+		}	
 	});
-	
-	
 });
 
 </script> 
