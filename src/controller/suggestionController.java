@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.suggestDao;
+import dto.sug_AnswerDto;
 import dto.suggestDto;
 import net.sf.json.JSONObject;
 
@@ -107,15 +108,22 @@ if(work.equals("suggest")) {
             		 	session.setAttribute(sseq+":cookie", sseq + ":" + cookieValue);
             		}
             	}
-             	// 글 상세 조회
+             	
 
              	// 조회수 카운트
              	if (!session.getAttribute(seq+":cookie").equals(session.getAttribute(seq+":cookie ex"))) {
             	 	// 가시적으로  조회수 1 추가해줌
             	 	dao.readcount(seq);
-             	}	   
+             	}
+             	//게시글 상세 정보
              	suggestDto dto = dao.getSuggest(seq);
+             	//댓글 갯수
+             	int answer = dao.getAllAnswer(seq);
+             	//댓글 리스트
+             	List<sug_AnswerDto> a_list = dao.getSu_AnswerList(seq);
 	        // 상세화면으로 전송
+             	req.setAttribute("a_list", a_list);
+             	req.setAttribute("answerCount", answer);
 				req.setAttribute("suggest_dto", dto); 
                 forward("suggestDetail.jsp", req, resp);
               
@@ -182,16 +190,42 @@ if(work.equals("suggest")) {
 		         out.flush();
 		 }
 	else if(detailwork.equals("suggest_answer")) {
-		
-		// 답글
-		         title = sseq+"번째의 답글";
+		      // 댓글 작성시 바로 뿌려줄 데이턴
+		         int count = 0;
 		         int seq = Integer.parseInt(sseq);
-		         boolean isS = dao.answer(seq, new suggestDto(id, title, content));
+		         boolean isS = dao.answer(seq, new sug_AnswerDto(seq,id,content));
 		         if(isS) {
-		        	 
+		        	   count = dao.getAllAnswer(seq);
+		        	 System.out.println(count);
+		        	   List<sug_AnswerDto> list = dao.getSu_AnswerList(seq); 
+		        	   for(int i = 0; i< list.size(); i++) {
+		        		   System.out.println(list.get(i).getAnswer_Wdate());
+		        	   }
+		        	 HashMap<String, Object> map = new HashMap<String, Object>();
+		        	 map.put("answerList", list); map.put("answerCount", count);
+		        	
+		        	 JSONObject jobj = new JSONObject();
+		     		jobj.put("map", map);			
+		     		resp.setContentType("application/x-json; charset=UTF-8");
+		     	     resp.getWriter().print(jobj); 
 		         }else {
-		        	 
+		        	 out.print("<script>alert('오류....하...'); location.href = 'suggest?work=suggest&detailwork=suggest_main'</script>");
+		        	 out.flush();
 		         }
+	}
+	else if(detailwork.equals("answer_delete")) {
+		 //댓글 삭제         
+        int seq = Integer.parseInt(sseq);
+        
+        boolean isS = dao.su_Answer_Delete(seq);
+        
+        if(isS) {
+        	out.print("<script>alert('삭제되었습니다'); location.href='suggest?work=suggest&detailwork=suggest_detail&seq="+ seq +"';</script>");
+        	
+        }else {
+        	out.print("<script>alert('오류....하...'); location.href='suggest?work=suggest&detailwork=suggest_detail&seq="+ seq +"';</script>");
+        }
+		
 	}
 	}
 	}
