@@ -39,7 +39,7 @@
     <div class="hero_area">
     
       <!-- 헤더 -->
-       <header class="header_section">
+      <header class="header_section">
         <div class="container-fluid">
         <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -47,25 +47,31 @@
               Simple Five
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            	<span class=""> </span>
+            	<span class=""></span>
             </button>
-
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
+                	<a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="detail.jsp">카테고리</a>
+                	<a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="CScener.jsp">고객센터</a>
+                	<div class="dropdown">
+						<p class="dropdown-p">고객센터</p>
+						<div class="dropdown-content">
+							<a href="#">Q & A</a>
+							<a href="#">공지사항</a>
+							<a href="#">건의사항</a>
+						</div>
+					</div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.jsp">로그인</a>
+                	<a class="nav-link" href="login.jsp">로그인</a>
                 </li>
    				<li class="nav-item">
-                  <a class="nav-link" href="register.jsp">회원가입</a>
+                	<a class="nav-link" href="register.jsp">회원가입</a>
                 </li>
               </ul>
             </div>

@@ -1,3 +1,158 @@
+/* 드롭다운 */
+.dropdown-p {
+	background-color: #fff;
+	padding: 8px;
+	font-size: 15px;
+	border: none;
+	padding-top: 11px;
+}
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+.dropdown-content {
+	display: none; 
+	position: absolute;
+	background-color: #fff;
+	min-width: 100px;
+	padding: 5px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	font-size: 14px;
+}
+.dropdown-content a {
+	color: black;
+	padding: 8px;
+	text-decoration: none;
+	display: block;
+}
+.dropdown-content a:hover { background-color: #B0C4DE; }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown:hover .dropdown-button { background-color: #fff; }
+
+
+
+
+
+
+
+/* 공지사항 */
+
+/* 메인 */
+
+/* 글쓰기 */
+/* body {
+	color: #fff;
+	background: white;
+} */
+.write-form {
+	padding-top: 30px;
+	width: 700px;
+	height: 500px;
+	margin: 30px auto;
+	border-radius: 100px;
+	/* opacity: 0.95; */
+	margin-bottom: 700px;
+}
+.form-control {
+	min-height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.form-area {
+	min-height: 500px;
+	min-width: 640px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+.form-control, .btn {        
+    border-radius: 2px;
+}
+
+.write-form h2 {
+       margin: 10px 0 25px;
+       color: #7a7a7a;
+}
+.write-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+.write-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+.write-form .btn:hover, .write-form .btn:focus .form-area {
+	background: #2389cd;
+}
+
+
+
+
+
+/* 수정 */
+
+
+
+
+/* 디테일 */
+.answer-form{
+	padding-top: 30px;
+	width: 500px;
+	height: 100px;
+	margin: 30px auto;
+	border-radius: 100px;
+	/* opacity: 0.95; */
+	margin-bottom: 600px;
+}
+.answer-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+
+.answer-area {
+	min-height: 100px;
+	min-width: 640px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 20px;
+}
+.answer-form p{
+	text-align: left;
+}
+.answer-form h6 {
+       margin: 10px 0 25px;
+       color: #7a7a7a;
+}
+
+
+
+
+
+
+
+
+
+
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
@@ -417,10 +572,11 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-	border: 1px solid #eee6c4;
+	border: 1px solid #faf5f4;
    padding-top: 25px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  background-color: #faf9f9;
 }
 
 .chocolate_section .box .img-box {
@@ -435,6 +591,10 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.category_section .box .img-box{
+	
 }
 
 .chocolate_section .box .img-box img {
@@ -981,7 +1141,11 @@ border: none;
 
 
 
+.box .img-box img:hover{
+      box-shadow: 0px 4px 6px rgba(0.0, 0.3, 0.9, 0.6);
 
+	
+}
 
 
 

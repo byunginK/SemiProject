@@ -27,9 +27,9 @@
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
-<!--   <link rel="stylesheet" href="css/slick-theme.css" /> --> 
+  <!-- <link rel="stylesheet" href="css/slick-theme.css" /> --> 
   <!-- font awesome style -->
- <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
@@ -41,6 +41,7 @@
   <div class="main_body_content">
     <div class="hero_area">
     
+
       <!-- 헤더 -->
       <header class="header_section">
         <div class="container-fluid">
@@ -55,19 +56,26 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
+                	<a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="detail.jsp">카테고리</a>
+                	<a class="nav-link" href="detail.jsp">카테고리</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="CScenter.jsp">고객센터</a>
+                	<div class="dropdown">
+						<p class="dropdown-p">고객센터</p>
+						<div class="dropdown-content">
+							<a href="#">Q & A</a>
+							<a href="#">공지사항</a>
+							<a href="#">건의사항</a>
+						</div>
+					</div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.jsp">로그인</a>
+                	<a class="nav-link" href="login.jsp">로그인</a>
                 </li>
    				<li class="nav-item">
-                  <a class="nav-link" href="register.jsp">회원가입</a>
+                	<a class="nav-link" href="register.jsp">회원가입</a>
                 </li>
               </ul>
             </div>
@@ -215,7 +223,7 @@
     <section class="chocolate_section ">
       <div class="container">
         <div class="heading_container">
-          <h2><br><br>
+          <h2>
             Weekly Best Item(조회순)
           </h2>
         </div>
