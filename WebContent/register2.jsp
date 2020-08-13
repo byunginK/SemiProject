@@ -13,14 +13,16 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  
-  <title>Login</title>
-  
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  
+
+  <title>회원가입</title>
+
+
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
@@ -39,8 +41,8 @@
   <div class="main_body_content">
     <div class="hero_area">
     
-     <!-- 헤더 -->
-      <header class="header_section">
+      <!-- 헤더 -->
+       <header class="header_section">
         <div class="container-fluid">
          <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -62,6 +64,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="CScenter.jsp">고객센터</a>
                 </li>
+             
                 <li class="nav-item">
                   <a class="nav-link" href="login.jsp">로그인</a>
                 </li>
@@ -75,43 +78,44 @@
       </header>
       <!-- 헤더 끝 -->
     </div>
-    
-    
-    
-    
-    <!-- 로그인 창 추가 -->
+
+
+
+
+  <!-- 회원가입창 -->
     <section class="contact_section layout_padding">
-      <div class="container-fluid">
-        <div class="row">
-			<div class="login-form">
-				<form method="post">
-					<h2 class="text-center">로그인</h2>
-					<div class="form-group has-error">
-						<input type="text" class="form-control name="id" placeholder="아이디" id="id">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" name="pwd" placeholder="비밀번호" id="pwd">
-					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-primary btn-lg btn-block" id="btn">로그인</button>
+       	<div class="regi-form2">
+			<form id="frm">
+				<h2>회원 가입</h2>
+				<div class="form-group">
+					<input type="text" class="form-control" name="id" placeholder="아이디" maxlength="20" id="id"><input type="button" class="btn1" id="btn" value="중복체크">
+				</div>
 				
-				
-				<!-- 혹시 이거 맘에 안드시면 회원가입은 링크로 만드는 것도 괜춘?할듯요
-					예를들면  "아이디가 없으신가요? <a>회원가입</a> 하기" 등등드으드ㅡ으ㅡ~~~~
-				 -->
-				 
-						<button type="button" class="btn btn-primary btn-lg btn-block" id="btn" onclick="location.href ='register.jsp'">회원가입</button></td></tr>
-					</div>
-				</form>
-			</div>
-		  </div>
-       </div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="pwd" placeholder="비밀번호" maxlength="25" id="pwd">
+				</div>
+				<div class="form-group">
+				</div>	
+					<input type="text" class="form-control" name="name" placeholder="이름" id="name">
+				<div class="form-group">
+				</div>
+					<input type="text" class="form-control" name="phone" placeholder="휴대폰번호" maxlength="11" id="number">
+				<div class="form-group">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="email" placeholder="이메일" id="email">
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-primary btn-lg btn-block" id="regi">회원가입</button>
+				</div>
+			</form>
+		</div>
     </section>
+    <!-- 회원가입 끝 -->
 
 
 
-
-	<!-- 바닥글 창 -->
+ 	<!-- 바닥글 창 -->
     <section class="info_section layout_padding2">
       <div class="container">
         <div class="row info_main_row">
@@ -205,10 +209,7 @@
 
   </div>
 
-
-
-
-  <!-- 밑창-->
+  <!-- 밑창 -->
   <footer class="container-fluid footer_section">
     <div class="container">
       <div class="col-md-11 col-lg-8 mx-auto">
@@ -218,8 +219,7 @@
       </div>
     </div>
   </footer>
-  <!-- 밑창 끝 -->
-
+  <!-- 밑창 끛-->
 
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
@@ -231,48 +231,94 @@
   <script src="js/custom.js"></script>
 
 
+<!-- 회원가입 관련 체크시작 -->
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	 $("#btn").click(function () {
+	//	alert("btn click");
+	let id = $("#id").val();
+	if(id == null || id == "" || id.search(/\s/) != -1){
+		alert("공백없이 입력해주세요")
+	}else{
+		$.ajax({
+			type:"post",
+			
+			url:"addmember",
 		
-	<!-- 로그인체크 -->
-	<script type="text/javascript">
-			$(document).ready(function() {
-					$("#btn").click(function () {
-						//	alert("btn click");
-						let id = $("#id").val();
-						let pwd =$("#pwd").val();
-						if(id== ""||id.search(/\s/) != -1 ||pwd=="" ||pwd.search(/\s/) != -1){
-							alert("공백없이 입력해주세요")
-						}else{
-							$.ajax({
-								type:"post",
-								
-								url:"login",
-							
-								data:{ "id":$("#id").val(), "pwd":$("#pwd").val() },
-								
-								success:function( data ){
-						        
-									let isS = data.map.isS;
-						       
-									if( isS == "YES"){
-									alert("환영합니다 "+id +" 님");
-									location.href = "addPro?work=main";
-									
-									}else if(isS == "NO"){
-						
-									alert("아이디나 비밀번호를 다시한번 확인해주세요");
-										
-									}			
-								},
-								error:function(){
-									alert("error");
-								}
-							});
-						}
-						});
+			data:{ "id":$("#id").val() },
+			
+			success:function( data ){
+	        
+				let isS = data.map.isS;
+	       
+				if( isS == "YES"){
 				
-				});
-	</script>   
-	<!-- 로그인 체크 끝 -->
+				alert("사용할 수 있는 id입니다");
+				
+				}else if(isS == "NO"){
+	
+				alert("사용할 수 없는 id입니다");
+					
+				}			
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}
+	}); 
+	 $.fn.CheckFunction = function() {
+			
+		 /* 비밀번호  */
+		 let pwd = $("#pwd").val();   	
+		 let num = pwd.search(/[0-9]/g);
+		 let eng = pwd.search(/[a-z]/ig);
+		 let spe = pwd.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		 /* 이름 */
+		 let name = $("#name").val(); 
+		 let num_name = name.search(/[0-9]/g);
+		 let spe_name = name.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		 /* 이메일 */
+		 let email = $("#email").val(); 
+		
+		 /* 전화전호 */
+		 let number = $("#number").val();
+		 let num_number = number.search(/[a-z]/ig);
+		// let spe_number = pwd.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		 
+
+		 if(pwd.length < 8 || pwd.length > 20){
+			 alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
+		   }else if(pwd.search(/\s/) != -1){
+		    alert("비밀번호는 공백 없이 입력해주세요.");
+		 }else if(num < 0 || eng < 0 || spe < 0 ){
+            alert("비밀반호를 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+		 }else if(name == "" || name.search(/\s/)!= -1){ 
+			 alert("이름을 공백 없이 입력해주세요.");
+		 }else if(num_name != -1 || spe_name != -1){
+			 alert("이름에 숫자, 특수문자가 포함되어있습니다.");
+		 }
+		 else if( number.search(/\s/) != -1 || number == ""){
+			 alert("휴대폰 번호는 공백 없이 입력해주세요.");
+		 }else if( num_number != -1 ){
+			 alert("휴대폰 번호는 숫자만 입력해주세요");
+		 }else{
+		     alert("가입을 축하드립니다");
+			 $("#frm").attr("action", "addmember").submit(); 
+		 }
+
+  }	
+$("#regi").click(function() {
+	
+      $.fn.CheckFunction();
+
+ 
+});
+	
+});
+</script>
+<!-- 회원가입 체크 끝 -->
 
 </body>
 </html>

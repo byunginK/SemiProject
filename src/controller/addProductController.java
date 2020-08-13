@@ -66,7 +66,13 @@ public class addProductController extends HttpServlet {
 		map.put("listac", list5);
 		String ln = listNum + "";
 		map.put("listNum", ln.trim());
-		if (work.equals("list")) {
+		
+		if(work.equals("main")) {
+			req.setAttribute("map", map);
+			forward("index.jsp", req, resp);
+		}
+		//카테고리에서 detail.jsp로 넘겨줌
+		else if (work.equals("list")) {
 
 			req.setAttribute("map", map);
 			forward("detail.jsp", req, resp);

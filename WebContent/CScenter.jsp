@@ -5,7 +5,6 @@
 
 <head>
   <!-- Basic -->
-  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -13,14 +12,16 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  
-  <title>Login</title>
-  
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  
+
+  <title>Contact</title>
+
+
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
@@ -33,16 +34,16 @@
   <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
 
 </head>
-
 <!-- 바디 셋팅 -->
 <body class="sub_page">
+
   <div class="main_body_content">
+
     <div class="hero_area">
-    
-     <!-- 헤더 -->
+       <!-- 헤더 -->
       <header class="header_section">
         <div class="container-fluid">
-         <!-- 네비게이션 바 -->
+        <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.jsp">
               Simple Five
@@ -50,7 +51,6 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
             </button>
-
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -73,49 +73,37 @@
           </nav>
         </div>
       </header>
-      <!-- 헤더 끝 -->
+       <!-- 헤더 끝 -->
     </div>
-    
-    
-    
-    
-    <!-- 로그인 창 추가 -->
+
+
+ 	 <!-- 게시판 추가 -->
+ 	 
     <section class="contact_section layout_padding">
       <div class="container-fluid">
         <div class="row">
-			<div class="login-form">
-				<form method="post">
-					<h2 class="text-center">로그인</h2>
-					<div class="form-group has-error">
-						<input type="text" class="form-control name="id" placeholder="아이디" id="id">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" name="pwd" placeholder="비밀번호" id="pwd">
-					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-primary btn-lg btn-block" id="btn">로그인</button>
-				
-				
-				<!-- 혹시 이거 맘에 안드시면 회원가입은 링크로 만드는 것도 괜춘?할듯요
-					예를들면  "아이디가 없으신가요? <a>회원가입</a> 하기" 등등드으드ㅡ으ㅡ~~~~
-				 -->
-				 
-						<button type="button" class="btn btn-primary btn-lg btn-block" id="btn" onclick="location.href ='register.jsp'">회원가입</button></td></tr>
-					</div>
-				</form>
-			</div>
-		  </div>
-       </div>
+          <div class="col-md-5 col-lg-4 offset-md-1 offset-lg-2">
+            <div class="form_container">
+              
+              
+              
+              
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
+    <!-- 게시판 끝 -->
 
 
-
-
-	<!-- 바닥글 창 -->
+ 	<!-- 바닥글 창 -->
     <section class="info_section layout_padding2">
       <div class="container">
         <div class="row info_main_row">
-<!-- Menu -->
+ 			<!-- Menu -->
           <div class="col-md-6 col-lg-3">
             <div class="info_links">
               <h4>
@@ -202,13 +190,10 @@
       </div>
     </section>
 	<!-- 바닥글 끝-->
-
   </div>
 
 
-
-
-  <!-- 밑창-->
+  <!-- 밑창 -->
   <footer class="container-fluid footer_section">
     <div class="container">
       <div class="col-md-11 col-lg-8 mx-auto">
@@ -218,8 +203,7 @@
       </div>
     </div>
   </footer>
-  <!-- 밑창 끝 -->
-
+  <!-- 밑창끝 -->
 
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
@@ -229,50 +213,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-
-
-		
-	<!-- 로그인체크 -->
-	<script type="text/javascript">
-			$(document).ready(function() {
-					$("#btn").click(function () {
-						//	alert("btn click");
-						let id = $("#id").val();
-						let pwd =$("#pwd").val();
-						if(id== ""||id.search(/\s/) != -1 ||pwd=="" ||pwd.search(/\s/) != -1){
-							alert("공백없이 입력해주세요")
-						}else{
-							$.ajax({
-								type:"post",
-								
-								url:"login",
-							
-								data:{ "id":$("#id").val(), "pwd":$("#pwd").val() },
-								
-								success:function( data ){
-						        
-									let isS = data.map.isS;
-						       
-									if( isS == "YES"){
-									alert("환영합니다 "+id +" 님");
-									location.href = "addPro?work=main";
-									
-									}else if(isS == "NO"){
-						
-									alert("아이디나 비밀번호를 다시한번 확인해주세요");
-										
-									}			
-								},
-								error:function(){
-									alert("error");
-								}
-							});
-						}
-						});
-				
-				});
-	</script>   
-	<!-- 로그인 체크 끝 -->
 
 </body>
 </html>

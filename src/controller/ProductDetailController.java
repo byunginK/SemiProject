@@ -113,9 +113,6 @@ public class ProductDetailController extends HttpServlet {
 			//같은 종류 카테고리 리스트의 버튼을 누르면 다음 상품들 리스트 값 전달
 		} else if (work.equals("display")) {
 			int listNum = Integer.parseInt(req.getParameter("listNum"));
-			if (listNum <= 0) {
-				listNum = 1;
-			}
 
 			prolist2 = dao.getplist(seq, listNum, pro.getP_category());
 			map.put("plist", prolist2);

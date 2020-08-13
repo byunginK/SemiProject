@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +23,7 @@ public class PurchaseController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String work = req.getParameter("work");
-		if(work.equals("purchasego")) {
+		if (work.equals("purchasego")) {
 			int seq = Integer.parseInt(req.getParameter("purseq"));
 			ProductDetailDao dao = ProductDetailDao.getInstance();
 			ProductDto product = dao.getProduct(seq);
@@ -30,38 +31,26 @@ public class PurchaseController extends HttpServlet {
 			String size = req.getParameter("size");
 			String count = req.getParameter("buy_count");
 			String totalPrice = req.getParameter("totalprice");
-			
+
 			req.setAttribute("product", product);
 			req.setAttribute("color", color);
 			req.setAttribute("size", size);
 			req.setAttribute("count", count);
 			req.setAttribute("totalPrice", totalPrice);
-			
+
 			RequestDispatcher dispatcher = req.getRequestDispatcher("purchase.jsp");
 			dispatcher.forward(req, resp);
-		}
-		else if(work.equals("successpay")) {
+		} else if (work.equals("successpay")) {
 			resp.sendRedirect("thank.jsp");
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		String email =req.getParameter("email");
-		String name = req.getParameter("name");
-		String phoneNum = req.getParameter("phoneNum");
-		String addr = req.getParameter("addr");
-		String postcode = req.getParameter("postcode");
-		
-		map.put("email", email);
-		map.put("name", name);
-		map.put("phoneNum", phoneNum);
-		map.put("addr", addr);
-		map.put("postcode", postcode);
+		String imp_uid = req.getParameter("imp_uid");
 		
 		JSONObject jobj = new JSONObject();
-		jobj.put("map", map);
+		jobj.put("imp_uid", imp_uid);
 		resp.setContentType("application/x-json; charset=UTF-8");
 		resp.getWriter().print(jobj);
 	}

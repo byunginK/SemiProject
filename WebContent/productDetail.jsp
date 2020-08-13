@@ -50,7 +50,7 @@ if (session.getAttribute("login_Id") != null) {
 
 			<!-- 네비게이션 바 -->
 			<nav class="navbar navbar-expand-lg custom_nav-container ">
-				<a class="navbar-brand" href="index.jsp"> Simple Five </a>
+				<a class="navbar-brand" href="addPro?work=main"> Simple Five </a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -93,14 +93,14 @@ if (session.getAttribute("login_Id") != null) {
 			</nav>
 		</div>
 	</header>
-	
+
 	<!-- 메인 컨텐츠 자리 -->
-	
+
 	<main>
 		<div align="center" style="margin-top: 100px">
-		
+
 			<!-- DB의 카테고리 값을 이용하여 분류 -->
-			
+
 			<%
 				if (product.getP_category().equals("top")) {
 			%>
@@ -122,105 +122,116 @@ if (session.getAttribute("login_Id") != null) {
 			%>
 		</div>
 		<div align="center" style="margin-top: 100px">
-		
+
 			<!-- 큰 이미지 -->
-		
+
 			<div align="center" class="img1">
 				<img alt="이미지 없음" src="productimg/<%=product.getFilename()%>"
 					width="400px" height="580px">
 			</div>
-			
+
 			<!-- 상품 이름 -->
-			
+
 			<div class="div1">
 				<h2><%=product.getP_name()%></h2>
 			</div>
-			
+
 			<!-- 상품 소개 글 -->
-			
+
 			<div class="div2">
-			
+
 				<!-- 금액, 색상, 사이즈 선택, 수량, 결제금액 표기 테이블 -->
 				<form id="selectFrm">
-				<input type="hidden" name="purseq" value="<%=product.getSeq()%>">
-				<input type="hidden" name="work" value="purchasego">
-				<table>
-					<col width="200px">
-					<col width="200px">
-					<tr height="50px">
-						<td>판매 가격</td>
-						<td align="right"><%=product.getP_price()%>원</td>
-					</tr>
-					<tr height="50px">
-						<td>색상</td>
-						<td align="right"><select name="color">
-								<option>색상 선택</option>
-								<option>흰색</option>
-						</select>
-					</tr>
-					<tr height="50px">
-						<td>사이즈</td>
-						<td align="right"><select name="size">
-								<option>사이즈 선택</option>
-								<option>S</option>
-								<option>M</option>
-								<option>XL</option>
-								<option>XXL</option>
-						</select>
-					</tr>
-					<tr height="50px">
-						<td>배송 방법 / 배송료</td>
-						<td align="right">국내 / 무료</td>
-					</tr>
-					<tr height="50px">
-						<td>수량 선택</td>
-						<td align="right"><input type="text" id="pcount"
-							name="buy_count" readonly="readonly" value="1" size="10"
-							style="text-align: center; border: none;">
-							<button type="button" id="plus">+</button>
-							<button type="button" id="min">-</button></td>
-					</tr>
-					<tr height="50px">
-						<td>총 결제금액</td>
-						<td align="right"><input type="text" id="totalprice"
-							name="totalprice" readonly="readonly"
-							style="text-align: right; border: none;">
-						<td>
-					</tr>
-				</table>
+					<input type="hidden" name="purseq" value="<%=product.getSeq()%>">
+					<input type="hidden" name="work" value="purchasego">
+					<input type="hidden" name="id" value="<%=id%>">
+					<table>
+						<col width="200px">
+						<col width="200px">
+						<tr height="50px">
+							<td>판매 가격</td>
+							<td align="right"><%=product.getP_price()%>원</td>
+						</tr>
+						<tr height="50px">
+							<td>색상</td>
+							<td align="right"><select name="color">
+									<option>색상 선택</option>
+									<option>흰색</option>
+							</select>
+						</tr>
+						<tr height="50px">
+							<td>사이즈</td>
+							<td align="right"><select name="size">
+									<option>사이즈 선택</option>
+									<option>S</option>
+									<option>M</option>
+									<option>XL</option>
+									<option>XXL</option>
+							</select>
+						</tr>
+						<tr height="50px">
+							<td>배송 방법 / 배송료</td>
+							<td align="right">국내 / 무료</td>
+						</tr>
+						<tr height="50px">
+							<td>수량 선택</td>
+							<td align="right"><input type="text" id="pcount"
+								name="buy_count" readonly="readonly" value="1" size="10"
+								style="text-align: center; border: none;">
+								<button type="button" id="plus">+</button>
+								<button type="button" id="min">-</button></td>
+						</tr>
+						<tr height="50px">
+							<td>총 결제금액</td>
+							<td align="right"><input type="text" id="totalprice"
+								name="totalprice" readonly="readonly"
+								style="text-align: right; border: none;">
+							<td>
+						</tr>
+					</table>
 				</form>
 			</div>
-			
+
 			<!-- 구매 버튼 -->
-			
+
 			<div class="div2">
-				<button type="button" style="width: 300px; height: 40px" id="purchase_btn">구매하기</button>
+				<button type="button" style="width: 300px; height: 40px"
+					id="purchase_btn">구매하기</button>
 			</div>
-			
+
 			<!-- 장바구니 버튼 -->
-			
+
 			<div class="div3">
-				<button type="button" style="width: 300px; height: 40px">장바구니</button>
+				<button type="button" style="width: 300px; height: 40px" id="cart_btn">장바구니</button>
 			</div>
 
 			<!-- 카테고리별 전체 상품 리스트 출력 -->
-			
-			<div style="width: 900px; height: 200px; margin-top: 150px">
-				<button type="button" onclick="display(1)">◀</button>
-				<%
-					for (int i = 0; i < prolist.size(); i++) {
-					ProductDto dto = prolist.get(i);
-				%>
-				<a href="productDetail?work=product&seq=<%=dto.getSeq()%>"
-					id='dplist'><img alt="이미지 없음"
-					src="productimg/<%=dto.getFilename()%>" width="250px"
-					height="200px"></a>
-				<%
-					}
-				%>
-				<button type="button" onclick="display(2)" id="dp">▶</button>
-			</div>
-			
+
+				<section class="category_section">
+					<div class="container">
+						<div class="row some-cards" style="margin-left: 50px; margin-top: 100px">
+						<button type="button" onclick="display(1)" >◀</button>
+							<%
+								for (int i = 0; i < prolist.size(); i++) {
+								ProductDto dto = prolist.get(i);
+							%>
+							<div class="box">
+								<a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
+									<div class="img-box">
+										<img src="productimg/<%=dto.getFilename()%>" alt="">
+									</div>
+								</a>
+								<%=dto.getP_price()%>원<br><%=dto.getP_name()%><br><%=dto.getP_info()%>
+							</div>
+							<%
+								}
+							%>
+							<button type="button" onclick="display(2)" id="dp">▶</button>
+						</div>
+						
+					</div>
+				</section>
+
 			<!-- 버튼을 누르면 해당 내용 표기-->
 
 			<div style="width: 680px; height: 70px; margin-top: 100px;">
@@ -232,24 +243,24 @@ if (session.getAttribute("login_Id") != null) {
 			</div>
 			<div id="product_Detail"
 				style="width: 900px; margin-top: 50px; padding: 50px;">
-				
+
 				<!-- 상품의 소개 글 -->
-				
+
 				<div style="width: 400px;">
 					<h3>COMMENT</h3>
 					<span><%=product.getP_info()%></span>
 				</div>
 				<h2>PRODUCT INFO</h2>
-				
+
 				<!-- 작은 이미지 -->
-				
+
 				<div style="width: 200px; height: 300px; margin-top: 50px;">
 					<img alt="이미지 없음" src="productimg/<%=product.getFilename()%>"
 						style="position: absolute; width: 200px; height: 300px; margin-left: -100px;">
 				</div>
-				
+
 				<!-- 상품 상세 정보 -->
-				
+
 				<div style="margin-top: 50px;">
 					<table class="tb2" border="1px solid;">
 						<col width="120px">
@@ -277,9 +288,9 @@ if (session.getAttribute("login_Id") != null) {
 					</table>
 				</div>
 			</div>
-			
+
 			<!-- 리뷰 테이블 -->
-			
+
 			<div id="review_detail"
 				style="width: 900px; margin-top: 50px; padding: 50px;">
 				<table id="reviewTb" border="1px solid">
@@ -310,9 +321,9 @@ if (session.getAttribute("login_Id") != null) {
 					%>
 
 				</table>
-				
+
 				<!-- 리뷰 테이블 페이징 -->
-				
+
 				<div class="reviewPage">
 					<ul class="paginglist">
 						<%
@@ -322,7 +333,7 @@ if (session.getAttribute("login_Id") != null) {
 						<%
 							} else {
 						%>
-						<li><button type="button"id="p_btn">Previous</button></li>
+						<li><button type="button" id="p_btn">Previous</button></li>
 						<%
 							}
 						if (endPage > totalPage) {
@@ -340,15 +351,15 @@ if (session.getAttribute("login_Id") != null) {
 						<%
 							} else {
 						%>
-						<li><button type="button"id="n_btn">Next</button></li>
+						<li><button type="button" id="n_btn">Next</button></li>
 						<%
 							}
 						%>
 					</ul>
 				</div>
-				
+
 				<!-- 리뷰 쓰는 곳 -->
-				
+
 				<div>
 					<br>
 					<textarea rows='3' cols='50' id='revContent'></textarea>
@@ -357,9 +368,9 @@ if (session.getAttribute("login_Id") != null) {
 					<br> <span id="block"></span>
 				</div>
 			</div>
-			
+
 			<!-- 정책 부분 -->
-			
+
 			<div id="common_Detail"
 				style="width: 900px; margin-top: 50px; padding: 50px;">
 				<div align="left">
@@ -375,8 +386,7 @@ if (session.getAttribute("login_Id") != null) {
 						<li>일부 특가 상품의 경우, 인수 후에는 제품 하자나 오 배송의 경우를 제외한 고객님의 단순변심에 의한
 							교환, 반품이 불가능할 수 있사오니, 각 상품의 상품상세정보를 꼭 참조하십시오.</li>
 					</ul>
-					<br>
-					<br>
+					<br> <br>
 					<ul>
 						<li>수령하신 제품의 불량 및 오배송이 확인 된 경우의 교환/반품은 전자상거래법에 의거하여 배송완료일로부터
 							7일 이내에만 가능합니다.</li>
@@ -399,9 +409,9 @@ if (session.getAttribute("login_Id") != null) {
 			</div>
 		</div>
 	</main>
-	
+
 	<!-- 바닥 글 -->
-	
+
 	<div style="margin-top: 50px">
 		<section class="info_section layout_padding2">
 			<div class="container">
@@ -423,8 +433,8 @@ if (session.getAttribute("login_Id") != null) {
 						<div class="info_detail">
 							<h4>Company</h4>
 							<p>
-								(주)Simple Five<br>대표자: 오조<br>
-								<br> 사업자 등록번호:520-02-55555<br>
+								(주)Simple Five<br>대표자: 오조<br> <br> 사업자
+								등록번호:520-02-55555<br>
 								<!-- 	통신판매업 등록번호 : <br> -->
 								서울특별시 강남구 테헤란로<br> 64번길2 서영빌딩1층
 							</p>
@@ -476,9 +486,9 @@ if (session.getAttribute("login_Id") != null) {
 
 	<!--  버튼 기능  -->
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-let listNum = 0;
+let listNum = 1;
 let count = 1;
 
 /* 첫 화면 제품 상세 정보 만 표기를 위한 함수 */
@@ -527,6 +537,12 @@ $(function() {
 	$("#purchase_btn").click(function() {
 		$("#selectFrm").attr("action","purchaseCon").submit();
 	});
+	
+	/* 장바구니 버튼 */
+	$("#cart_btn").click(function() {
+		$("#selectFrm").attr("action","cartCon").submit();
+	});
+	
 	
 	/* 리뷰 작성 후 등록 버튼을 누르면 바로 리뷰 목록에 표기 및 페이징 처리 */
 	$("#review_btn").click(function() {
@@ -601,8 +617,15 @@ $(function() {
 
 /* 상품 리스트 표기 버튼 */
 function display(num) {
-	
 	if(num==1){
+		listNum--;
+		if(listNum < 1){
+			listNum = 1;
+		}
+		
+	}else{
+		listNum ++;
+	}
 		$.ajax({
 			url:"productDetail",
 			type:"get",
@@ -610,43 +633,30 @@ function display(num) {
 			data:"work=display&seq="+"<%=product.getSeq()%>"+"&listNum="+listNum,
 			success:function(datas){
 				let displayList = datas.map.plist;
-				listNum--;
-				$("a").remove("#dplist");
-				for(let i =0; i< displayList.length; i++){
-					let display = "<a href='productDetail?work=product&seq="+displayList[i].seq+"' id='dplist'>"
-								+ "<img alt='이미지 없음' src='productimg/"+displayList[i].filename+"' width='250px' height='200px'></a>";
-					$("#dp").before(display);
-				}
-			},
-			error:function(){
-				alert('error');
-			}
-		});
-	}else{
-		$.ajax({
-			url:"productDetail",
-			type:"get",
-			datatype:"json",
-			data:"work=display&seq="+"<%=product.getSeq()%>"+"&listNum="+(listNum+1),
-			success:function(datas){
-				let displayList = datas.map.plist;
-				listNum ++;
-			//	alert(displayList[0].filename);
-				$("a").remove("#dplist");
-				for(let i =0; i< displayList.length; i++){
-					let display = "<a href='productDetail?work=product&seq="+displayList[i].seq+"' id='dplist'>"
-								+ "<img alt='이미지 없음' src='productimg/"+displayList[i].filename+"' width='250px' height='200px'></a>";
-					$("#dp").before(display);
-				}
-				if(listNum > displayList.length+1){
+				if(listNum> displayList.length-1){
 					listNum = 0;
 				}
+				
+				$("div").remove(".box");
+				for(let i =0; i< displayList.length; i++){
+					let display = 
+						"<div class='box'>"
+					+"<a href='productDetail?work=product&seq="+displayList[i].seq+"'>"
+						+"<div class='img-box'>"
+							+"<img src='productimg/"+displayList[i].filename+"'>"
+						+"</div>"
+					+"</a>"
+					+ displayList[i].p_price+"원<br>"+displayList[i].p_name+"<br>"+displayList[i].p_info
+				+"</div>";
+					$("#dp").before(display);
+				}
+				
 			},
 			error:function(){
 				alert('error');
 			}
 		});
-	}
+	
 }
 /* 리뷰 페이지 누르면 해당 페이지의 리뷰들 목록에 출력 */
 function page(cp) {

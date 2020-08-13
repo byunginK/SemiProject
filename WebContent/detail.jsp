@@ -1,21 +1,18 @@
 <%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
 <%@page import="dto.ProductDto"%>
 <%@page import="java.util.List"%>
-<%@page import="dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 
-<% //임시 로그인 정보
-String id = null;
-if(session.getAttribute("login_Id") != null){
-	   id = (String)session.getAttribute("login_Id");
-}
+<%
+HashMap map = (HashMap)request.getAttribute("map");
+List<ProductDto> list2 = (List<ProductDto>)map.get("listtop");
+List<ProductDto> list3 = (List<ProductDto>)map.get("listbottom");
+List<ProductDto> list4 = (List<ProductDto>)map.get("listshoes");
+List<ProductDto> list5 = (List<ProductDto>)map.get("listac");
+ProductDto dto = new ProductDto();
 
-Map map = (HashMap)request.getAttribute("map");
-String ln = (String)map.get("listNum");
-int listNum = Integer.parseInt(ln);
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +30,7 @@ int listNum = Integer.parseInt(ln);
 
   <title>Detail</title>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!--slick slider stylesheet -->
@@ -43,32 +40,30 @@ int listNum = Integer.parseInt(ln);
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
-
-  <link rel="stylesheet" href="css/slick-theme.css" />
+  <!-- <link rel="stylesheet" href="css/slick-theme.css" /> -->
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
 
 </head>
-
 <body class="sub_page">
-
+<!-- 바디 셋팅 -->
   <div class="main_body_content">
-
     <div class="hero_area">
     
      <!-- 헤더 -->
       <header class="header_section">
         <div class="container-fluid">
+        <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.jsp">
               Simple Five
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class=""> </span>
+               <span class=""> </span>
             </button>
 
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
@@ -77,29 +72,21 @@ int listNum = Integer.parseInt(ln);
                   <a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="detail.jsp">카테고리</a>
+                 <a class="nav-link" href="addPro?work=list">카테고리</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href="addPro?work=add">제품 추가(임시)</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link"href="#" onclick="location.href ='suggest?work=suggest&detailwork=suggest_main'; return false;">고객센터</a>
+                  <a class="nav-link" href="CScenter.jsp">고객센터</a>
                 </li>
-             
-                <% if(id != null){ %>
-             <li class="nav-item">
-                  <a class="nav-link" href="myPageCheck.jsp?id=<%=id%>"><%=id %> 님</a>
-                </li>
-   				<li class="nav-item">
-                  <a class="nav-link" href="login?work=logout">로그아웃</a>
-                </li>
-             <%}else{ %>
                 <li class="nav-item">
                   <a class="nav-link" href="login.jsp">로그인</a>
                 </li>
    				<li class="nav-item">
-                  <a class="nav-link" href="register_agree.jsp">회원가입</a>
+                  <a class="nav-link" href="register.jsp">회원가입</a>
                 </li>
-                <%} %>
               </ul>
-
             </div>
           </nav>
         </div>
@@ -108,43 +95,31 @@ int listNum = Integer.parseInt(ln);
     </div>
 
 
-    <!-- 금주의 Best 제품-->
-   <section class="chocolate_section ">
+
+
+
+    <!-- Best Product 5개 -->
+    <section class="chocolate_section ">
       <div class="container">
         <div class="heading_container">
           <h2><br><br>
-            금주의 Best Product
+            Weekly Best Item(판매량순)
           </h2>
- <!--          <p>
-            ìì¸ì¬ë¦¬
-          </p> -->
         </div>
       </div>
       <div class="container">
         <div class="chocolate_container">
           <div class="box">
             <div class="img-box">
-            	<%
-            	List<ProductDto> list = (List<ProductDto>)map.get("listall");
-            	for(int i =0; i < list.size(); i++){
-            		ProductDto pro = list.get(i);
-            	%>	
-            		<a href="productDetail?work=product&seq=<%=pro.getSeq()%>"><img src="productimg/<%=pro.getFilename() %>" alt=""></a>
-            	<%	
-            	}
-            	%>
-				
+              <img src="img/acc1.jpg" alt="">
             </div>
             <div class="detail-box">
               <h6>
                1 <span>2</span>
               </h6>
               <h5>
-                140,000ì
+                140,000원
               </h5>
-<!--          <a href="">
-              	êµ¬ë§¤íê¸°
-              </a> -->
             </div>
           </div>
           <div class="box">
@@ -156,11 +131,8 @@ int listNum = Integer.parseInt(ln);
                 1 <span>2</span>
               </h6>
               <h5>
-                97,000ì
+                97,000원
               </h5>
-<!--          <a href="">
-                	ì í ë³´ê¸°
-              </a> -->
             </div>
           </div>
           <div class="box">
@@ -172,11 +144,8 @@ int listNum = Integer.parseInt(ln);
                 	1<span>2</span>
               </h6>
               <h5>
-                112,000ì
+                112,000원
               </h5>
-<!--               <a href="">
-              	  ìì¸ë³´ê¸°
-              </a> -->
             </div>
           </div>
           <div class="box">
@@ -188,11 +157,8 @@ int listNum = Integer.parseInt(ln);
                1<span>2</span>
               </h6>
               <h5>
-                138,000ì
+                138,000원
               </h5>
-<!--               <a href="">
-               	ìì¸ë³´ê¸°
-              </a> -->
             </div>
           </div>
           <div class="box">
@@ -201,102 +167,197 @@ int listNum = Integer.parseInt(ln);
             </div>
             <div class="detail-box">
               <h6>
-                1<span>2 </span>
+                1<span>2 </span>
               </h6>
               <h5>
-                49,000ì
+                49,000원
               </h5>
-<!--               <a href="">
-             		ìì¸ë³´ê¸°
-              </a> -->
             </div>
           </div>
           
-        </div> 
-      </div>
-    </section>
-     <!-- Best제품 끝 -->
-    
-              
-     <!-- 디테일 -->
-          
-  <section class="contact_section layout_padding">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5 col-lg-4 offset-md-1 offset-lg-2">
-            <div class="form_container" style="width: 1200px;">
-             	 <h1>상의</h1>
-             	 <br>
-             	 <button type="button" onclick="printimg(1)"id="topbtn"><<</button>
-             	 <%
-             	List<ProductDto> list2 = (List<ProductDto>)map.get("listtop");
-            	for(int i =0; i < list2.size(); i++){
-            		ProductDto pro = list2.get(i);
-            	%>	
-            		<a href="productDetail?work=product&seq=<%=pro.getSeq()%>" class="topdis"><img src="productimg/<%=pro.getFilename() %>" alt="" width="200px" height="250px"></a>
-            	<%	
-            	}
-            	%>
-            	<button type="button" onclick="printimg(2)">>></button>
-            	<br><br>
-              	<h1>하의</h1>
-              	<br>
-              	<button type="button" onclick="printimg(3)"id="botbtn"><<</button>
-             	 <%
-             	List<ProductDto> list3 = (List<ProductDto>)map.get("listbottom");
-            	for(int i =0; i < list3.size(); i++){
-            		ProductDto pro = list3.get(i);
-            	%>	
-            		<a href="productDetail?work=product&seq=<%=pro.getSeq()%>" class="botdis"><img src="productimg/<%=pro.getFilename() %>" alt="" width="200px" height="250px"></a>
-            	<%	
-            	}
-            	%>
-            	<button type="button" onclick="printimg(4)">>></button>
-            	<br><br>
-            	<h1>신발</h1>
-            	<br>
-            	<button type="button" onclick="printimg(5)"id="shobtn"><<</button>
-             	 <%
-             	List<ProductDto> list4 = (List<ProductDto>)map.get("listshoes");
-            	for(int i =0; i < list4.size(); i++){
-            		ProductDto pro = list4.get(i);
-            	%>	
-            		<a href="productDetail?work=product&seq=<%=pro.getSeq()%>" class="shodis"><img src="productimg/<%=pro.getFilename() %>" alt="" width="200px" height="250px"></a>
-            	<%	
-            	}
-            	%>
-            	<button type="button" onclick="printimg(6)">>></button>
-            	<br><br>
-            	<h1>악세사리</h1>
-            	<br>
-            	<button type="button" onclick="printimg(7)"id="accbtn"><<</button>
-             	 <%
-             	List<ProductDto> list5 = (List<ProductDto>)map.get("listac");
-            	for(int i =0; i < list5.size(); i++){
-            		ProductDto pro = list5.get(i);
-            	%>	
-            		<a href="productDetail?work=product&seq=<%=pro.getSeq()%>" class="accdis"><img src="productimg/<%=pro.getFilename() %>" alt="" width="200px" height="250px"></a>
-            	<%	
-            	}
-            	%>
-            	<button type="button" onclick="printimg(8)">>></button>
-              
-            </div>
-          <div class="col-md-6  px-0">
-            <div class="map_container">
-              <div class="map">
-                <div id="googleMap"></div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
+    <!-- Best 끝 -->
+            
+            
+            
+            
+            
+              
+<!-- 카테고리별 디테일 -->
+     
+<!-- 상의 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Top & Outer
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+			      	<%
+			      	
+			      	for(int i = 0; i < list2.size(); i++){
+			      		dto = list2.get(i);
+			      		%>
+			      	 <div class="box">
+		                <a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
+	           				<div class="img-box">
+		                       	<img src="productimg/<%=dto.getFilename() %>" alt="">
+		                    </div>
+		                 </a>
+		                 	<%=dto.getP_price() %>원<br><%=dto.getP_name() %><br><%=dto.getP_info() %>
+		             </div>
+			      		<%
+			      	}
+			      	%>	
+		            
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 상의 끝 -->
+	
+	
+	
+	
+<!-- 하의 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Pants & Skirts
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+		            <%
+			      	
+			      	for(int i = 0; i < list3.size(); i++){
+			      		dto = list3.get(i);
+			      		%>
+			      	 <div class="box">
+		                <a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
+	           				<div class="img-box">
+		                       	<img src="productimg/<%=dto.getFilename() %>" alt="">
+		                    </div>
+		                 </a>
+		                 	<%=dto.getP_price() %>원<br><%=dto.getP_name() %><br><%=dto.getP_info() %>
+		             </div>
+			      		<%
+			      	}
+			      	%>	
+		               
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 하의 끝 -->	
+	
+	
+	
+	
+	
+<!-- 신발 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Shoes
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+			      		
+		           <%
+			      	
+			      	for(int i = 0; i < list4.size(); i++){
+			      		dto = list4.get(i);
+			      		%>
+			      	 <div class="box">
+		                <a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
+	           				<div class="img-box">
+		                       	<img src="productimg/<%=dto.getFilename() %>" alt="">
+		                    </div>
+		                 </a>
+		                 	<%=dto.getP_price() %>원<br><%=dto.getP_name() %><br><%=dto.getP_info() %>
+		             </div>
+			      		<%
+			      	}
+			      	%>	
+		             
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 신발 끝 -->	
+	
+	
+	
+	
+	
+	
+
+
+<!-- 악세서리 -->
+	<section class="category_section">
+		<div class="container">
+		          <div class="row some-cards">
+		          
+		             <div class="container">
+		       			<div class="heading_container">
+		          			<h2>
+			           			Pants & Skirts
+		          			</h2>
+		        		</div>
+		      		 </div>
+			      		
+			      		
+		            <%
+			      	
+			      	for(int i = 0; i < list5.size(); i++){
+			      		dto = list5.get(i);
+			      		%>
+			      	 <div class="box">
+		                <a href="productDetail?work=product&seq=<%=dto.getSeq()%>">
+	           				<div class="img-box">
+		                       	<img src="productimg/<%=dto.getFilename() %>" alt="">
+		                    </div>
+		                 </a>
+		                 	<%=dto.getP_price() %>원<br><%=dto.getP_name() %><br><%=dto.getP_info() %>
+		             </div>
+			      		<%
+			      	}
+			      	%>	
+		             
+		             
+		             
+	        	</div>
+			</div> 
+	</section>
+<!-- 악세서리 끝 -->
+
+
+	
+	
+	
+	
     
-     <!-- 디테일 끝 -->
+<!-- 디테일 끝 -->
 
    
-    <!-- 바닥글 창 -->
+ <!-- 바닥글 창 -->
     <section class="info_section layout_padding2">
       <div class="container">
         <div class="row info_main_row">
@@ -349,11 +410,11 @@ int listNum = Integer.parseInt(ln);
               <p>
               	이용약관<br>
               	개인정보 취급방침<br>
-              	Q&A
+              	Q & A
               </p>
             </div>
           </div>
-<!-- 고객센터 -->
+<!-- 연락방법 -->
           <div class="col-md-6 col-lg-3">
             <h4>
               	Contect Us
@@ -386,10 +447,9 @@ int listNum = Integer.parseInt(ln);
         </div>
       </div>
     </section>
+<!-- 바닥글 끝-->
 
-    <!-- 바닥글 끝-->
   </div>
-
 
   <!-- 밑창 -->
   <footer class="container-fluid footer_section">
@@ -411,122 +471,6 @@ int listNum = Integer.parseInt(ln);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-  <script type="text/javascript">
-  let listCount = <%=listNum %>;
-	  function printimg(num) {
-		  if(num==1){
-			  let category = "top";
-			  let rm = ".topdis";
-			  let add = "#topbtn";
-			  let cla = "topdis";
-			  listCount--;
-			  displayAjax(category, rm, cla, add);
-			  if(listCount < 1){
-				  listCount = 1;
-			  }
-		  }else if(num == 2){
-			  let category = "top";
-			  let rm = ".topdis";
-			  let add = "#topbtn";
-			  let cla = "topdis";
-			  listCount++;
-			  displayAjax(category, rm, cla, add);
-			  if(listCount > <%=list2.size()%>){
-				  listCount = 0;
-			  }
-		  }else if(num == 3){
-			  let category = "bottom";
-			  let rm = ".botdis"
-			  let add = "#botbtn";
-			  let cla = "botdis";
-			  listCount--;
-			  displayAjax(category, rm, cla, add);
-			  if(listCount < 1){
-				  listCount = 1;
-			  }
-		  }else if(num == 4){
-			  let category = "bottom";
-			  let rm = ".botdis"
-			  let add = "#botbtn";
-			  let cla = "botdis";
-			  listCount++;
-			  displayAjax(category, rm, cla, add);
-			  if(listCount > <%=list3.size()%>){
-				  listCount = 0;
-			  }
-		  }else if(num == 5){
-			  let category = "shoes";
-			  let rm = ".shodis"
-			  let add = "#shobtn";
-			  let cla = "shodis";
-			  listCount--;
-			  displayAjax(category, rm, cla, add);
-			  
-			  if(listCount < 1){
-				  listCount = 1;
-			  }
-		  }else if(num == 6){
-			  let category = "shoes";
-			  let rm = ".shodis"
-			  let add = "#shobtn";
-			  let cla = "shodis";
-			  listCount++;
-			  displayAjax(category, rm, cla, add);
-			 
-			  if(listCount > <%=list2.size()%>){
-				  listCount = 0;
-			  }
-		  }else if(num == 7){
-			  let category = "accessary";
-			  let rm = ".accdis"
-			  let add = "#accbtn";
-			  let cla = "accdis";
-			  listCount--;
-			  displayAjax(category, rm, cla, add);
-			  if(listCount < 1){
-				  listCount = 1;
-			  }
-		  }else if(num == 8){
-			  let category = "accessary";
-			  let rm = ".accdis"
-			  let add = "#accbtn";
-			  let cla = "accdis";
-			  listCount++;
-			  displayAjax(category, rm, cla, add);
-			  if(listCount > <%=list2.size()%>){
-				  listCount = 0;
-			  }
-		  }
-		
-	}
-
-function displayAjax(category, rm,cla, add) {
-	$.ajax({
-		url:"addPro",
-		type:"get",
-		datatype:"json",
-		data:"work=display&listNum="+listCount+"&category="+category,
-		success:function(data){
-		//	alert(listCount);
-			let list = data.map.display;
-		//	alert(nextlist);
-			$("a").remove(rm);
-			for(let i =0; i < list.length; i++){
-        		
-        		addlist="<a href='productDetail?work=product&seq='"+list[i].seq+"' class='"+cla+"'>"
-        				+"<img src='productimg/"+list[i].filename+"' width='200px' height='250px'></a>";
-        		$(add).eq(-1).after(addlist);
-        	}
-        	
-		},
-		error:function(){
-			alert("error");
-		}
-	});
-}
-  
-  </script>
 
 </body>
-
 </html>

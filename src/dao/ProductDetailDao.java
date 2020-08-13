@@ -8,6 +8,7 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
+import dto.CartDto;
 import dto.ProductDto;
 import dto.ReplyDto;
 
@@ -233,7 +234,7 @@ public class ProductDetailDao {
 					
 		
 		int start = listNum;
-		int end = listNum +3;
+		int end = listNum +7;
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -368,5 +369,75 @@ public class ProductDetailDao {
 			DBClose.close(psmt, conn, null);
 		}
 		return count>0?true:false;
+	}
+	
+	public boolean insertCart(String id, int item_seq, int qty) {
+		String sql = " INSERT INTO FIVE_CART(SEQ, ID, ITEM_SEQ, QTY) "
+					+" VALUES(FIVE_CART_SEQ.NEXTVAL, ? , ? , ? ) ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 insertCart success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setInt(2, item_seq);
+			psmt.setInt(3, qty);
+			System.out.println("2/6 insertCart success");
+			
+			count = psmt.executeUpdate();
+			System.out.println("3/6 insertCart success");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBClose.close(psmt, conn, null);
+		}
+		return count>0?true:false;
+	}
+	
+	public List<CartDto> getcartlist(String id) {
+		String sql = " SELECT ID, ITEM_SEQ, QTY "
+					+" FROM FIVE_CART "
+					+" WHERE ID = ? "
+					+" ORDER BY SEQ DESC ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<CartDto> list = new ArrayList<CartDto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getcartlist success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getcartlist success");
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				String user = rs.getString("id");
+				int item_seq = rs.getInt("ITEM_SEQ");
+				int qty = rs.getInt("QTY");
+				
+				CartDto dto = new CartDto(user, item_seq, qty);
+				
+				list.add(dto);
+			}
+			System.out.println("3/6 getcartlist success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		return list;
 	}
 }
