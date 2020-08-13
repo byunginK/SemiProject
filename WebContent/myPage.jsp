@@ -112,15 +112,21 @@
       <!-- 헤더 끝 -->
     </div>
 <!-- 마이 페이지 시작 -->
-
+<br><br>
+<h1 align="center">MY PAGE</h1>
+<hr>
+<br><br><br>
+<div align="center">
 <table>
 <col width="100"><col width="200">
-<tr><th>아이디</th><td><%=id %></td></tr>
-<tr><th>이름</th><td><%=dto.getName() %></td></tr>
-<tr><th>이메일</th><td><%=dto.getEmail() %></td></tr>
-<tr><th>전화번호</th><td><%=dto.getPwd() %></td></tr>
+<tr height="100" align="center" style="border-bottom: 1px; border-bottom-style: groove; border-bottom-color: #FFCCCC;"><th bgcolor="#FFCCCC">아이디</th><td  align="center"><%=id %></td></tr>
 
+<tr height="100" align="center" style="border-bottom: 1px; border-bottom-style: groove; border-bottom-color: #FFCCCC;"><th bgcolor="#FFCCCC">이름</th><td  align="center"><%=dto.getName() %></td></tr>
+<tr height="100" align="center" style="border-bottom: 1px; border-bottom-style: groove; border-bottom-color: #FFCCCC;"><th bgcolor="#FFCCCC">이메일</th><td  align="center"><%=dto.getEmail() %></td></tr>
+<tr height="100" align="center" style="border-bottom: 1px; border-bottom-style: groove; border-bottom-color: #FFCCCC;"><th bgcolor="#FFCCCC">전화번호</th><td  align="center"><%=dto.getPhone() %></td></tr>
 </table>
+</div>
+<br><br><br>
 <!-- 마이 페이지 끝 -->
     <!-- 바닥글 창 -->
     <section class="info_section layout_padding2">
