@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+/* 세션에서 아이디 받아옴 로그인을 안할시 null */
+String id = null;
+if(session.getAttribute("login_Id") != null){
+ id = (String)session.getAttribute("login_Id");
+}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -100,14 +107,15 @@
 					</div>
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-lg btn-block" id="btn">로그인</button>
-				
-				
-				<!-- 혹시 이거 맘에 안드시면 회원가입은 링크로 만드는 것도 괜춘?할듯요
-					예를들면  "아이디가 없으신가요? <a>회원가입</a> 하기" 등등드으드ㅡ으ㅡ~~~~
-				 -->
-				 
-						<button type="button" class="btn btn-primary btn-lg btn-block" id="btn" onclick="location.href ='register.jsp'">회원가입</button></td></tr>
+					<br>
+	<!-- 회원가입 이동 -->
+						<a href="register_agree.jsp">아이디가 없으신가요?</a><div style="position: relative; "> 
+						<!-- 아이디 저장 쿠키(ajax)-->
+						<a style="float: right;">아이디 저장</a><input type="checkbox" id="chk_save_id" style="float: right; margin-top: 5px; margin-right: 3px"></div>
 					</div>
+				 
+				<!-- 		<button type="button" class="btn btn-primary btn-lg btn-block" id="btn" onclick="location.href ='register.jsp'">회원가입</button></td></tr>
+				 -->	
 				</form>
 			</div>
 		  </div>

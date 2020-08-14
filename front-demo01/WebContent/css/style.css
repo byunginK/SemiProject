@@ -1,10 +1,10 @@
-/* 드롭다운 */
+/* 네비 드롭다운 */
 .dropdown-p {
-	background-color: #fff;
 	padding: 8px;
 	font-size: 15px;
 	border: none;
 	padding-top: 11px;
+	text-align: center;
 }
 .dropdown {
 	position: relative;
@@ -16,12 +16,12 @@
 	background-color: #fff;
 	min-width: 100px;
 	padding: 5px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
 	font-size: 14px;
 }
 .dropdown-content a {
 	color: black;
-	padding: 8px;
+	padding: 5px;
 	text-decoration: none;
 	display: block;
 }
@@ -35,7 +35,7 @@
 
 
 
-/* 공지사항 */
+/* 게시판 */
 
 /* 메인 */
 
@@ -153,6 +153,168 @@
 
 
 
+
+
+/* 로그인창 */
+.form-control {
+		min-height: 41px;
+		background: #f2f2f2;
+		box-shadow: none !important;
+		border: transparent;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+.form-control, .btn {        
+       border-radius: 2px;
+}
+.login-form {
+	width: 500px;
+	margin: 30px auto;
+	text-align: center !important;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+.login-form h2 {
+       margin: 10px 0 25px;
+}
+  .login-form form {
+color: #7a7a7a;
+border-radius: 3px;
+  	margin-bottom: 15px;
+      background: #fff;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+}
+  .login-form .btn {        
+      font-size: 16px;
+      font-weight: bold;
+background: black;
+border: none;
+      outline: none !important;
+}
+.login-form .btn:hover, .login-form .btn:focus {
+	background: #2389cd;
+}
+.login-form a {
+	color: #fff;
+	text-decoration: underline;
+}
+.login-form a:hover {
+	text-decoration: none;
+}
+.login-form form a {
+	color: #7a7a7a;
+	text-decoration: none;
+}
+.login-form form a:hover {
+	text-decoration: underline;
+}
+
+
+
+
+
+/* 회원가입 약관 동의  */
+.regi-form {
+	text-align: center; 
+	width: 800px;
+	margin: 30px auto;
+	text-align: center;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+
+ 
+.regi-form p{
+	text-align:center;
+	color: #000;
+	background: #DCDCDC;
+	padding:10px;
+	border:1px solid #DCDCDC;
+	margin:0 0 30px;
+}
+
+.regi-form .area{
+	width:100%;
+	line-height:2.5em;
+	border:0;
+	padding:20px;
+	background:#F5F5F5;
+	/* text-align: center; */
+}
+
+.regi-form h2{
+	text-align: center;
+	margin-bottom: 30px;
+	color: #000;
+}
+
+.regi-form h6{
+	text-align:left;
+	padding:3px 10px;
+	border-bottom:1px solid #dbdbdb;
+	margin-top: 20px;
+}
+ 
+
+
+
+
+
+/* 회원가입 */
+.btn1 {
+	border-radius: 3px;
+    border: none; 
+    outline: none !important; 
+    font-weight: bold; 
+    background-color: gray; 
+    color: white;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+
+.regi-form2 {
+	width: 600px;
+	margin: 30px auto;
+	text-align: right;
+	opacity: 0.95;
+		
+}
+.regi-form2 .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+
+.regi-form2 h2{
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
@@ -184,7 +346,10 @@ body {
   padding-bottom: 90px;
 }
 
-.heading_container {                                 /*  */
+
+/* 소개 글씨 */
+
+.heading_container {                                 /*       */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -244,6 +409,12 @@ a:focus {
 }
 
 /*헤더 시작*/
+/* .container-fluid{
+	position: fixed;
+	background-color: white;
+} */
+
+
 .hero_area {
   height: calc(100vh - 45px);
   display: -webkit-box;
@@ -256,11 +427,15 @@ a:focus {
   position: relative;
 }
 
+
+
 /* 서브 페이지 */
 .sub_page .hero_area {
   height: auto;
 }
 
+
+/* 헤더  */
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;
@@ -480,8 +655,9 @@ a:focus {
 } 
 
 .slider_section .img-box img {
-  width: 100%;
-   opacity: 0.90;
+   width: 100%;
+   opacity: 0.80;
+   border-radius: 55%;
 }
 
 .slider_section #customCarousel1 {
@@ -523,6 +699,13 @@ a:focus {
   color: #46200b;
 }
 
+
+
+
+
+
+/* 중간 회사소개 */
+
 .about_section .detail-box p {
   color: #6c6c6c;
 }
@@ -553,7 +736,12 @@ a:focus {
   width: 100%;
 }
 
-/* 디테일 */
+
+
+
+
+
+/* best 제품 */
 
 .chocolate_section .chocolate_container {
   padding-bottom: 75px;
@@ -700,14 +888,19 @@ a:focus {
 
 
 
- 
-
 
 
 
 
 
 /* 카테고리 */
+
+.category_section .box .img-box img:hover{
+		box-shadow: 0px 4px 6px rgba(0.0, 0.3, 0.9, 0.6);
+		transition : /*애니메이션 시간*/  0.4s;
+		transform : /* 확대하고픈 크기 */ scale(1.1);
+		
+}
 
 .category_section{
 	padding-top: 80px;
@@ -731,6 +924,8 @@ a:focus {
    padding-top: 0px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  color: #463d3d;
+  text-shadow: 0px 1px 1px gray;
 }
 
 .category_section .box .img-box {
@@ -752,41 +947,13 @@ a:focus {
   height: 300px;
 }
 
-/* .category_section .box .detail-box {
-  width: 100%;
-  background-color: #46200b;
-  color: #ffffff;
-  padding: 15px;
-  margin-top: 10px;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+.category_section .boc .sale{
+	color: gray; 
+	text-decoration: line-through;
 }
-
-.category_section .box .detail-box h6 {
-  text-transform: uppercase;
-  font-weight: 600;
+.category_section .boc .saleprice{
+	color: red; 
 }
-
-.category_section .box .detail-box h6 span {
-  color: #cb4e08;
-}
-
-.category_section .box .detail-box h5 {
-  font-weight: 600;
-}
-
-.category_section .box .detail-box a {
-  color: #ffffff;
-  font-size: 14px;
-} */
-
-
-
-
-
-
 
 
 
@@ -927,7 +1094,7 @@ a:focus {
 	margin-top: 150px;
 	margin-bottom: 25px;
 }  */
-.new_section{
+/* .new_section{
 	
 	background-color: red;
 	width: 100%;
@@ -960,6 +1127,7 @@ a:focus {
   	height: 350px;
 }
 
+ */
 
 
 
@@ -972,10 +1140,7 @@ a:focus {
 
 
 
-
-
-
-/* 맨아래 이름 */
+/* 밑창 */
 .footer_section {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1000,152 +1165,6 @@ a:focus {
 
 
 
-
-
-/* 로그인창 */
-.form-control {
-		min-height: 41px;
-		background: #f2f2f2;
-		box-shadow: none !important;
-		border: transparent;
-}
-.form-control:focus {
-	background: #e2e2e2;
-}
-.form-control, .btn {        
-       border-radius: 2px;
-}
-.login-form {
-	width: 500px;
-	margin: 30px auto;
-	text-align: center !important;
-	border-radius: 100px;
-	opacity: 0.95;
-}
-.login-form h2 {
-       margin: 10px 0 25px;
-}
-  .login-form form {
-color: #7a7a7a;
-border-radius: 3px;
-  	margin-bottom: 15px;
-      background: #fff;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-      padding: 30px;
-}
-  .login-form .btn {        
-      font-size: 16px;
-      font-weight: bold;
-background: black;
-border: none;
-      outline: none !important;
-}
-.login-form .btn:hover, .login-form .btn:focus {
-	background: #2389cd;
-}
-.login-form a {
-	color: #fff;
-	text-decoration: underline;
-}
-.login-form a:hover {
-	text-decoration: none;
-}
-.login-form form a {
-	color: #7a7a7a;
-	text-decoration: none;
-}
-.login-form form a:hover {
-	text-decoration: underline;
-}
-
-
-
-
-
-/* 회원가입 약관 동의  */
-.regi-form {
-	text-align: center; 
-	width: 800px;
-	margin: 30px auto;
-	text-align: center;
-	border-radius: 100px;
-	opacity: 0.95;
-}
-
- 
-.regi-form p{
-	text-align:center;
-	color: #000;
-	background: #DCDCDC;
-	padding:10px;
-	border:1px solid #DCDCDC;
-	margin:0 0 30px;
-}
-
-.regi-form .area{
-	width:100%;
-	line-height:2.5em;
-	border:0;
-	padding:20px;
-	background:#F5F5F5;
-	/* text-align: center; */
-}
-
-.regi-form h2{
-	text-align: center;
-	margin-bottom: 30px;
-	color: #000;
-}
-
-.regi-form h6{
-	text-align:left;
-	padding:3px 10px;
-	border-bottom:1px solid #dbdbdb;
-	margin-top: 20px;
-}
- 
-
-
-/* 회원가입 */
-.btn1 {
-	border-radius: 3px;
-    border: none; 
-    outline: none !important; 
-    font-weight: bold; 
-    background-color: gray; 
-    color: white;
-}
-.form-control:focus {
-	background: #e2e2e2;
-}
-
-.regi-form2 {
-	width: 600px;
-	margin: 30px auto;
-	text-align: right;
-	opacity: 0.95;
-		
-}
-.regi-form2 .btn {        
-    font-size: 16px;
-    font-weight: bold;
-	background: black;
-	border: none;
-    outline: none !important;
-}
-
-.regi-form2 h2{
-	text-align: center;
-	margin-bottom: 40px;
-}
-
-
-
-.box .img-box img:hover{
-      box-shadow: 0px 4px 6px rgba(0.0, 0.3, 0.9, 0.6);
-
-	
-}
 
 
 

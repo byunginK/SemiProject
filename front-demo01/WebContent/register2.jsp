@@ -93,18 +93,18 @@
 			<form id="frm">
 				<h2>회원 가입</h2>
 				<div class="form-group">
-					<input type="text" class="form-control" name="id" placeholder="아이디" maxlength="20" id="id"><input type="button" class="btn1" id="btn" value="중복체크">
+					<input type="text" class="form-control" name="id" placeholder="아이디" id="id"><input type="button" class="btn1" id="btn" value="중복체크">
 				</div>
 				
 				<div class="form-group">
-					<input type="text" class="form-control" name="pwd" placeholder="비밀번호" maxlength="25" id="pwd">
+					<input type="text" class="form-control" name="pwd" placeholder="비밀번호" id="pwd">
 				</div>
 				<div class="form-group">
 				</div>	
 					<input type="text" class="form-control" name="name" placeholder="이름" id="name">
 				<div class="form-group">
 				</div>
-					<input type="text" class="form-control" name="phone" placeholder="휴대폰번호" maxlength="11" id="number">
+					<input type="text" class="form-control" name="phone" placeholder="휴대폰번호" id="number">
 				<div class="form-group">
 				</div>
 				<div class="form-group">

@@ -94,7 +94,7 @@
       <div class="container">
         <div class="heading_container">
           <h2><br><br>
-            Weekly Best Item(판매량순)
+            Weekly Best Item<!-- (판매량순) -->
           </h2>
         </div>
       </div>
@@ -102,7 +102,7 @@
         <div class="chocolate_container">
           <div class="box">
             <div class="img-box">
-              <img src="img/acc1.jpg" alt="">
+              <img src="img/acc/acc1.jpg" alt="">
             </div>
             <div class="detail-box">
               <h6>
@@ -115,7 +115,7 @@
           </div>
           <div class="box">
             <div class="img-box">
-              <img src="img/sk1.jpg" alt="">
+              <img src="img/pants/sk1.jpg" alt="">
             </div>
             <div class="detail-box">
               <h6>
@@ -128,7 +128,7 @@
           </div>
           <div class="box">
             <div class="img-box">
-              <img src="img/sh3.jpg" alt="">
+              <img src="img/shoes/sh3.jpg" alt="">
             </div>
             <div class="detail-box">
               <h6>
@@ -141,7 +141,7 @@
           </div>
           <div class="box">
             <div class="img-box">
-              <img src="img/top1.jpg" alt="">
+              <img src="img/top/top1.jpg" alt="">
             </div>
             <div class="detail-box">
               <h6>
@@ -154,7 +154,7 @@
           </div>
           <div class="box">
             <div class="img-box">
-              <img src="img/sk2.jpg" alt="">
+              <img src="img/pants/sk2.jpg" alt="">
             </div>
             <div class="detail-box">
               <h6>

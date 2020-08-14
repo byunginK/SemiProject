@@ -44,7 +44,7 @@
 
       <!-- 헤더 -->
       <header class="header_section">
-        <div class="container-fluid">
+        <div class="container-fluid" id="header">
         <!-- 네비게이션 바 -->
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.jsp">
@@ -75,7 +75,7 @@
                 	<a class="nav-link" href="login.jsp">로그인</a>
                 </li>
    				<li class="nav-item">
-                	<a class="nav-link" href="register.jsp">회원가입</a>
+					<a class="nav-link" href="register.jsp">회원가입</a>
                 </li>
               </ul>
             </div>
@@ -107,7 +107,7 @@
                   </div>
                   <div class="col-md-4 ml-auto">
                     <div class="img-box">
-                      <img src="img/sk1.jpg" alt="">
+                      <img src="img/pants/sk1.jpg" alt="">
                     </div>
                   </div>
                 </div>
@@ -224,7 +224,7 @@
       <div class="container">
         <div class="heading_container">
           <h2>
-            Weekly Best Item(조회순)
+            Weekly Best Item<!-- (조회순) -->
           </h2>
         </div>
       </div>
@@ -387,7 +387,7 @@
 </section> -->
 <!-- 신제품 Best 끝 -->
 
-
+<hr>
  
 
 	<!-- 카테고리별 제품 나눔 -->
@@ -398,19 +398,19 @@
 			           <div class="container">
 			       			<div class="heading_container">
 			          			<h2>
-				           			New Item(신상품)
+				           			New Item<!-- (신상품) -->
 			          			</h2>
-			        		</div>
+			        		</div> 
 			      		</div>
 			      		
 <!-- 제품 시작 -->
 			             <div class="box">
 			                <a href="">
 		           				<div class="img-box">
-			                       	<img src="img/acc1.jpg" alt="">
+			                       	<img src="img/shoes/sh1.jpg" alt="">
 			                    </div>
 			                 </a>
-			                 60,000원<br>PUMA<br>굽 5cm
+			                 <b>PUMA UltraRide</b><p style="color: gray; text-decoration: line-through;">60,000원<p style="color: red;">55,000원</p>
 			             </div>
 		               
 			             <div class="box">
@@ -419,7 +419,7 @@
 			                       	<img src="img/acc/acc2.jpg" alt="">
 			                    </div> 
 			                 </a>
-			                 60,000원<br>PUMA<br>굽 5cm
+			                 <b>손톱보호대ㅋ</b><p style="color: gray; text-decoration: line-through;">60,000원<p style="color: red;">55,000원</p>
 			             </div>
 		                    
 			             <div class="box">
@@ -586,7 +586,7 @@
               	(주)Simple Five<br>대표자: 오조<br><br>
               	사업자 등록번호:520-02-55555<br>
               <!-- 	통신판매업 등록번호 : <br> -->
-              	서울특별시 강남구 테헤란로<br> 64번길2 서영빌딩1층
+              	서울특별시 강남구 테헤란로<br> 5길 11 YOO빌딩 2층
               </p>
             </div>
           </div>
