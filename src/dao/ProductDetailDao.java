@@ -8,9 +8,9 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
-import dto.CartDto;
 import dto.ProductDto;
 import dto.ReplyDto;
+import dto.cartDto;
 
 public class ProductDetailDao {
 
@@ -371,9 +371,9 @@ public class ProductDetailDao {
 		return count>0?true:false;
 	}
 	
-	public boolean insertCart(String id, int item_seq, int qty) {
-		String sql = " INSERT INTO FIVE_CART(SEQ, ID, ITEM_SEQ, QTY) "
-					+" VALUES(FIVE_CART_SEQ.NEXTVAL, ? , ? , ? ) ";
+	public boolean insertbuylist(String id, int item_seq, int qty, String color, String item_size) {
+		String sql = " INSERT INTO FIVE_ORDER(SEQ, ID, ITEM_SEQ, QTY, COLOR, ITEM_SIZE) "
+					+" VALUES(FIVE_ORDER_SEQ.NEXTVAL, ? , ? , ?, ?, ? ) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -388,6 +388,8 @@ public class ProductDetailDao {
 			psmt.setString(1, id);
 			psmt.setInt(2, item_seq);
 			psmt.setInt(3, qty);
+			psmt.setString(4, color);
+			psmt.setString(5, item_size);
 			System.out.println("2/6 insertCart success");
 			
 			count = psmt.executeUpdate();
@@ -402,35 +404,40 @@ public class ProductDetailDao {
 		return count>0?true:false;
 	}
 	
-	public List<CartDto> getcartlist(String id) {
-		String sql = " SELECT ID, ITEM_SEQ, QTY "
-					+" FROM FIVE_CART "
-					+" WHERE ID = ? "
+	public cartDto getcart(int iseq) {
+		String sql = " SELECT c.SEQ, c.ID, c.ITEM_SEQ, c.QTY, c.COLOR, c.ITEM_SIZE, g.P_NAME , g.P_PRICE, g.FILENAME "
+					+" FROM FIVE_CART c , FIVE_CATEGORY g "
+					+" WHERE c.ITEM_SEQ = g.SEQ AND c.ITEM_SEQ = ? "
 					+" ORDER BY SEQ DESC ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		List<CartDto> list = new ArrayList<CartDto>();
-		
+		cartDto dto = null;
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 getcartlist success");
 			
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
+			psmt.setInt(1, iseq);
 			System.out.println("2/6 getcartlist success");
 			
 			rs = psmt.executeQuery();
-			while(rs.next()) {
-				String user = rs.getString("id");
+			if(rs.next()) {
+				int c_seq = rs.getInt("SEQ");
+				String user = rs.getString("ID");
 				int item_seq = rs.getInt("ITEM_SEQ");
 				int qty = rs.getInt("QTY");
+				String color = rs.getString("COLOR");
+				String item_size = rs.getString("ITEM_SIZE");
+				String name = rs.getString("P_NAME");
+				int price = rs.getInt("P_PRICE");
+				String filename = rs.getString("FILENAME");
 				
-				CartDto dto = new CartDto(user, item_seq, qty);
+				dto = new cartDto(c_seq, user, item_seq, name, price, qty, filename, color, item_size);
 				
-				list.add(dto);
+				
 			}
 			System.out.println("3/6 getcartlist success");
 		} catch (Exception e) {
@@ -438,6 +445,6 @@ public class ProductDetailDao {
 		} finally {
 			DBClose.close(psmt, conn, rs);
 		}
-		return list;
+		return dto;
 	}
 }

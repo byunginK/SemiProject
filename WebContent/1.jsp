@@ -9,6 +9,6 @@
 <body>
 
 <a href="addPro?work=main">gomain</a>
-
+<a href="purchaseCon?work=buylist&item_seq=55,61">55, 61</a>
 </body>
 </html>

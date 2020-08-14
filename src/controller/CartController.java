@@ -1,7 +1,6 @@
-package controller;
+package Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,45 +10,53 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProductDetailDao;
-import dto.CartDto;
-import dto.ProductDto;
+import dto.cartDto;
+import net.sf.json.JSONObject;
 
-@WebServlet("/cartCon")
-public class CartController extends HttpServlet {
+@WebServlet("/cartcont")
+public class cartController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int seq = Integer.parseInt(req.getParameter("purseq"));
-		String id = req.getParameter("id");
-		ProductDetailDao dao = ProductDetailDao.getInstance();
-		ProductDto product = dao.getProduct(seq);
-		String color = req.getParameter("color");
-		String size = req.getParameter("size");
-		String count = req.getParameter("buy_count");
-		int qty = Integer.parseInt(count);
-		String totalPrice = req.getParameter("totalprice");
+		req.setCharacterEncoding("UTF-8");
 		
-		boolean isS = dao.insertCart(id, seq, qty);
-		List<CartDto> list = new ArrayList<CartDto>();
-		if(isS) {
-			list = dao.getcartlist(id);
+		JSONObject obj = new JSONObject();
+		String work = req.getParameter("work");
+		
+		if(work.equals("cmove")) {
+			String id = req.getParameter("id");
+			cartDao dao = cartDao.getInstance();
+			List<cartDto> list = dao.getList(id);
+			
 			req.setAttribute("list", list);
-			forward("cart.jsp", req, resp);
-		}
-	}
-	
-	public void forward(String linkname, HttpServletRequest req, HttpServletResponse resp) {
-		RequestDispatcher dispatcher = req.getRequestDispatcher(linkname);
-		try {
-			dispatcher.forward(req, resp);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			forward("./cart/cart_main.jsp", req, resp);
+		}else if(work.equals("chgqty")) {
+			String sqty = req.getParameter("qty");
+			int qty = Integer.parseInt(sqty);
+			String sseq = req.getParameter("seq");
+			int seq = Integer.parseInt(sseq);
+			
+			cartDao dao = cartDao.getInstance();
+			boolean b = dao.updateQty(seq, qty);
+			
+			obj.put("b", b);
+			resp.setContentType("application/x-json; charset=UTF-8");
+			resp.getWriter().print(obj);
 		}
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	}
+	
+	public void forward(String link,HttpServletRequest req, HttpServletResponse resp) {
+		RequestDispatcher dispatcher = req.getRequestDispatcher(link);
+		try {
+			dispatcher.forward(req, resp);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

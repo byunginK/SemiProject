@@ -1,13 +1,30 @@
+<%@page import="dto.CartDto"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.ProductDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-ProductDto dto = (ProductDto)request.getAttribute("product");
-String color = request.getParameter("color");
-String size = request.getParameter("size");
-String count = request.getParameter("buy_count");
-String totalPrice = request.getParameter("totalprice");
+List<CartDto> cartlist = (List<CartDto>)request.getAttribute("cartlist");
+ProductDto dto = null;
+String color = "";
+String size ="";
+String count ="";
+int buy_count = 0;
+int totalPrice = 0;
+String item_seq = "";
+if(dto == null){
+	dto = new ProductDto();
+	dto.setP_name("Simple FIVE");
+}
+
+if(cartlist == null || cartlist.size()==0){
+	dto = (ProductDto)request.getAttribute("product");
+	color = request.getParameter("color");
+	size = request.getParameter("size");
+	count = request.getParameter("buy_count");
+	buy_count = Integer.parseInt(count);
+}
 
 
 String id = null;
@@ -111,6 +128,9 @@ String id = null;
 			<tr>
 				<th>상품 이미지</th><th>상품정보</th><th>수량</th><th>상품금액</th><th>총 상품금액</th>		
 			</tr>		
+			<%
+			if(cartlist.size()==0 || cartlist==null){
+			%>
 			<tr>
 				<td><img alt="이미지 없음" src="productimg/<%=dto.getFilename()%>" width="50px" height="70px"></td>
 				<td>
@@ -123,10 +143,39 @@ String id = null;
 						</tr>
 					</table>
 				</td>
-				<td><%=count %>개</td>
+				<td><%=buy_count %>개</td>
 				<td><%=dto.getP_price() %></td>
-				<td><%=totalPrice %></td>
+				<td><%=buy_count *dto.getP_price() %></td>
 			</tr>
+			<%
+			item_seq = dto.getSeq()+"";
+			totalPrice = buy_count *dto.getP_price();
+			count = buy_count+"";
+			}else{
+			%>
+				<%for(int i = 0; i <cartlist.size(); i++){
+					CartDto cart = cartlist.get(i);
+					%>
+					<tr>
+						<td><img alt="이미지 없음" src="productimg/<%=cart.getFilename()%>" width="50px" height="70px"></td>
+						<td><table style="font-size: 14px">
+							<tr>
+								<td align="center"><%=cart.getP_name() %></td>
+							</tr>
+							<tr>
+								<td>사이즈 : <%=cart.getItem_size() %> / </td><td>색상 : <%=cart.getColor() %></td>
+							</tr>
+						</table></td>
+						<td><%=cart.getQty() %> 개</td><td><%=cart.getPrice() %> 원</td><td><%=cart.getQty()*cart.getPrice() %> 원</td>
+					</tr>
+					<% 	
+					totalPrice = totalPrice + (cart.getQty()*cart.getPrice());
+					item_seq = cart.getItem_seq()+"";
+					count = cart.getQty()+"";
+					
+				}
+			}	
+			%>
 		</table>
 	</div>
 	<div style="margin-top: 70px">
@@ -359,7 +408,8 @@ $(document).ready(function() {
 	  	    		type: 'POST',
 	  	    		dataType: 'json',
 	  	    		data: {
-	  		    		imp_uid : rsp.imp_uid
+	  		    		imp_uid : rsp.imp_uid,
+	  		    		
 	  		    		//기타 필요한 데이터가 있으면 추가 전달
 	  	    		}
 	  	    	}).done(function(data) {
@@ -382,7 +432,7 @@ $(document).ready(function() {
 	  	    	msg += '에러내용 : ' + rsp.error_msg;
 	  	    }
 	  	  	alert("결제가 완료 되었습니다.");
-	  	    location.href="thank.jsp";
+	  	    location.href="purchaseCon?work=addorderlist&";
 	  	  });
 			
 		}

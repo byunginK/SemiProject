@@ -1,3 +1,5 @@
+<%@page import="dto.CartDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -6,7 +8,7 @@ String id = null;
 if(session.getAttribute("login_Id") != null){
 	   id = (String)session.getAttribute("login_Id");
 }    
-    
+List<CartDto> list = (List<CartDto>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -99,9 +101,25 @@ if(session.getAttribute("login_Id") != null){
 			<tr>
 				<th><input type="checkbox" id="checklist"></th><th>상품 이미지</th><th>상품정보</th><th>수량</th><th>상품금액</th><th>총 상품금액</th>		
 			</tr>		
-			<tr>
-				<td><input type="checkbox" name="chec"></td><td></td><td></td><td></td><td></td><td></td>
-			</tr>
+			<%for(int i = 0; i <list.size(); i++){
+				CartDto cart = list.get(i);
+				%>
+				<tr>
+					<td><input type="checkbox" name="chec"></td><td><img alt="이미지 없음" src="productimg/<%=cart.getFilename()%>" width="50px" height="70px"></td>
+					<td><table style="font-size: 14px">
+						<tr>
+							<td align="center"><%=cart.getP_name() %></td>
+						</tr>
+						<tr>
+							<td>사이즈 : <%=cart.getItem_size() %> / </td><td>색상 : <%=cart.getColor() %></td>
+						</tr>
+					</table></td>
+					<td><%=cart.getQty() %> 개</td><td><%=cart.getPrice() %> 원</td><td><%=cart.getQty()*cart.getPrice() %> 원</td>
+				</tr>
+				<% 	
+			}
+			%>
+			
 		</table>
 		
 		<div style="margin-left: -700px">
@@ -188,5 +206,19 @@ if(session.getAttribute("login_Id") != null){
 	</footer>			
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#checklist").click(function() {
+		if($("#checklist").prop("checked")){
+            $("input[name=chec]").prop("checked",true);
+        }else{
+            $("input[name=chec]").prop("checked",false);
+        }
+
+	});
+});
+
+</script>
 </body>
 </html>

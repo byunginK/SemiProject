@@ -11,6 +11,7 @@ List<ProductDto> list2 = (List<ProductDto>)map.get("listtop");
 List<ProductDto> list3 = (List<ProductDto>)map.get("listbottom");
 List<ProductDto> list4 = (List<ProductDto>)map.get("listshoes");
 List<ProductDto> list5 = (List<ProductDto>)map.get("listac");
+
 ProductDto dto = new ProductDto();
 
 %>
@@ -199,7 +200,7 @@ ProductDto dto = new ProductDto();
 		          			</h2>
 		        		</div>
 		      		 </div>
-			      		
+			      		<button type="button" onclick="display(1)" style="background: none; border: none; outline: none;">◀</button>
 			      	<%
 			      	
 			      	for(int i = 0; i < list2.size(); i++){
@@ -217,7 +218,7 @@ ProductDto dto = new ProductDto();
 			      	}
 			      	%>	
 		            
-		             
+		             <button type="button" onclick="display(2)" id="dp" style="background: none; border: none; outline: none;">▶</button>
 	        	</div>
 			</div> 
 	</section>
@@ -471,6 +472,51 @@ ProductDto dto = new ProductDto();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+<script type="text/javascript">
+let listNum = 1;
+function display(num) {
+	if(num==1){
+		listNum--;
+		if(listNum < 1){
+			listNum = 1;
+		}
+		
+	}else{
+		listNum ++;
+	}
+		$.ajax({
+			url:"productDetail",
+			type:"get",
+			datatype:"json",
+			data:"work=display"+"&listNum="+listNum,
+			success:function(datas){
+				let displayList = datas.map.plist;
+				if(listNum> displayList.length-1){
+					listNum = 0;
+				}
+				
+				$("div").remove(".box");
+				for(let i =0; i< displayList.length; i++){
+					let display = 
+						"<div class='box'>"
+					+"<a href='productDetail?work=product&seq="+displayList[i].seq+"'>"
+						+"<div class='img-box'>"
+							+"<img src='productimg/"+displayList[i].filename+"'>"
+						+"</div>"
+					+"</a>"
+					+ displayList[i].p_price+"원<br>"+displayList[i].p_name+"<br>"+displayList[i].p_info
+				+"</div>";
+					$("#dp").before(display);
+				}
+				
+			},
+			error:function(){
+				alert('error');
+			}
+		});
+	
+}
 
+</script>
 </body>
 </html>

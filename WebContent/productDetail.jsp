@@ -42,6 +42,42 @@ if (session.getAttribute("login_Id") != null) {
 <link href="css/font-awesome.min.css" rel="stylesheet" />
 <!-- Custom styles for this template -->
 <link href="css/style.css" rel="stylesheet" />
+<style type="text/css">
+#reviewTb{
+	border-collapse: collapse; 
+}
+#p_btn{
+	 font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+}
+#n_btn{
+	 font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+}
+#review_btn{
+ font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+}
+#tableheader th{
+	 background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-align: center;
+}
+</style>
 </head>
 
 <body onload="func()">
@@ -142,7 +178,7 @@ if (session.getAttribute("login_Id") != null) {
 
 				<!-- 금액, 색상, 사이즈 선택, 수량, 결제금액 표기 테이블 -->
 				<form id="selectFrm">
-					<input type="hidden" name="purseq" value="<%=product.getSeq()%>">
+					<input type="hidden" name="seq" value="<%=product.getSeq()%>">
 					<input type="hidden" name="work" value="purchasego">
 					<input type="hidden" name="id" value="<%=id%>">
 					<table>
@@ -210,7 +246,7 @@ if (session.getAttribute("login_Id") != null) {
 				<section class="category_section">
 					<div class="container">
 						<div class="row some-cards" style="margin-left: 50px; margin-top: 100px">
-						<button type="button" onclick="display(1)" >◀</button>
+						<button type="button" onclick="display(1)" style="background: none; border: none; outline: none;">◀</button>
 							<%
 								for (int i = 0; i < prolist.size(); i++) {
 								ProductDto dto = prolist.get(i);
@@ -226,7 +262,7 @@ if (session.getAttribute("login_Id") != null) {
 							<%
 								}
 							%>
-							<button type="button" onclick="display(2)" id="dp">▶</button>
+							<button type="button" onclick="display(2)" id="dp" style="background: none; border: none; outline: none;">▶</button>
 						</div>
 						
 					</div>
@@ -296,7 +332,7 @@ if (session.getAttribute("login_Id") != null) {
 				<table id="reviewTb" border="1px solid">
 					<col width="500px">
 					<col width="100px">
-					<tr>
+					<tr id="tableheader">
 						<th>리뷰 제목</th>
 						<th>작성자</th>
 					</tr>
@@ -340,10 +376,16 @@ if (session.getAttribute("login_Id") != null) {
 							endPage = totalPage;
 						}
 						for (int i = startPage; i <= endPage; i++) {
-						%>
-						<li><a onclick="page(<%=i%>)"><%=i%></a></li>
-						<%
+							if(i == startPage){
+								%>
+								<li><span style='font-size:18pt; color:#9d6b53; font-weight:bold;' onclick="page(<%=i%>)"><%=i%></span>&nbsp;&nbsp;</li>
+								<%
+							}else{
+								%>
+								<li><a onclick="page(<%=i%>)"><%=i%></a>&nbsp;&nbsp;</li>
+								<%
 							}
+						}
 
 						if (totalPage == endPage) {
 						%>
@@ -362,9 +404,12 @@ if (session.getAttribute("login_Id") != null) {
 
 				<div>
 					<br>
+					<div>
 					<textarea rows='3' cols='50' id='revContent'></textarea>
-					<button type='button' id='review_btn'
-						style="width: 50px; height: 50px">등록</button>
+					</div>
+					<div>
+					<button type='button' id='review_btn'style="width: 50px; height: 50px">등록</button>
+					</div>
 					<br> <span id="block"></span>
 				</div>
 			</div>
@@ -490,7 +535,6 @@ if (session.getAttribute("login_Id") != null) {
 
 let listNum = 1;
 let count = 1;
-
 /* 첫 화면 제품 상세 정보 만 표기를 위한 함수 */
 function func() {
 	$("#review_detail").hide();
@@ -540,13 +584,24 @@ $(function() {
 	
 	/* 장바구니 버튼 */
 	$("#cart_btn").click(function() {
-		$("#selectFrm").attr("action","cartCon").submit();
+		$("#selectFrm").attr("action","cartcont").submit();
 	});
 	
 	
 	/* 리뷰 작성 후 등록 버튼을 누르면 바로 리뷰 목록에 표기 및 페이징 처리 */
 	$("#review_btn").click(function() {
+		
+		<%if(id==null){
+			%>
+			alert("로그인이 필요한 서비스 입니다.");
+		<%	
+		}else{
+			%>
+		
 			let content = $("#revContent").val();
+			if(content ==""){
+				alert('내용을 입력하세요');
+			}
 			$.ajax({
 				url:"productDetail",
 				type:"get",
@@ -587,7 +642,16 @@ $(function() {
 						endPage = totalPage;
 					}	
 					for(let i = startPage; i <= endPage; i++){
-						addlist2 += "<li><a onclick='page("+i+")'>"+i+"</a></li>";
+						
+						if(i == startPage){
+							
+							addlist2 += "<li><span style='font-size:18pt; color:#9d6b53; font-weight:bold;' onclick='page("+i+")'>"+i+"</span>&nbsp;&nbsp;</li>";
+							
+						}else{
+							
+							addlist2 +=	"<li><a onclick='page("+i+")'>"+i+"</a>&nbsp;&nbsp;</li>";
+							
+						}
 			
 					}
 						
@@ -607,10 +671,12 @@ $(function() {
 									
 				},
 				error:function(){
-					alert("error");
+					alert("리뷰에 특수문자를 사용할 수 없습니다");
 				}
 			});
-			
+		<%	
+		}
+		%>
 	});
 	
 });	
@@ -665,9 +731,13 @@ function page(cp) {
 		type:"get",
 		datatype:"json",
 		data:"work=writeReply&seq="+"<%=product.getSeq()%>"+"&pageNum="+cp,
-		success:function(data){
+		success:function(datas){
 			//alert('success');
-			let rlist = data.map.rlist;
+			let rlist = datas.map.rlist;
+			let cpage = cp;
+			let startPage = parseInt(datas.map.startPage);
+			let endPage = parseInt(datas.map.endPage);
+			let totalPage = parseInt(datas.map.totalPage);
 			
 			$(".rvf").remove();
 			$.each(rlist,function(i, val){
@@ -680,7 +750,44 @@ function page(cp) {
 							+ "</tr>"
 				
 					$("#reviewTb tr").eq(-1).after(addlist);	
-			});				
+			});	
+			$(".paginglist").remove();
+			let addlist2 = "<ul class='paginglist'>";
+			if(startPage == 1){
+				addlist2 += "<li></li>";
+		
+			}else if(startPage > 5){
+				addlist2 += "<li><button type='button' id='p_btn'>Previous</button></li>";
+			}
+			if(endPage>totalPage){
+				endPage = totalPage;
+			}	
+			for(let i = startPage; i <= endPage; i++){
+				
+				if(i == cpage){
+					
+					addlist2 += "<li><span style='font-size:18pt; color:#9d6b53; font-weight:bold;' onclick='page("+i+")'>"+i+"</span>&nbsp;&nbsp;</li>";
+					
+				}else{
+					
+					addlist2 +=	"<li><a onclick='page("+i+")'>"+i+"</a>&nbsp;&nbsp;</li>";
+					
+				}
+	
+			}
+				
+			if(totalPage == endPage){
+							
+				addlist2 += "<li></li>";
+			
+			}else {
+					 
+				addlist2 += "<li><button type='button' id='n_btn'>Next</button></li>";
+					
+			}
+				
+				addlist2 += "</ul>";
+				$(".reviewPage").eq(-1).after(addlist2);
 							
 		},
 		error:function(){
@@ -702,6 +809,7 @@ $(document).on("click", "#p_btn",function() {
 			let startPage = parseInt(datas.map.startPage);
 			let endPage = parseInt(datas.map.endPage);
 			let totalPage = parseInt(datas.map.totalPage);
+			let pageNum = parseInt(datas.map.pageNum);
 			$(".rvf").remove();
 			$.each(rlist,function(i, val){
 			let addlist = "";
@@ -720,14 +828,23 @@ $(document).on("click", "#p_btn",function() {
 			if(startPage == 1){
 				addlist2 += "<li></li>";
 		
-			}else{
+			}else if(startPage > 5){
 				addlist2 += "<li><button type='button' id='p_btn'>Previous</button></li>";
 			}
 			if(endPage>totalPage){
 				endPage = totalPage;
 			}	
 			for(let i = startPage; i <= endPage; i++){
-				addlist2 += "<li><a onclick='page("+i+")'>"+i+"</a></li>";
+				
+				if(i == pageNum){
+					
+					addlist2 += "<li><span style='font-size:18pt; color:#9d6b53; font-weight:bold;' onclick='page("+i+")'>"+i+"</span>&nbsp;&nbsp;</li>";
+					
+				}else{
+					
+					addlist2 +=	"<li><a onclick='page("+i+")'>"+i+"</a>&nbsp;&nbsp;</li>";
+					
+				}
 	
 			}
 				
@@ -790,8 +907,19 @@ $(document).on("click", "#n_btn",function() {
 			if(endPage>totalPage){
 				endPage = totalPage;
 			}	
-			for(let i = pageNum; i <=endPage; i++){
-				addlist2 += "<li><a onclick='page("+i+")'>"+i+"</a></li>";
+			for(let i = startPage; i <= endPage; i++){
+				
+				if(i == pageNum){
+					
+					addlist2 += "<li><span style='font-size:18pt; color:#9d6b53; font-weight:bold;' onclick='page("+i+")'>"+i+"</span>&nbsp;&nbsp;</li>";
+					
+				}else{
+					if(pageNum == endPage-1){
+						break;
+					}
+					addlist2 +=	"<li><a onclick='page("+i+")'>"+i+"</a>&nbsp;&nbsp;</li>";
+					
+				}
 	
 			}
 				
