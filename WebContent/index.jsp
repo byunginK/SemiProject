@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>    
+<<<<<<< HEAD
 <%=request.getContextPath() %>
 <%
 /* 세션에서 아이디 받아옴 로그인을 안할시 null */
@@ -19,6 +20,21 @@
     List<ProductDto> list = (List<ProductDto>)map.get("listall");
     ProductDto dto = new ProductDto();*/   
  %> 
+=======
+   <%
+   /* 세션에서 아이디 받아옴 로그인을 안할시 null */
+      String id = null;
+       if(session.getAttribute("login_Id") != null){
+    	   id = (String)session.getAttribute("login_Id");
+       }
+       //로그인 시 관리자 번호 받음
+       String m_Id = null;  int m_Auth = 0;
+       if(request.getParameter("m_Id") != null && request.getParameter("m_Auth") != null){
+    	   m_Id = request.getParameter("m_Id"); 
+    	   m_Auth = Integer.parseInt(request.getParameter("m_Auth")); 
+       }
+   %> 
+>>>>>>> f982e6c7156f923d7a831a301fdbc28d99c1bedb
 <!DOCTYPE html>
 <html>
 
@@ -48,14 +64,26 @@
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
+<<<<<<< HEAD
   <!-- <link rel="stylesheet" href="css/slick-theme.css" /> --> 
   <!-- font awesome style -->
   <link href="<%=request.getContextPath() %>/css/font-awesome.min.css" rel="stylesheet" />
+=======
+<!--   <link rel="stylesheet" href="css/slick-theme.css" /> --> 
+  <!-- font awesome style -->
+ <link href="css/font-awesome.min.css" rel="stylesheet" />
+>>>>>>> f982e6c7156f923d7a831a301fdbc28d99c1bedb
   <!-- Custom styles for this template -->
   <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" />
   <!-- responsive style -->
+<<<<<<< HEAD
 </head>
  
+=======
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
+</head>
+
+>>>>>>> f982e6c7156f923d7a831a301fdbc28d99c1bedb
 <body>
 <!-- 바디 셋팅 -->
   <div class="main_body_content">
@@ -78,6 +106,7 @@
                   <a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
                   <a class="nav-link" href="addPro?work=list">카테고리</a>
                 </li>
                  <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
@@ -92,6 +121,19 @@
 						</div>
 					</div>
                 </li>
+=======
+                  <a class="nav-link" href="detail.jsp">카테고리</a>
+                </li>
+                 <!-- 일단 임시로 만들었어요 수정필요  게시판 이동-->
+                 <li><a href="#">게시판</a>
+            <ul class="sub">
+          <li><a href="#" >공지사항</a></li>
+         <li><a href="#">Q&A</a></li>
+         <!-- 혹시 모를 오류를 위해 "return false" 안해도 무방 -->
+          <li><a href="suggest?work=suggest&detailwork=suggest_main" >건의사항</a></li>
+        </ul>
+        </li>
+>>>>>>> f982e6c7156f923d7a831a301fdbc28d99c1bedb
                  <!-- 게시판 이동 끝 -->
          
           <!--로그인을 하면 세션에 저장 -> 세션값이 없으면 로그인/회원가입  있으면 마이페이지/로그아웃 -->
@@ -256,6 +298,8 @@
       </div>
     </section>
     <!-- 회사소개 끝 -->
+
+
 
 
     <!-- Best Product 5개 -->
@@ -704,6 +748,7 @@
   <!-- slick slider -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
+<<<<<<< HEAD
   <script src="js/custom.js"></script>
   <!-- Google Map -->
   <script>
@@ -711,6 +756,10 @@
    window.open("Main_Pop-Up.html","SimpleFive","width=450, height=500");
   }
    </script>
+=======
+  <script  src="js/custom.js"></script>
+  
+>>>>>>> f982e6c7156f923d7a831a301fdbc28d99c1bedb
 <!-- 바디 끝 -->
 </body>
 </html>
