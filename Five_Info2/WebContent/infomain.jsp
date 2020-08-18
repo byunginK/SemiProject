@@ -47,85 +47,113 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>공지사항</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style type="text/css">
-table{
-	border-collapse: collapse; 
-	/* max-width: 100%; */
-	
-}
-.span{
-	font-size: 15pt;
-	color: #0000ff;
-	font-weight: bold;
-	text-decoration: none;
-	text-align: center;
-	
-}
-.aa{
-	font-size: 15pt;
-	color: #000;
-	font-weight: bold;
-	text-decoration: none;
-	text-align: center;
-	tex
-	
-}
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
- .table-header {
-    background-color: #f8ad9d;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-  .table-row {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
-}
-.h4{
-	 text-align: right;
-}
-.h1{
-	background-color: #f0f0f0;
-	text-align: center !import;
-}
-.a{
-	text-align: right;
-	text-decoration: none;
-	font-weight: bold;
-}
-.btn {        
-    font-size: 16px;
-    font-weight: bold;
-	background: gray;
-	border: none;
-    outline: none !important;
-    color: white;
-    border-radius: 2px; 
-    border-radius: 100px;
-}
-.div{
-	text-align: center;
-}
-</style>
-</head>
-<body>
 
-<h4 class="h4" >
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>공지사항</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- slick slider -->
+  <!-- <link rel="stylesheet" href="css/slick-theme.css" /> --> 
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
+</head>
+
+<!-- 바디 셋팅 -->
+<body class="sub_page">
+  <div class="main_body_content">
+    <div class="hero_area">
+    
+
+      <!-- 헤더 -->
+      <header class="header_section">
+        <div class="container-fluid" id="header">
+        <!-- 네비게이션 바 -->
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="index.jsp">
+              Simple Five
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            	<span class=""></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                	<a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                	<a class="nav-link" href="detail.jsp">카테고리</a>
+                </li>
+                <li class="nav-item">
+                	<div class="dropdown">
+						<p class="dropdown-p">고객센터</p>
+						<div class="dropdown-content">
+							<a href="#">Q & A</a>
+							<a href="#">공지사항</a>
+							<a href="#">건의사항</a>
+							<a href="#">일정확인</a>
+						</div>
+					</div>
+                </li>
+                <li class="nav-item">
+                	<a class="nav-link" href="login.jsp">로그인</a>
+                </li>
+   				<li class="nav-item">
+					<a class="nav-link" href="register.jsp">회원가입</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- 헤더 끝 -->
+   </div>   
+
+
+
+
+
+
+
+
+
+
+
+      <!-- 게시판메인 시작 -->
+    <section class="bbs_section layout_padding">
+      <div class="container_padding">
+
+
+
+
+<%-- <h4 class="h4" >
 	환영합니다  <%=id %> 님<a href="login.jsp" class="a">&nbsp;&nbsp;로그아웃</a>
 </h4>
 
-<h1 class="h1">공지사항</h1>
+<h1 class="h1">공지사항</h1> --%>
 
-<a href="infomain?work=write&id=<%=id %>" class="a">글쓰기</a>
+<a href="infomain?work=write&id=<%=id %>" class="aTagWrite">글쓰기</a>
 <div align="center" class="container">
 <table border="1">
 	<col width="70"><col width="600"><col width="60"><col width="100"><col width="100">
@@ -174,7 +202,7 @@ table{
 			<%
 		}else{//그외 페이지
 			%>
-			<a class="aa" href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)">
+			<a class="aTagPage" href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)">
 			<%=i+1 %>
 			</a>&nbsp;
 			<%
@@ -195,6 +223,19 @@ table{
 	<button class="btn" onclick="searchBbs()" value="<%=searchWord%>">검색</button>
 <!-- </form> -->
 </div>
+
+<!-- 게시판 메인 끝 -->
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 function searchBbs() {
@@ -243,5 +284,115 @@ function goPage(obj) {
 	});
 }
 </script>
+</div>
+    </section>
+
+    <!-- 바닥글 창 -->
+    <section class="info_section layout_padding2">
+      <div class="container">
+        
+        <div class="row info_main_row">
+ <!-- Menu -->
+          <div class="col-md-6 col-lg-3">
+            <div class="info_links">
+              <h4>
+              	Menu
+              </h4>
+              <div class="info_links_menu">
+                <a href="index.jsp">
+                  Home
+                </a>
+                <a href="detail.jsp">
+                  	카테고리
+                </a>
+                <a href="suggetion.jsp?work=suggest">
+                  	고객센터
+                </a>
+                <a href="login.jsp">
+                  	로그인
+                </a>
+                <a href="register_agree.jsp">
+                  	회원가입
+                </a>
+              </div>
+            </div>
+          </div>
+
+<!-- 회사 -->          
+          <div class="col-md-6 col-lg-3">
+            <div class="info_detail">
+              <h4>
+                Company
+              </h4>
+              <p class="mb-0">
+              	(주)Simple Five<br>대표자: 오조<br><br>
+              	사업자 등록번호:520-02-55555<br>
+              <!-- 	통신판매업 등록번호 : <br> -->
+              	서울특별시 강남구 테헤란로 64번길 2 서영빌딩 1층
+              </p>
+            </div>
+          </div>
+<!-- 고객센터 -->
+          <div class="col-md-6 col-lg-3">
+            <h4>
+              	CS Center
+            </h4>
+            <div class="info_contact">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  	T. 02-223-5555
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  M. 010-5555-5555
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope"></i>
+                <span>
+                  demo@gmail.com
+                </span>
+              </a>
+          	    <span>
+                  	평일 : am 09:00 - pm 18:00 <br>/ 주말: pm 12:00 - pm 13:00
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 바닥글 끝-->
+  </div>
+
+
+  <!-- 밑창 -->
+  <footer class="container-fluid footer_section">
+    <div class="container">
+      <div class="col-md-11 col-lg-8 mx-auto">
+        <p>
+          &copy; <span id="displayYear"></span> (주)심플파이브
+        </p>
+      </div>
+    </div>
+  </footer>
+   <!-- 밑창끝 -->
+
+  <!-- jQery -->
+  <script  src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script  src="js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- custom js -->
+  <script  src="js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
+
 </body>
+
 </html>

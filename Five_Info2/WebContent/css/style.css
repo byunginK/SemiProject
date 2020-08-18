@@ -1,3 +1,199 @@
+/* table */
+
+/* 메인 */
+table{
+	border-collapse: collapse; 
+	/* max-width: 100%; */
+	
+}
+.bbs_section .span{
+	font-size: 15pt;
+	color: #0000ff;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	
+}
+.bbs_section .aTagPage{
+	font-size: 15pt;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	tex
+	
+}
+.bbs_section .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+}
+.bbs_section .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.bbs_section .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+}
+/* .h4{
+	 text-align: right;
+} */
+/* .h1{
+	background-color: #f0f0f0;
+	text-align: center !import;
+} */
+.bbs_section .aTagWrite{
+	text-decoration: none;
+	font-weight: bold;
+}
+.bbs_section .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    outline: none !important;
+    color: white;
+    border-radius: 2px; 
+    border-radius: 100px;
+}
+.bbs_section .div{
+	text-align: center;
+}
+
+
+
+
+
+/* 글쓰기 */
+
+body {
+color: #fff;
+background: white;
+}
+.bbs_section .container_padding{
+	padding-bottom: 400px;
+}
+.bbs_section .form-control {
+	min-height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.bbs_section .form-area {
+	min-height: 400px;
+	min-width: 630px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+
+.bbs_section .form-area-bbs {
+	min-height: 400px;
+	min-width: 630px;
+	/* background: #f2f2f2; */
+	box-shadow: none !important;
+	border: transparent;
+	text-align: left;
+}
+
+.bbs_section .form-control:focus {
+	background: #e2e2e2;
+}
+.bbs_section .form-control, .btn {        
+    border-radius: 2px;
+}
+.bbs_section .write-form {
+	height: 400px;
+	width: 700px;
+	margin: 30px auto;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+.bbs_section .write-form h2 {
+    margin: 10px 0 25px;
+    text-align: center;
+    color: #000;
+}
+.bbs_section .write-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+.bbs_section .write-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+.bbs_section .write-form .btn:hover, .write-form .btn:focus .form-area {
+	background: #2389cd;
+} 
+
+
+
+
+
+
+
+/* 수정 */
+table{
+	border-collapse: collapse;
+	/* max-width: 100%; */
+	
+}
+.bbs_section .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.bbs_section .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    height: 40px;
+    font-size: 16px;
+}
+.bbs_section .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+}
+.bbs_section .h2{
+	/* background-color: #f0f0f0; */
+	 text-align: center;
+	 padding-bottom: 20px;
+}
+.bbs_section .wri{
+	text-align: right;
+}
+.bbs_section .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+    
+}
+/*  */
+
+
+
+
+
+
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
@@ -10,7 +206,7 @@ body {
 }
 
 .layout_padding2 {
-  padding: 45px 0;
+  padding: 45px c;
 }
 
 .layout_padding2-top {

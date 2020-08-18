@@ -11,14 +11,14 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
+<head> 
+<meta charset="UTF-8"> 
 <title>loginAf.jsp</title>
 </head>
 <body>
 <%
 MemberDao dao = MemberDao.getInstance();
-MemberDto mem = dao.login(id, pwd);
+MemberDto mem = dao.login(id);
 
 if(mem != null && !mem.getId().equals("")){
 	//login정보 저장

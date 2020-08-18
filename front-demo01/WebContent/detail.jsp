@@ -480,7 +480,7 @@
 		             <div class="container">
 		       			<div class="heading_container">
 		          			<h2>
-			           			Pants & Skirts
+			           			Acc
 		          			</h2>
 		        		</div>
 		      		 </div>

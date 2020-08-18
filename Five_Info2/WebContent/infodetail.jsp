@@ -21,88 +21,134 @@
 	System.out.println("mem.getid:"+id);
 %>    
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login하기</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-<style>
-table{
-	border-collapse: collapse;
-	
-	/* max-width: 100%; */
-	
-}
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
- .table-header {
-    background-color: #95A5A6;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    height: 40px;
-    font-size: 16px;
-}
-  .table-row {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
-}
-.h2{
-	background-color: #f0f0f0;
-	 text-align: center;
-}
-.wri{
-	text-align: right;
-}
-.btn {        
-    font-size: 16px;
-    font-weight: bold;
-	background: gray;
-	border: none;
-    color: white;
-    border-radius: 2px;
-    
-}
-</style>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>공지사항</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- slick slider -->
+  <!-- <link rel="stylesheet" href="css/slick-theme.css" /> --> 
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
 </head>
-<body>
-<h2 class="h2">공지사항</h2>
 
-<div align="center" class="container">
-<table border="1">
-	<tr>
-		<th class="table-header">작성자</th><th><%=dto.getId() %></th>
-	</tr>
-	<tr>
-		<th class="table-header">작성일</th><th><%=dto.getWdate() %></th>
-	</tr>
-	<tr>
-		<th class="table-header">제목</th><th><%=dto.getTitle() %></th>
-	</tr>
-	<tr>
-		<th class="table-header">내용</th><th><textarea readonly="readonly" class="form-area" id="area" name="area" cols="80" rows="30" placeholder="내용을 입력해주세요" required="required"><%=dto.getContent() %></textarea></th>
-	</tr>
-</table>
-<%
-	if(dto.getId().equals(id)){//작성자와 로그인id가 같을때만 수정하게해라(다를경우 수정,삭제 버튼 비공개) 
-%>
-	<button type="button" onclick="updateBbs(<%=dto.getSeq() %>)" class="btn">수정하기</button>
-	<%
-	}
-%>
-<button type="button" onclick="bbslist(<%=dto.getSeq() %>)" class="btn">목록으로 돌아가기</button>
-</div>
+<!-- 바디 셋팅 -->
+<body class="sub_page">
+  <div class="main_body_content">
+    <div class="hero_area">
+    
 
+      <!-- 헤더 -->
+      <header class="header_section">
+        <div class="container-fluid" id="header">
+        <!-- 네비게이션 바 -->
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="index.jsp">
+              Simple Five
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            	<span class=""></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                	<a class="nav-link" href="index.jsp">Main<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                	<a class="nav-link" href="detail.jsp">카테고리</a>
+                </li>
+                <li class="nav-item">
+                	<div class="dropdown">
+						<p class="dropdown-p">고객센터</p>
+						<div class="dropdown-content">
+							<a href="#">Q & A</a>
+							<a href="#">공지사항</a>
+							<a href="#">건의사항</a>
+							<a href="#">일정확인</a>
+						</div>
+					</div>
+                </li>
+                <li class="nav-item">
+                	<a class="nav-link" href="login.jsp">로그인</a>
+                </li>
+   				<li class="nav-item">
+					<a class="nav-link" href="register.jsp">회원가입</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- 헤더 끝 -->
+   </div>   
+   
+   
+   
+   
+         
+      <!-- 게시판 디테일 시작 -->
+    <section class="bbs_section layout_padding">
+      <div class="container_padding">
+   
+   
+			   
+			<h2 class="h2">공지사항</h2>
+			
+			<div align="center" class="container">
+				<table border="1">
+					<tr>
+						<th class="table-header">작성자</th><th><%=dto.getId() %></th>
+					</tr>
+					<tr>
+						<th class="table-header">작성일</th><th><%=dto.getWdate() %></th>
+					</tr>
+					<tr>
+						<th class="table-header">제목</th><th><%=dto.getTitle() %></th>
+					</tr>
+					<tr>
+						<th class="table-header">내용</th><th><textarea readonly="readonly" class="form-area-bbs" id="area" name="area" cols="80" rows="30" placeholder="내용을 입력해주세요" required="required"><%=dto.getContent() %></textarea></th>
+					</tr>
+				</table>
+					<%
+						if(dto.getId().equals(id)){//작성자와 로그인id가 같을때만 수정하게해라(다를경우 수정,삭제 버튼 비공개) 
+					%>
+				<button type="button" onclick="updateBbs(<%=dto.getSeq() %>)" class="btn">수정하기</button>
+					<%
+						}
+					%>
+			<button type="button" onclick="bbslist(<%=dto.getSeq() %>)" class="btn">목록으로 돌아가기</button>
+			</div>
+		</div>
+    </section>
+    <!-- 게시판 끝 -->
+    
+    
+    
+    
+    
 <script type="text/javascript">
 function updateBbs() {
 	location.href = "infomain?work=update&seq=<%=dto.getSeq()%>";
@@ -113,5 +159,108 @@ function bbslist() {
 }
 
 </script>
+    <!-- 바닥글 창 -->
+    <section class="info_section layout_padding2">
+      <div class="container">
+        
+        <div class="row info_main_row">
+ <!-- Menu -->
+          <div class="col-md-6 col-lg-3">
+            <div class="info_links">
+              <h4>
+              	Menu
+              </h4>
+              <div class="info_links_menu">
+                <a href="index.jsp">
+                  Home
+                </a>
+                <a href="detail.jsp">
+                  	카테고리
+                </a>
+                <a href="suggetion.jsp?work=suggest">
+                  	고객센터
+                </a>
+                <a href="login.jsp">
+                  	로그인
+                </a>
+                <a href="register_agree.jsp">
+                  	회원가입
+                </a>
+              </div>
+            </div>
+          </div>
+
+<!-- 회사 -->          
+          <div class="col-md-6 col-lg-3">
+            <div class="info_detail">
+              <h4>
+                Company
+              </h4>
+              <p class="mb-0">
+              	(주)Simple Five<br>대표자: 오조<br><br>
+              	사업자 등록번호:520-02-55555<br>
+              <!-- 	통신판매업 등록번호 : <br> -->
+              	서울특별시 강남구 테헤란로 64번길 2 서영빌딩 1층
+              </p>
+            </div>
+          </div>
+<!-- 고객센터 -->
+          <div class="col-md-6 col-lg-3">
+            <h4>
+              	CS Center
+            </h4>
+            <div class="info_contact">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  	T. 02-223-5555
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  M. 010-5555-5555
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope"></i>
+                <span>
+                  demo@gmail.com
+                </span>
+              </a>
+          	    <span>
+                  	평일 : am 09:00 - pm 18:00 <br>/ 주말: pm 12:00 - pm 13:00
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 바닥글 끝-->
+  </div>
+
+
+  <!-- 밑창 -->
+  <footer class="container-fluid footer_section">
+    <div class="container">
+      <div class="col-md-11 col-lg-8 mx-auto">
+        <p>
+          &copy; <span id="displayYear"></span> (주)심플파이브
+        </p>
+      </div>
+    </div>
+  </footer>
+   <!-- 밑창끝 -->
+
+  <!-- jQery -->
+  <script  src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script  src="js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- custom js -->
+  <script  src="js/custom.js"></script>
+
 </body>
 </html>

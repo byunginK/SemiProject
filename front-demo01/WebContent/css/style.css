@@ -37,20 +37,24 @@
 
 /* 게시판 */
 
+
+
 /* 메인 */
+
+
 
 /* 글쓰기 */
 /* body {
 	color: #fff;
 	background: white;
 } */
-.write-form {
+/* .write-form {
 	padding-top: 30px;
 	width: 700px;
 	height: 500px;
 	margin: 30px auto;
 	border-radius: 100px;
-	/* opacity: 0.95; */
+	opacity: 0.95;
 	margin-bottom: 700px;
 }
 .form-control {
@@ -96,10 +100,67 @@
 }
 .write-form .btn:hover, .write-form .btn:focus .form-area {
 	background: #2389cd;
+} */
+
+/* 공지사항 게시판 글쓰기 */
+body {
+color: #fff;
+background: white;
 }
-
-
-
+.contact_section .container_padding{
+	padding-bottom: 400px;
+}
+.contact_section .form-control {
+	min-height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.contact_section .form-area {
+	min-height: 400px;
+	min-width: 630px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.contact_section .form-control:focus {
+	background: #e2e2e2;
+}
+.contact_section .form-control, .btn {        
+    border-radius: 2px;
+}
+.contact_section .write-form {
+	height: 400px;
+	width: 700px;
+	margin: 30px auto;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+.contact_section .write-form h2 {
+    margin: 10px 0 25px;
+    text-align: center;
+    color: #000;
+}
+.contact_section .write-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+.contact_section .write-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+.contact_section .write-form .btn:hover, .write-form .btn:focus .form-area {
+	background: #2389cd;
+} 
 
 
 /* 수정 */
@@ -178,7 +239,7 @@
 .login-form h2 {
        margin: 10px 0 25px;
 }
-  .login-form form {
+.login-form form {
 color: #7a7a7a;
 border-radius: 3px;
   	margin-bottom: 15px;
@@ -186,7 +247,7 @@ border-radius: 3px;
       box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
       padding: 30px;
 }
-  .login-form .btn {        
+.login-form .btn {        
       font-size: 16px;
       font-weight: bold;
 background: black;
@@ -314,7 +375,7 @@ border: none;
 
 
 
-
+/* 레이아웃 */
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
@@ -435,7 +496,7 @@ a:focus {
 }
 
 
-/* 헤더  */
+/* 헤더, 네비  */
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;
