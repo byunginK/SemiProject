@@ -82,7 +82,7 @@ public class ProductDetailController extends HttpServlet {
 			prolist = dao.getplist(seq, 1, pro.getP_category());
 			req.setAttribute("prolist", prolist);
 			
-			forward("productDetail.jsp", req, resp);
+			forward("./product/productDetail.jsp", req, resp);
 			
 			//리뷰 작성 값을 받아줌
 		} else if (work.equals("writeReply")) {
@@ -113,15 +113,15 @@ public class ProductDetailController extends HttpServlet {
 			//같은 종류 카테고리 리스트의 버튼을 누르면 다음 상품들 리스트 값 전달
 		} else if (work.equals("display")) {
 			int listNum = Integer.parseInt(req.getParameter("listNum"));
-			if (listNum <= 0) {
-				listNum = 1;
-			}
 
 			prolist2 = dao.getplist(seq, listNum, pro.getP_category());
 			map.put("plist", prolist2);
 			jobj.put("map", map);
 			resp.setContentType("application/x-json; charset=UTF-8");
 			resp.getWriter().print(jobj);
+		} else if(work.equals("remove")) {
+			String id = req.getParameter("id");
+			
 		}
 
 	}

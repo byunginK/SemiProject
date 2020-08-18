@@ -23,7 +23,16 @@ public class suggestDto implements Serializable {
 		
 	}
 
- 
+    public suggestDto( int seq, String id, int ref, int step, int depth, String content, String wdate, int del) {
+    	this.seq = seq;
+		this.id = id;
+		this.ref = ref;
+		this.step = step;
+		this.depth = depth;
+		this.content = content;
+		this.wdate = wdate;
+		this.del = del;
+    }
     
 	public suggestDto(int seq, String id, int ref, int step, int depth, String title, String content, String wdate, int del,
 			int readcount) {
@@ -48,6 +57,12 @@ public class suggestDto implements Serializable {
 		this.content = content;
 	}
 
+	public suggestDto(int seq, String id, String title, String content) {
+		this.seq = seq;
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
 
 
 	public int getSeq() {

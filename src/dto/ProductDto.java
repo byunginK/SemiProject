@@ -17,10 +17,16 @@ public class ProductDto implements Serializable {
 	
 	public ProductDto() {
 	}
-
+	
+	public ProductDto(int seq, String p_name, String p_category, String filename) {
+		this.seq = seq;
+		this.p_name = p_name;
+		this.p_category = p_category;
+		this.filename = filename;
+	}
+	
 	public ProductDto(int seq, String p_name, String p_info, String p_material, String p_madeIn, int p_price,
 			String p_category, int p_readcount, int p_kind, String filename) {
-		super();
 		this.seq = seq;
 		this.p_name = p_name;
 		this.p_info = p_info;
@@ -35,7 +41,6 @@ public class ProductDto implements Serializable {
 
 	public ProductDto(String p_name, String p_info, String p_material, String p_madeIn, int p_price, String p_category,
 			int p_kind, String filename) {
-		super();
 		this.p_name = p_name;
 		this.p_info = p_info;
 		this.p_material = p_material;

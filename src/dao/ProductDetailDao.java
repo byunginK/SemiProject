@@ -8,8 +8,10 @@ import java.util.List;
 
 import db.DBClose;
 import db.DBConnection;
+import dto.MyOrderDto;
 import dto.ProductDto;
 import dto.ReplyDto;
+import dto.cartDto;
 
 public class ProductDetailDao {
 
@@ -233,7 +235,7 @@ public class ProductDetailDao {
 					
 		
 		int start = listNum;
-		int end = listNum +3;
+		int end = listNum +7;
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -369,4 +371,37 @@ public class ProductDetailDao {
 		}
 		return count>0?true:false;
 	}
+	public boolean insertcart(String id, int item_seq, int qty, String color, String item_size) {
+		String sql = " INSERT INTO FIVE_CART(SEQ, ID, ITEM_SEQ, QTY, COLOR, ITEM_SIZE) "
+					+" VALUES(FIVE_CART_SEQ.NEXTVAL, ? , ? , ?, ?, ? ) ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 insertCart success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setInt(2, item_seq);
+			psmt.setInt(3, qty);
+			psmt.setString(4, color);
+			psmt.setString(5, item_size);
+			System.out.println("2/6 insertCart success");
+			
+			count = psmt.executeUpdate();
+			System.out.println("3/6 insertCart success");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBClose.close(psmt, conn, null);
+		}
+		return count>0?true:false;
+	}
+	
 }

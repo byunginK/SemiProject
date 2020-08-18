@@ -1,3 +1,585 @@
+/* 네비 드롭다운 */
+.dropdown-p {
+	padding: 8px;
+	font-size: 15px;
+	border: none;
+	padding-top: 11px;
+	text-align: center;
+}
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+.dropdown-content {
+	display: none; 
+	position: absolute;
+	background-color: #fff;
+	min-width: 100px;
+	padding: 5px;
+	box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+	font-size: 14px;
+}
+.dropdown-content a {
+	color: black;
+	padding: 5px;
+	text-decoration: none;
+	display: block;
+}
+.dropdown-content a:hover { background-color: #B0C4DE; }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown:hover .dropdown-button { background-color: #fff; }
+
+
+
+
+
+
+
+
+
+
+/* table */
+
+/* 메인 */
+table{
+	border-collapse: collapse; 
+	/* max-width: 100%; */
+	
+}
+.bbs_section .span{
+	font-size: 15pt;
+	color: #0000ff;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	
+}
+.bbs_section .aTagPage{
+	font-size: 15pt;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	tex
+	
+}
+.bbs_section .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+}
+.bbs_section .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.bbs_section .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+}
+/* .h4{
+	 text-align: right;
+} */
+/* .h1{
+	background-color: #f0f0f0;
+	text-align: center !import;
+} */
+.bbs_section .aTagWrite{
+	text-decoration: none;
+	font-weight: bold;
+}
+.bbs_section .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    outline: none !important;
+    color: white;
+    border-radius: 2px; 
+    border-radius: 100px;
+}
+.bbs_section .div{
+	text-align: center;
+}
+
+
+
+
+
+/* 글쓰기 */
+
+body {
+color: #fff;
+background: white;
+}
+.bbs_section .container_padding{
+	padding-bottom: 400px;
+}
+.bbs_section .form-control {
+	min-height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.bbs_section .form-area {
+	min-height: 400px;
+	min-width: 630px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+
+.bbs_section .form-area-bbs {
+	min-height: 400px;
+	min-width: 630px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: left;
+}
+
+.bbs_section .form-control:focus {
+	background: #e2e2e2;
+}
+.bbs_section .form-control, .btn {        
+    border-radius: 2px;
+}
+.bbs_section .write-form {
+	height: 400px;
+	width: 700px;
+	margin: 30px auto;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+.bbs_section .write-form h2 {
+    margin: 10px 0 25px;
+    text-align: center;
+    color: #000;
+}
+.bbs_section .write-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+.bbs_section .write-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+.bbs_section .write-form .btn:hover, .write-form .btn:focus .form-area {
+	background: #2389cd;
+} 
+
+
+
+
+
+
+
+/* 수정 */
+table{
+	border-collapse: collapse;
+	/* max-width: 100%; */
+	
+}
+.bbs_section .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.bbs_section .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    height: 40px;
+    font-size: 16px;
+}
+.bbs_section .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.3);
+}
+.bbs_section .h2{
+	/* background-color: #f0f0f0; */
+	 text-align: center;
+	 padding-bottom: 20px;
+}
+.bbs_section .wri{
+	text-align: right;
+}
+.bbs_section .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: gray;
+	border: none;
+    color: white;
+    border-radius: 2px;
+    
+}
+/*  */
+
+
+
+
+
+
+
+
+
+
+
+/* 게시판 */
+
+
+
+/* 메인 */
+
+
+
+/* 글쓰기 */
+/* body {
+	color: #fff;
+	background: white;
+} */
+/* .write-form {
+	padding-top: 30px;
+	width: 700px;
+	height: 500px;
+	margin: 30px auto;
+	border-radius: 100px;
+	opacity: 0.95;
+	margin-bottom: 700px;
+}
+.form-control {
+	min-height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.form-area {
+	min-height: 500px;
+	min-width: 640px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+.form-control, .btn {        
+    border-radius: 2px;
+}
+
+.write-form h2 {
+       margin: 10px 0 25px;
+       color: #7a7a7a;
+}
+.write-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+.write-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+.write-form .btn:hover, .write-form .btn:focus .form-area {
+	background: #2389cd;
+} */
+
+/* 공지사항 게시판 글쓰기 */
+body {
+color: #fff;
+background: white;
+}
+.contact_section .container_padding{
+	padding-bottom: 400px;
+}
+.contact_section .form-control {
+	min-height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.contact_section .form-area {
+	min-height: 400px;
+	min-width: 630px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	text-align: center;
+}
+.contact_section .form-control:focus {
+	background: #e2e2e2;
+}
+.contact_section .form-control, .btn {        
+    border-radius: 2px;
+}
+.contact_section .write-form {
+	height: 400px;
+	width: 700px;
+	margin: 30px auto;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+.contact_section .write-form h2 {
+    margin: 10px 0 25px;
+    text-align: center;
+    color: #000;
+}
+.contact_section .write-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+.contact_section .write-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+.contact_section .write-form .btn:hover, .write-form .btn:focus .form-area {
+	background: #2389cd;
+} 
+
+
+/* 수정 */
+
+
+
+
+/* 디테일 */
+.answer-form{
+	padding-top: 30px;
+	width: 500px;
+	height: 100px;
+	margin: 30px auto;
+	border-radius: 100px;
+	/* opacity: 0.95; */
+	margin-bottom: 600px;
+}
+.answer-form form {
+	color: #7a7a7a;
+	border-radius: 3px;
+  	margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+
+.answer-area {
+	min-height: 100px;
+	min-width: 640px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: transparent;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 20px;
+}
+.answer-form p{
+	text-align: left;
+}
+.answer-form h6 {
+       margin: 10px 0 25px;
+       color: #7a7a7a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 로그인창 */
+.form-control {
+		min-height: 41px;
+		background: #f2f2f2;
+		box-shadow: none !important;
+		border: transparent;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+.form-control, .btn {        
+       border-radius: 2px;
+}
+.login-form {
+	width: 500px;
+	margin: 30px auto;
+	text-align: center !important;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+.login-form h2 {
+       margin: 10px 0 25px;
+}
+.login-form form {
+color: #7a7a7a;
+border-radius: 3px;
+  	margin-bottom: 15px;
+      background: #fff;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+}
+.login-form .btn {        
+      font-size: 16px;
+      font-weight: bold;
+background: black;
+border: none;
+      outline: none !important;
+}
+.login-form .btn:hover, .login-form .btn:focus {
+	background: #2389cd;
+}
+.login-form a {
+	color: #fff;
+	text-decoration: underline;
+}
+.login-form a:hover {
+	text-decoration: none;
+}
+.login-form form a {
+	color: #7a7a7a;
+	text-decoration: none;
+}
+.login-form form a:hover {
+	text-decoration: underline;
+}
+
+
+
+
+
+/* 회원가입 약관 동의  */
+.regi-form {
+	text-align: center; 
+	width: 800px;
+	margin: 30px auto;
+	text-align: center;
+	border-radius: 100px;
+	opacity: 0.95;
+}
+
+ 
+.regi-form p{
+	text-align:center;
+	color: #000;
+	background: #DCDCDC;
+	padding:10px;
+	border:1px solid #DCDCDC;
+	margin:0 0 30px;
+}
+
+.regi-form .area{
+	width:100%;
+	line-height:2.5em;
+	border:0;
+	padding:20px;
+	background:#F5F5F5;
+	/* text-align: center; */
+}
+
+.regi-form h2{
+	text-align: center;
+	margin-bottom: 30px;
+	color: #000;
+}
+
+.regi-form h6{
+	text-align:left;
+	padding:3px 10px;
+	border-bottom:1px solid #dbdbdb;
+	margin-top: 20px;
+}
+ 
+
+
+
+
+
+/* 회원가입 */
+.btn1 {
+	border-radius: 3px;
+    border: none; 
+    outline: none !important; 
+    font-weight: bold; 
+    background-color: gray; 
+    color: white;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+
+.regi-form2 {
+	width: 600px;
+	margin: 30px auto;
+	text-align: right;
+	opacity: 0.95;
+		
+}
+.regi-form2 .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: black;
+	border: none;
+    outline: none !important;
+}
+
+.regi-form2 h2{
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 레이아웃 */
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
@@ -29,7 +611,10 @@ body {
   padding-bottom: 90px;
 }
 
-.heading_container {
+
+/* 소개 글씨 */
+
+.heading_container {                                 /*       */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -40,6 +625,8 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+   padding-bottom: 10px;
+   padding-top: 30px;
 }
 
 .heading_container h2 {
@@ -87,6 +674,12 @@ a:focus {
 }
 
 /*헤더 시작*/
+/* .container-fluid{
+	position: fixed;
+	background-color: white;
+} */
+
+
 .hero_area {
   height: calc(100vh - 45px);
   display: -webkit-box;
@@ -99,11 +692,15 @@ a:focus {
   position: relative;
 }
 
+
+
 /* 서브 페이지 */
 .sub_page .hero_area {
   height: auto;
 }
 
+
+/* 헤더, 네비  */
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;
@@ -323,8 +920,9 @@ a:focus {
 } 
 
 .slider_section .img-box img {
-  width: 100%;
-   opacity: 0.90;
+   width: 100%;
+   opacity: 0.80;
+   border-radius: 55%;
 }
 
 .slider_section #customCarousel1 {
@@ -366,6 +964,13 @@ a:focus {
   color: #46200b;
 }
 
+
+
+
+
+
+/* 중간 회사소개 */
+
 .about_section .detail-box p {
   color: #6c6c6c;
 }
@@ -396,13 +1001,12 @@ a:focus {
   width: 100%;
 }
 
-.chocolate_section .heading_container {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
-  margin-bottom: 25px;
-}
+
+
+
+
+
+/* best 제품 */
 
 .chocolate_section .chocolate_container {
   padding-bottom: 75px;
@@ -421,15 +1025,16 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #6c6c6c;
-  padding-top: 25px;
+	border: 1px solid #faf5f4;
+   padding-top: 25px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  background-color: #faf9f9;
 }
 
 .chocolate_section .box .img-box {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -441,15 +1046,19 @@ a:focus {
           align-items: center;
 }
 
+.category_section .box .img-box{
+	
+}
+
 .chocolate_section .box .img-box img {
-  width: 100%;
-  height: auto;
+  width: 250px;
+  height: 350px;
 }
 
 .chocolate_section .box .detail-box {
   width: 100%;
   background-color: #46200b;
-  color: #ffffff;
+  color: #eee6c4; 
   padding: 15px;
   margin-top: 10px;
   opacity: 0;
@@ -543,6 +1152,83 @@ a:focus {
 
 
 
+
+
+
+
+
+
+/* 카테고리 */
+
+.category_section .box .img-box img:hover{
+		box-shadow: 0px 4px 6px rgba(0.0, 0.3, 0.9, 0.6);
+		transition : /*애니메이션 시간*/  0.4s;
+		transform : /* 확대하고픈 크기 */ scale(1.1);
+		
+}
+
+.category_section{
+	padding-top: 80px;
+	padding-bottom: 150px;
+}
+
+.category_section .box {
+  text-align: center;
+  margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+	border: 1px solid #F8F8FF;
+   padding-top: 0px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: #463d3d;
+  text-shadow: 0px 1px 1px gray;
+}
+
+.category_section .box .img-box {
+  width: 240px;
+  height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.category_section .box .img-box img {
+  width: 240px;
+  height: 300px;
+}
+
+.category_section .boc .sale{
+	color: gray; 
+	text-decoration: line-through;
+}
+.category_section .boc .saleprice{
+	color: red; 
+}
+
+
+
+
+
+
+
+
+/* 바닥글 */
+
 .info_section {
   background-color: #111111;
   color: #ffffff;
@@ -620,22 +1306,6 @@ a:focus {
   display: flex;
 }
 
-.info_section .social_box a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 65px;
-  height: 65px;
-  border: 1px solid #ffffff;
-  color: #ffffff;
-  margin-right: 10px;
-}
 
 .info_section h4 {
   font-family: "SnellBT Regular", sans-serif;
@@ -683,13 +1353,59 @@ a:focus {
 }
 
 
-/* 디테일뷰 */
-.detailView{
+/* new - 신제품*/
+
+/* .detailView{
 	margin-top: 150px;
 	margin-bottom: 25px;
+}  */
+/* .new_section{
+	
+	background-color: red;
+	width: 100%;
+	height:800px;
+}
+.new_section .new_heading_container{
+	background-color: blue;
+
+}
+.new_section .new_container{
+	
+	display: inline-block;
+	background-color: pink;
+	width: 200px;
+	height: 350px;
+	width: 100%;
+	height:200px;
+	
+}
+.new_section .new_box{
+	
+	display: inline-block;
+	background-color: green;
+	width: 300px;
+	height: 350px;
+
+}
+.new_section .new_box .img-box img{
+	width: 250px;
+  	height: 350px;
 }
 
-/* 맨아래 이름 */
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+/* 밑창 */
 .footer_section {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -711,148 +1427,13 @@ a:focus {
 .footer_section a {
   color: inherit;
 }
-/*# sourceMappingURL=style.css.map */
 
 
 
 
 
-/* 로그인창 */
-.form-control {
-		min-height: 41px;
-		background: #f2f2f2;
-		box-shadow: none !important;
-		border: transparent;
-	}
-	.form-control:focus {
-		background: #e2e2e2;
-	}
-	.form-control, .btn {        
-        border-radius: 2px;
-    }
-	.login-form {
-		width: 500px;
-		margin: 30px auto;
-		text-align: center !important;
-		border-radius: 100px;
-		opacity: 0.95;
-	}
-	.login-form h2 {
-        margin: 10px 0 25px;
-    }
-    .login-form form {
-		color: #7a7a7a;
-		border-radius: 3px;
-    	margin-bottom: 15px;
-        background: #fff;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }
-    .login-form .btn {        
-        font-size: 16px;
-        font-weight: bold;
-		background: black;
-		border: none;
-        outline: none !important;
-    }
-	.login-form .btn:hover, .login-form .btn:focus {
-		background: #2389cd;
-	}
-	.login-form a {
-		color: #fff;
-		text-decoration: underline;
-	}
-	.login-form a:hover {
-		text-decoration: none;
-	}
-	.login-form form a {
-		color: #7a7a7a;
-		text-decoration: none;
-	}
-	.login-form form a:hover {
-		text-decoration: underline;
-	}
 
 
-
-
-
-/* 회원가입 약관 동의  */
-.regi-form {
-	text-align: center; 
-	width: 800px;
-	margin: 30px auto;
-	text-align: center;
-	border-radius: 100px;
-	opacity: 0.95;
-}
-
- 
-.regi-form p{
-	text-align:center;
-	color: #000;
-	background: #DCDCDC;
-	padding:10px;
-	border:1px solid #DCDCDC;
-	margin:0 0 30px;
-}
-
-.regi-form .area{
-	width:100%;
-	line-height:2.5em;
-	border:0;
-	padding:20px;
-	background:#F5F5F5;
-	text-align: center;
-}
-
-.regi-form h2{
-	text-align: center;
-	margin-bottom: 30px;
-	color: #000;
-}
-
-.regi-form h6{
-	text-align:left;
-	padding:3px 10px;
-	border-bottom:1px solid #dbdbdb;
-	margin-top: 20px;
-}
-
-
-
-/* 회원가입 */
-.btn1 {
-	border-radius: 3px;
-    border: none; 
-    outline: none !important; 
-    font-weight: bold; 
-    background-color: gray; 
-    color: white;
-}
-.form-control:focus {
-	background: #e2e2e2;
-}
-
-.regi-form2 {
-	width: 600px;
-	margin: 30px auto;
-	text-align: right;
-	opacity: 0.95;
-		
-}
-.regi-form2 .btn {        
-    font-size: 16px;
-    font-weight: bold;
-	background: black;
-	border: none;
-    outline: none !important;
-}
-
-.regi-form2 h2{
-	text-align: center;
-	margin-bottom: 40px;
-}
 
 
 

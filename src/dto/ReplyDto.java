@@ -27,7 +27,6 @@ public class ReplyDto implements Serializable {
 
 	public ReplyDto(int seq, int qna_seq, String id, String wdate, int secret, String udate, int category_seq,
 			String contents) {
-		super();
 		this.seq = seq;
 		this.qna_seq = qna_seq;
 		this.id = id;
@@ -37,9 +36,23 @@ public class ReplyDto implements Serializable {
 		this.category_seq = category_seq;
 		this.contents = contents;
 	}
+	//추가
+	public ReplyDto(int seq, int qna_seq, String id, String contents,String wdate) {
+		this.seq = seq;
+		this.qna_seq = qna_seq;
+		this.id = id;
+		this.contents = contents;
+		this.wdate = wdate;
+	}
+	
+	public ReplyDto(int seq, String id, String wdate, String contents) {
+		this.seq = seq;
+		this.id = id;
+		this.wdate = wdate;
+		this.contents = contents;
+	}
 
 	public ReplyDto(int qna_seq, String id, int category_seq, String contents) {
-		super();
 		this.qna_seq = qna_seq;
 		this.id = id;
 		this.category_seq = category_seq;

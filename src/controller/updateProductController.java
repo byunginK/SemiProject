@@ -63,7 +63,7 @@ public class updateProductController extends HttpServlet {
 		boolean isS = dao.updateProduct(dto);
 		req.setAttribute("updateP", isS);
 
-		forward("updateProductAf.jsp", req, resp);
+		forward("./admin/updateProductAf.jsp", req, resp);
 	}
 
 	public void forward(String linkname, HttpServletRequest req, HttpServletResponse resp) {
@@ -71,10 +71,8 @@ public class updateProductController extends HttpServlet {
 		try {
 			dispatcher.forward(req, resp);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -15,6 +15,20 @@ public class MemberDto implements Serializable {
 	}
 
 	
+	public MemberDto(String id, String pwd, String name, int phone, String email) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public MemberDto(String id, int auth) {
+		super();
+		this.id = id;
+		this.auth = auth;
+	}
 	public MemberDto(String id, String pwd, String name, int phone, String email, int auth) {
 		super();
 		this.id = id;

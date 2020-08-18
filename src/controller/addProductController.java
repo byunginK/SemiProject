@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.ProductDetailDao;
+import dao.PurchaseDao;
 import dto.ProductDto;
 import net.sf.json.JSONObject;
 
@@ -28,14 +29,17 @@ public class addProductController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 처음 기능 구분을 위한 work
 		String work = req.getParameter("work");
+		System.out.println(work);
 		ProductDetailDao dao = ProductDetailDao.getInstance();
-
+		PurchaseDao buydao = PurchaseDao.getInstance();
 		// 카테고리 페이지에서 상의,하의,신발,악세사리의 상품들 리스트를 출력하기 위한 리스트들
 		List<ProductDto> list = new ArrayList<ProductDto>();
-		List<ProductDto> list2 = new ArrayList<ProductDto>();
-		List<ProductDto> list3 = new ArrayList<ProductDto>();
-		List<ProductDto> list4 = new ArrayList<ProductDto>();
-		List<ProductDto> list5 = new ArrayList<ProductDto>();
+		List<ProductDto> listtop = new ArrayList<ProductDto>();
+		List<ProductDto> listbottom = new ArrayList<ProductDto>();
+		List<ProductDto> listshoes = new ArrayList<ProductDto>();
+		List<ProductDto> listacc = new ArrayList<ProductDto>();
+		
+		List<ProductDto> listsell = new ArrayList<ProductDto>();
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -52,41 +56,45 @@ public class addProductController extends HttpServlet {
 		} catch (NumberFormatException e) {
 			listNum = 1;
 		}
-
+		
 		// map에 리스트를 담아서 카테고리 페이지로 넘겨줌
 		list = dao.getProductList(listNum, "all");
 		map.put("listall", list);
-		list2 = dao.getProductList(listNum, "top");
-		map.put("listtop", list2);
-		list3 = dao.getProductList(listNum, "bottom");
-		map.put("listbottom", list3);
-		list4 = dao.getProductList(listNum, "shoes");
-		map.put("listshoes", list4);
-		list5 = dao.getProductList(listNum, "accessary");
-		map.put("listac", list5);
+		listtop = dao.getProductList(listNum, "top");
+		map.put("listtop", listtop);
+		listbottom = dao.getProductList(listNum, "bottom");
+		map.put("listbottom", listbottom);
+		listshoes = dao.getProductList(listNum, "shoes");
+		map.put("listshoes", listshoes);
+		listacc = dao.getProductList(listNum, "accessary");
+		map.put("listac", listacc);
+		listsell = buydao.getsellcountList(listNum);
+		map.put("listsell", listsell);
 		String ln = listNum + "";
 		map.put("listNum", ln.trim());
-		if (work.equals("list")) {
+		
+		if(work.equals("main")) {
+			req.setAttribute("map", map);
+			forward("index.jsp", req, resp);
+		}
+		//카테고리에서 detail.jsp로 넘겨줌
+		else if (work.equals("list")) {
 
 			req.setAttribute("map", map);
-			forward("detail.jsp", req, resp);
+			forward("./product/detail.jsp", req, resp);
 		}
 		// 제품 추가를 누르면 제품추가 페이지로 이동
 		else if (work.equals("add")) {
-			resp.sendRedirect("addProduct.jsp");
+			resp.sendRedirect("./admin/addProduct.jsp");
 		}
 		// 제품 수정을 누르면 해당 페이지로 제품의 시퀀스번호를 가지고 이동
-		else if (work.equals("update")) {
-			int seq = Integer.parseInt(req.getParameter("seq"));
-			ProductDto product = dao.getProduct(seq);
-			req.setAttribute("product", product);
-			forward("updateProduct.jsp", req, resp);
-		}
-		// 리스트들의 버튼을 누르면 db에서 제품들을 가져오는값
+		
 		else if (work.equals("display")) {
 			String category = req.getParameter("category");
+			int dln = Integer.parseInt(req.getParameter("ln"));
+					
 
-			list = dao.getProductList(listNum, category);
+			list = dao.getProductList(dln, category);
 
 			map.put("display", list);
 
